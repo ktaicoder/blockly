@@ -1,0 +1,29 @@
+{
+  "name": "@ktaicoder/blockly",
+  "version": "6.20210701.0-patch1",
+  "description": "Blockly library for ktaicoder",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ktaicoder/blockly.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ktaicoder/blockly/issues"
+  },
+  "homepage": "https://aicodingblock.kt.co.kr",
+  "main": "index.js",
+  "author": {
+    "name": "ktaicoder"
+  },
+  "license": "MIT",
+  "scripts": {
+    "update-version": "node ./scripts/dist-package.js"
+  },
+  "devDependencies": {
+    "shelljs": "^0.8.4"
+  },
+  "keywords": [
+    "kt",
+    "aicodingblock",
+    "blockcoding"
+  ]
+}

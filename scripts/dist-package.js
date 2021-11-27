@@ -10,7 +10,7 @@ function updatePackageDistJson() {
 
     // package.json의 버전은 dist/package.json의 버전끝에 -patchN suffix를 붙여야 한다
     if (fromVersion === toVersion) {
-        throw new Error(`version is same '${fromVersion}', need suffix -patchN`)
+        console.warn(`warning: version is same '${fromVersion}', need updating suffix patch number`)
     }
 
     let baseVersion = toVersion.replace(/-patch[0-9]+$/, '')
@@ -30,6 +30,7 @@ function updatePackageDistJson() {
     });
 
     fs.writeFileSync('blockly-dist/package.json', JSON.stringify(toPkg, null, 4))
+    fs.copyFileSync('./README.md', 'blockly-dist/README.md')
 }
 
 function main() {

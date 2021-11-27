@@ -16,7 +16,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "update-version": "node ./scripts/dist-package.js"
+    "update-version": "node ./scripts/dist-package.js",
+    "publish": "npm publish blockly-dist --access=public"
   },
   "devDependencies": {
     "shelljs": "^0.8.4"

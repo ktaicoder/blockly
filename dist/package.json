@@ -1,6 +1,6 @@
 {
     "name": "@ktaicoder/blockly",
-    "version": "7.20211209.2-p2",
+    "version": "7.20211209.2-p4",
     "description": "Blockly library for ktaicoder",
     "keywords": [
         "blockly"

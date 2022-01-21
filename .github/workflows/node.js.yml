@@ -5,8 +5,8 @@ name: Publish blockly
 
 on:
   push:
-    branches: [release]
-
+    tags:
+      - "v*"
 jobs:
   build:
     runs-on: ubuntu-latest

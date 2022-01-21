@@ -13,20 +13,43 @@
 ## 설치 방법
 
 ```bash
-$  yarn add @ktaicoder/blockly
+$ yarn add @ktaicoder/blockly
+
+# or
+$ yarn add blockly@npm:@ktaicoder/blockly
+
+# or
+$ yarn add blockly@npm:@ktaicoder/blockly@7.20211209.2-p2
 ```
 
 ## 빌드
 
-```bash
-git submodule update --init
-yarn --cwd blockly-src install
-yarn install
-yarn prepare
+- 개인적으로 구글의 블록리 빌드가 윈도우 환경에서는 잘 안되서, 리눅스에서 빌드하고 있습니다. 혹시 윈도우에서 빌드가 안된다면, 리눅스에서 빌드해주세요.
+- 구글의 블록리 빌드하려면 `python3`이 필요합니다.
 
+### Setup
+
+```bash
+# preparing
+yarn install
+
+git submodule update --init
+cd blockly-src
+npm install
+```
+
+### Build and Publish
+
+- 소스코드를 편집한 후에 빌드합니다.
+- 구글의 블록리를 대체할 것이므로, 자체 버전을 관리합니다.
+- 자체 버전은 구글의 블록리 버전의 끝에 p1, p2 이런식의 Suffix를 붙이는 방식입니다.
+
+```bash
 # modify version
 vi package.json
 
+# build and packaging
+# python3 required for blockly build
 yarn dist
 
 git tag v7.20211209.2-p1
@@ -35,9 +58,9 @@ git push origin v7.20211209.2-p1
 
 ## 주요 변경 내용
 
-- FlayoutButton의 style을 변경
-  - style로는 변경할 수가 없어서 추가
 - JavaScript 제너레이터의 `procedure` 부분을 `async`하게 변경
+- FlayoutButton의 style을 변경
+  - css로는 변경할 수가 없어서 추가
 
 ## 변경 방향
 

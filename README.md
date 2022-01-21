@@ -20,6 +20,7 @@ $  yarn add @ktaicoder/blockly
 
 ```bash
 git submodule update --init
+yarn --cwd blockly-src install
 yarn install
 yarn prepare
 

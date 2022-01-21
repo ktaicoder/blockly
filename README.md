@@ -13,13 +13,14 @@
 ## 설치 방법
 
 ```bash
-$ yarn add @ktaicoder/blockly
+yarn add @ktaicoder/blockly
 
 # or
-$ yarn add blockly@npm:@ktaicoder/blockly
+yarn add blockly@npm:@ktaicoder/blockly
 
 # or
-$ yarn add blockly@npm:@ktaicoder/blockly@7.20211209.2-p2
+yarn add blockly@npm:@ktaicoder/blockly@7.20211209.2-p4
+
 ```
 
 ## 빌드
@@ -52,8 +53,8 @@ vi package.json
 # python3 required for blockly build
 yarn dist
 
-git tag v7.20211209.2-p1
-git push origin v7.20211209.2-p1
+git tag v7.20211209.2-p3
+git push origin v7.20211209.2-p3
 ```
 
 ## 주요 변경 내용

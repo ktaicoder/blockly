@@ -16,6 +16,22 @@
 $  yarn add @ktaicoder/blockly
 ```
 
+## 빌드
+
+```bash
+git submodule update --init
+yarn install
+yarn prepare
+
+# modify version
+vi package.json
+
+yarn dist
+
+git tag v7.20211209.2-p1
+git push origin v7.20211209.2-p1
+```
+
 ## 주요 변경 내용
 
 - FlayoutButton의 style을 변경

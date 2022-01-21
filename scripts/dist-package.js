@@ -19,7 +19,7 @@ function updatePackageDistJson() {
         toPkg[it] = fromPkg[it]
     });
 
-    fs.writeFileSync('dist/package.json', JSON.stringify(toPkg, null, 4))
+    fs.writeFileSync('dist/package.json', JSON.stringify(toPkg, null, 2))
     fs.copyFileSync('./README.md', 'dist/README.md')
 }
 

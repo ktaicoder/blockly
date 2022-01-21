@@ -1,5 +1,5 @@
 /**
- * generators/procedures.js를 복사해서 변경
+ * generators/javascript/procedures.js를 복사해서 변경
  * 변경한 부분:
  * 함수 정의에 async를 추가, 함수 호출에 await을 추가
  * ORDER_FUNCTION_CALL을 ORDER_AWAIT으로 변경

@@ -16,10 +16,13 @@
   },
   "license": "MIT",
   "scripts": {
-    "update-version": "node ./scripts/dist-package.js",
-    "publish": "npm publish blockly-dist --access=public"
+    "prepare": "yarn --cwd blockly-src install",
+    "predist": "node ./scripts/copy-patch-files.js && yarn --cwd blockly-src build",
+    "dist": "node ./scripts/dist-package.js && yarn --cwd blockly-src package && rimraf dist && cp -rf blockly-src/dist/* dist",
+    "publish": "npm publish dist --access=public"
   },
   "devDependencies": {
+    "rimraf": "^3.0.2",
     "shelljs": "^0.8.4"
   },
   "keywords": [

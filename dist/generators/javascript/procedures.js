@@ -57,7 +57,7 @@ JavaScript['procedures_defreturn'] = function (block) {
     }
     const args = [];
     const variables = block.getVars();
-    for (let i = 0;i < variables.length;i++) {
+    for (let i = 0; i < variables.length; i++) {
         args[i] = JavaScript.nameDB_.getName(variables[i], NameType.VARIABLE);
     }
 
@@ -80,10 +80,11 @@ JavaScript['procedures_callreturn'] = function (block) {
         block.getFieldValue('NAME'), NameType.PROCEDURE);
     const args = [];
     const variables = block.getVars();
-    for (let i = 0;i < variables.length;i++) {
+    for (let i = 0; i < variables.length; i++) {
         args[i] = JavaScript.valueToCode(block, 'ARG' + i, JavaScript.ORDER_NONE) ||
             'null';
     }
+
     // aimk
     const code = 'await ' + funcName + '(' + args.join(', ') + ')';
     return [code, JavaScript.ORDER_AWAIT];

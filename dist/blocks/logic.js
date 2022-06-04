@@ -5,7 +5,6 @@
  * 다른 수정 없음
  */
 
-
 /**
  * @license
  * Copyright 2012 Google LLC
@@ -18,7 +17,7 @@
  */
 'use strict';
 
-goog.module('Blockly.blocks.logic');
+goog.module('Blockly.libraryBlocks.logic');
 
 /* eslint-disable-next-line no-unused-vars */
 const AbstractEvent = goog.requireType('Blockly.Events.Abstract');
@@ -27,20 +26,26 @@ const Extensions = goog.require('Blockly.Extensions');
 const xmlUtils = goog.require('Blockly.utils.xml');
 /* eslint-disable-next-line no-unused-vars */
 const { Block } = goog.requireType('Blockly.Block');
+/* eslint-disable-next-line no-unused-vars */
+const { BlockDefinition } = goog.requireType('Blockly.blocks');
 const { Msg } = goog.require('Blockly.Msg');
 const { Mutator } = goog.require('Blockly.Mutator');
 /* eslint-disable-next-line no-unused-vars */
 const { RenderedConnection } = goog.requireType('Blockly.RenderedConnection');
 /* eslint-disable-next-line no-unused-vars */
 const { Workspace } = goog.requireType('Blockly.Workspace');
-const { defineBlocksWithJsonArray } = goog.require('Blockly.common');
+const { createBlockDefinitionsFromJsonArray, defineBlocks } = goog.require('Blockly.common');
 /** @suppress {extraRequire} */
 goog.require('Blockly.FieldDropdown');
 /** @suppress {extraRequire} */
 goog.require('Blockly.FieldLabel');
 
 
-defineBlocksWithJsonArray([
+/**
+ * A dictionary of the block definitions provided by this module.
+ * @type {!Object<string, !BlockDefinition>}
+ */
+const blocks = createBlockDefinitionsFromJsonArray([
     // Block for boolean data type: true and false.
     {
         'type': 'logic_boolean',
@@ -266,6 +271,7 @@ defineBlocksWithJsonArray([
         'tooltip': '%{BKY_CONTROLS_IF_ELSE_TOOLTIP}',
     },
 ]);
+exports.blocks = blocks;
 
 /**
  * Tooltip text, keyed by block OP value. Used by logic_compare and
@@ -369,7 +375,7 @@ const CONTROLS_IF_MUTATOR_MIXIN = {
         const containerBlock = workspace.newBlock('controls_if_if');
         containerBlock.initSvg();
         let connection = containerBlock.nextConnection;
-        for (let i = 1;i <= this.elseifCount_;i++) {
+        for (let i = 1; i <= this.elseifCount_; i++) {
             const elseifBlock = workspace.newBlock('controls_if_elseif');
             elseifBlock.initSvg();
             connection.connect(elseifBlock.previousConnection);
@@ -463,7 +469,7 @@ const CONTROLS_IF_MUTATOR_MIXIN = {
             elseStatementConnection =
                 this.getInput('ELSE').connection.targetConnection;
         }
-        for (let i = 1;this.getInput('IF' + i);i++) {
+        for (let i = 1; this.getInput('IF' + i); i++) {
             const inputIf = this.getInput('IF' + i);
             const inputDo = this.getInput('DO' + i);
             valueConnections.push(inputIf.connection.targetConnection);
@@ -483,12 +489,12 @@ const CONTROLS_IF_MUTATOR_MIXIN = {
         if (this.getInput('ELSE')) {
             this.removeInput('ELSE');
         }
-        for (let i = 1;this.getInput('IF' + i);i++) {
+        for (let i = 1; this.getInput('IF' + i); i++) {
             this.removeInput('IF' + i);
             this.removeInput('DO' + i);
         }
         // Rebuild block.
-        for (let i = 1;i <= this.elseifCount_;i++) {
+        for (let i = 1; i <= this.elseifCount_; i++) {
             this.appendValueInput('IF' + i).setCheck('Boolean').appendField(
                 Msg['CONTROLS_IF_MSG_ELSEIF']);
             this.appendStatementInput('DO' + i).appendField(
@@ -511,7 +517,7 @@ const CONTROLS_IF_MUTATOR_MIXIN = {
      */
     reconnectChildBlocks_: function (
         valueConnections, statementConnections, elseStatementConnection) {
-        for (let i = 1;i <= this.elseifCount_;i++) {
+        for (let i = 1; i <= this.elseifCount_; i++) {
             Mutator.reconnect(valueConnections[i], this, 'IF' + i);
             Mutator.reconnect(statementConnections[i], this, 'DO' + i);
         }
@@ -630,7 +636,7 @@ const LOGIC_TERNARY_ONCHANGE_MIXIN = {
         const parentConnection = this.outputConnection.targetConnection;
         // Disconnect blocks that existed prior to this change if they don't match.
         if ((blockA || blockB) && parentConnection) {
-            for (let i = 0;i < 2;i++) {
+            for (let i = 0; i < 2; i++) {
                 const block = (i === 1) ? blockA : blockB;
                 if (block &&
                     !block.workspace.connectionChecker.doTypeChecks(
@@ -653,3 +659,6 @@ const LOGIC_TERNARY_ONCHANGE_MIXIN = {
 };
 
 Extensions.registerMixin('logic_ternary', LOGIC_TERNARY_ONCHANGE_MIXIN);
+
+// Register provided blocks.
+defineBlocks(blocks);

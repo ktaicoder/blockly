@@ -1,6 +1,6 @@
 {
   "name": "@ktaicoder/blockly",
-  "version": "8.0.2-p11",
+  "version": "8.0.2-p12",
   "description": "Blockly library for ktaicoder",
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   "scripts": {
     "build:blockly": "node ./scripts/copy-patch-files.js && yarn --cwd blockly-src build && yarn --cwd blockly-src package ",
     "dist": "yarn build:blockly && rimraf dist && cp -rf blockly-src/dist dist && node ./scripts/dist-package.js ",
-    "publish": "npm publish dist --access=public",
+    "publish": "cd dist && npm publish . --access=public",
     "reset": "cd blockly-src && git checkout ."
   },
   "devDependencies": {

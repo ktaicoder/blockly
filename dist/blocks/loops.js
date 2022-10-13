@@ -323,6 +323,7 @@ const loopTypes = new Set([
     'controls_custom_while_until',
     'controls_custom_for',
     'controls_custom_for_reverse',
+    'kws_loop',
 ]);
 exports.loopTypes = loopTypes;
 

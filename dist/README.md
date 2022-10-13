@@ -53,8 +53,8 @@ vi package.json
 # python3 required for blockly build
 yarn dist
 
-git tag v8.0.2-p2
-git push origin v8.0.2-p2
+git tag v8.0.2-p9
+git push origin v8.0.2-p9
 ```
 
 ## 주요 변경 내용

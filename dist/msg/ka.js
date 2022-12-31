@@ -1,17 +1,21 @@
 /* eslint-disable */
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) { // AMD
-    define(['../core'], factory);
+    define([], factory);
   } else if (typeof exports === 'object') { // Node.js
-    module.exports = factory(require('../core'));
+    module.exports = factory();
   } else { // Browser
-    root.Blockly.Msg = factory(root.Blockly);
+    var messages = factory();
+    for (var key in messages) {
+      root.Blockly.Msg[key] = messages[key];
+    }
   }
-}(this, function(Blockly) {
-
-      var Blockly = {};Blockly.Msg={};// This file was automatically generated.  Do not modify.
+}(this, function() {
+// This file was automatically generated.  Do not modify.
 
 'use strict';
+
+var Blockly = Blockly || { Msg: Object.create(null) };
 
 Blockly.Msg["ADD_COMMENT"] = "Add Comment";  // untranslated
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "Can't delete the variable '%1' because it's part of the definition of the function '%2'";  // untranslated
@@ -77,7 +81,7 @@ Blockly.Msg["DELETE_X_BLOCKS"] = "Delete %1 Blocks";  // untranslated
 Blockly.Msg["DIALOG_CANCEL"] = "Cancel";  // untranslated
 Blockly.Msg["DIALOG_OK"] = "კარგი";
 Blockly.Msg["DISABLE_BLOCK"] = "Disable Block";  // untranslated
-Blockly.Msg["DUPLICATE_BLOCK"] = "Duplicate";  // untranslated
+Blockly.Msg["DUPLICATE_BLOCK"] = "დუბლიკატი";
 Blockly.Msg["DUPLICATE_COMMENT"] = "Duplicate Comment";  // untranslated
 Blockly.Msg["ENABLE_BLOCK"] = "ბლოკის ჩართვა";
 Blockly.Msg["EXPAND_ALL"] = "Expand Blocks";  // untranslated
@@ -387,7 +391,7 @@ Blockly.Msg["TEXT_TRIM_OPERATOR_BOTH"] = "trim spaces from both sides of";  // u
 Blockly.Msg["TEXT_TRIM_OPERATOR_LEFT"] = "trim spaces from left side of";  // untranslated
 Blockly.Msg["TEXT_TRIM_OPERATOR_RIGHT"] = "trim spaces from right side of";  // untranslated
 Blockly.Msg["TEXT_TRIM_TOOLTIP"] = "Return a copy of the text with spaces removed from one or both ends.";  // untranslated
-Blockly.Msg["TODAY"] = "Today";  // untranslated
+Blockly.Msg["TODAY"] = "დღეს";
 Blockly.Msg["UNDO"] = "Undo";  // untranslated
 Blockly.Msg["UNNAMED_KEY"] = "unnamed";  // untranslated
 Blockly.Msg["VARIABLES_DEFAULT_NAME"] = "item";  // untranslated
@@ -433,4 +437,4 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 return Blockly.Msg;
-})); 
+}));

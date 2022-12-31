@@ -19,4 +19,4 @@
  */
 
 return Blockly;
-})); 
+}));

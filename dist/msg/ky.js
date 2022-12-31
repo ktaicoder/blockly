@@ -1,17 +1,21 @@
 /* eslint-disable */
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) { // AMD
-    define(['../core'], factory);
+    define([], factory);
   } else if (typeof exports === 'object') { // Node.js
-    module.exports = factory(require('../core'));
+    module.exports = factory();
   } else { // Browser
-    root.Blockly.Msg = factory(root.Blockly);
+    var messages = factory();
+    for (var key in messages) {
+      root.Blockly.Msg[key] = messages[key];
+    }
   }
-}(this, function(Blockly) {
-
-      var Blockly = {};Blockly.Msg={};// This file was automatically generated.  Do not modify.
+}(this, function() {
+// This file was automatically generated.  Do not modify.
 
 'use strict';
+
+var Blockly = Blockly || { Msg: Object.create(null) };
 
 Blockly.Msg["ADD_COMMENT"] = "Пикириңизди кошуңуз";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "Can't delete the variable '%1' because it's part of the definition of the function '%2'";  // untranslated
@@ -26,7 +30,7 @@ Blockly.Msg["COLOUR_BLEND_HELPURL"] = "https://meyerweb.com/eric/tools/color-ble
 Blockly.Msg["COLOUR_BLEND_RATIO"] = "катышы";
 Blockly.Msg["COLOUR_BLEND_TITLE"] = "аралаштыруу";
 Blockly.Msg["COLOUR_BLEND_TOOLTIP"] = "Эки түстү берилген катыш (0.0 - 1.0) менен аралаштыр.";
-Blockly.Msg["COLOUR_PICKER_HELPURL"] = "https://en.wikipedia.org/wiki/Color";
+Blockly.Msg["COLOUR_PICKER_HELPURL"] = "https://en.wikipedia.org/wiki/Color";  // untranslated
 Blockly.Msg["COLOUR_PICKER_TOOLTIP"] = "палитрадан түс танда";
 Blockly.Msg["COLOUR_RANDOM_HELPURL"] = "http://randomcolour.com";  // untranslated
 Blockly.Msg["COLOUR_RANDOM_TITLE"] = "тушкелди түс";
@@ -60,7 +64,7 @@ Blockly.Msg["CONTROLS_IF_TOOLTIP_1"] = "If a value is true, then do some stateme
 Blockly.Msg["CONTROLS_IF_TOOLTIP_2"] = "If a value is true, then do the first block of statements. Otherwise, do the second block of statements.";  // untranslated
 Blockly.Msg["CONTROLS_IF_TOOLTIP_3"] = "If the first value is true, then do the first block of statements. Otherwise, if the second value is true, do the second block of statements.";  // untranslated
 Blockly.Msg["CONTROLS_IF_TOOLTIP_4"] = "If the first value is true, then do the first block of statements. Otherwise, if the second value is true, do the second block of statements. If none of the values are true, do the last block of statements.";  // untranslated
-Blockly.Msg["CONTROLS_REPEAT_HELPURL"] = "https://en.wikipedia.org/wiki/For_loop";
+Blockly.Msg["CONTROLS_REPEAT_HELPURL"] = "https://en.wikipedia.org/wiki/For_loop";  // untranslated
 Blockly.Msg["CONTROLS_REPEAT_INPUT_DO"] = "жаса";
 Blockly.Msg["CONTROLS_REPEAT_TITLE"] = "%1 жолу кайтала";
 Blockly.Msg["CONTROLS_REPEAT_TOOLTIP"] = "Билдирүүнү бир канча жолу кайтала";
@@ -433,4 +437,4 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 return Blockly.Msg;
-})); 
+}));

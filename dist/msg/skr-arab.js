@@ -1,17 +1,21 @@
 /* eslint-disable */
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) { // AMD
-    define(['../core'], factory);
+    define([], factory);
   } else if (typeof exports === 'object') { // Node.js
-    module.exports = factory(require('../core'));
+    module.exports = factory();
   } else { // Browser
-    root.Blockly.Msg = factory(root.Blockly);
+    var messages = factory();
+    for (var key in messages) {
+      root.Blockly.Msg[key] = messages[key];
+    }
   }
-}(this, function(Blockly) {
-
-      var Blockly = {};Blockly.Msg={};// This file was automatically generated.  Do not modify.
+}(this, function() {
+// This file was automatically generated.  Do not modify.
 
 'use strict';
+
+var Blockly = Blockly || { Msg: Object.create(null) };
 
 Blockly.Msg["ADD_COMMENT"] = "تبصرہ کرو";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "Can't delete the variable '%1' because it's part of the definition of the function '%2'";  // untranslated
@@ -26,7 +30,7 @@ Blockly.Msg["COLOUR_BLEND_HELPURL"] = "https://meyerweb.com/eric/tools/color-ble
 Blockly.Msg["COLOUR_BLEND_RATIO"] = "نسبت";
 Blockly.Msg["COLOUR_BLEND_TITLE"] = "مرکب";
 Blockly.Msg["COLOUR_BLEND_TOOLTIP"] = "Blends two colours together with a given ratio (0.0 - 1.0).";  // untranslated
-Blockly.Msg["COLOUR_PICKER_HELPURL"] = "https://en.wikipedia.org/wiki/Color";
+Blockly.Msg["COLOUR_PICKER_HELPURL"] = "https://en.wikipedia.org/wiki/Color";  // untranslated
 Blockly.Msg["COLOUR_PICKER_TOOLTIP"] = "Choose a colour from the palette.";  // untranslated
 Blockly.Msg["COLOUR_RANDOM_HELPURL"] = "http://randomcolour.com";  // untranslated
 Blockly.Msg["COLOUR_RANDOM_TITLE"] = "بنا ترتيب رنگ";
@@ -78,7 +82,7 @@ Blockly.Msg["DIALOG_CANCEL"] = "منسوخ";
 Blockly.Msg["DIALOG_OK"] = "ٹھیک ہے";
 Blockly.Msg["DISABLE_BLOCK"] = "بلاک ہٹاؤ";
 Blockly.Msg["DUPLICATE_BLOCK"] = "ڈپلیکیٹ";
-Blockly.Msg["DUPLICATE_COMMENT"] = "Duplicate Comment";  // untranslated
+Blockly.Msg["DUPLICATE_COMMENT"] = " نقل  تبصرہ";
 Blockly.Msg["ENABLE_BLOCK"] = "بلاک فعال کرو";
 Blockly.Msg["EXPAND_ALL"] = "بلاکوں کوں کھنڈاؤ";
 Blockly.Msg["EXPAND_BLOCK"] = "بلاک کھنڈاؤ";
@@ -197,7 +201,7 @@ Blockly.Msg["LOGIC_TERNARY_IF_FALSE"] = "اگر کوڑ ہے";
 Blockly.Msg["LOGIC_TERNARY_IF_TRUE"] = "اگر سچ ہے";
 Blockly.Msg["LOGIC_TERNARY_TOOLTIP"] = "Check the condition in 'test'. If the condition is true, returns the 'if true' value; otherwise returns the 'if false' value.";  // untranslated
 Blockly.Msg["MATH_ADDITION_SYMBOL"] = "+";  // untranslated
-Blockly.Msg["MATH_ARITHMETIC_HELPURL"] = "https://en.wikipedia.org/wiki/Arithmetic";
+Blockly.Msg["MATH_ARITHMETIC_HELPURL"] = "https://en.wikipedia.org/wiki/Arithmetic";  // untranslated
 Blockly.Msg["MATH_ARITHMETIC_TOOLTIP_ADD"] = "Return the sum of the two numbers.";  // untranslated
 Blockly.Msg["MATH_ARITHMETIC_TOOLTIP_DIVIDE"] = "Return the quotient of the two numbers.";  // untranslated
 Blockly.Msg["MATH_ARITHMETIC_TOOLTIP_MINUS"] = "Return the difference of the two numbers.";  // untranslated
@@ -389,7 +393,7 @@ Blockly.Msg["TEXT_TRIM_OPERATOR_RIGHT"] = "trim spaces from right side of";  // 
 Blockly.Msg["TEXT_TRIM_TOOLTIP"] = "Return a copy of the text with spaces removed from one or both ends.";  // untranslated
 Blockly.Msg["TODAY"] = "اڄ";
 Blockly.Msg["UNDO"] = "واپس";
-Blockly.Msg["UNNAMED_KEY"] = "unnamed";  // untranslated
+Blockly.Msg["UNNAMED_KEY"] = "بغیر ناں";
 Blockly.Msg["VARIABLES_DEFAULT_NAME"] = "آئٹم";
 Blockly.Msg["VARIABLES_GET_CREATE_SET"] = "Create 'set %1'";  // untranslated
 Blockly.Msg["VARIABLES_GET_HELPURL"] = "https://github.com/google/blockly/wiki/Variables#get";  // untranslated
@@ -433,4 +437,4 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 return Blockly.Msg;
-})); 
+}));

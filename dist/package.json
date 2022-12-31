@@ -1,7 +1,7 @@
 {
   "name": "@ktaicoder/blockly",
-  "version": "8.0.2-p11",
-  "description": "Blockly library for ktaicoder",
+  "version": "9.2.0-p1",
+  "description": "Blockly library for codiny",
   "keywords": [
     "blockly"
   ],
@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/ktaicoder/blockly/issues"
   },
-  "homepage": "https://aicodingblock.kt.co.kr",
+  "homepage": "https://aicodiny.com",
   "author": {
     "name": "ktaicoder"
   },
@@ -27,22 +27,29 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "@blockly/block-test": "^2.0.1",
-    "@blockly/dev-tools": "^3.0.1",
-    "@blockly/theme-modern": "^2.1.1",
-    "@hyperjump/json-schema": "^0.18.4",
-    "@wdio/selenium-standalone-service": "^7.10.1",
+    "@blockly/block-test": "^3.0.0",
+    "@blockly/dev-tools": "^5.0.0",
+    "@blockly/theme-modern": "^3.0.0",
+    "@hyperjump/json-schema": "^0.23.3",
+    "@microsoft/api-documenter": "^7.19.16",
+    "@microsoft/api-extractor": "^7.29.5",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@wdio/selenium-standalone-service": "^8.0.2",
+    "async-done": "^2.0.0",
     "chai": "^4.2.0",
     "clang-format": "^1.6.0",
     "closure-calculate-chunks": "^3.0.2",
-    "concurrently": "^7.0.0",
+    "concurrently": "^7.4.0",
     "eslint": "^8.4.1",
     "eslint-config-google": "^0.14.0",
-    "google-closure-compiler": "^20220301.0.0",
-    "google-closure-deps": "^20220202.0.0",
+    "eslint-plugin-jsdoc": "^39.3.6",
+    "google-closure-compiler": "^20221004.0.0",
+    "google-closure-deps": "^20221102.0.0",
     "gulp": "^4.0.2",
     "gulp-clang-format": "^1.0.27",
     "gulp-concat": "^2.6.1",
+    "gulp-header": "^2.0.9",
+    "gulp-gzip": "^1.4.2",
     "gulp-insert": "^0.5.0",
     "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.0.0",
@@ -53,16 +60,18 @@
     "http-server": "^14.0.0",
     "js-green-licenses": "^3.0.0",
     "json5": "^2.2.0",
-    "mocha": "^9.1.1",
+    "markdown-tables-to-json": "^0.1.7",
+    "mocha": "^10.0.0",
+    "patch-package": "^6.4.7",
     "readline-sync": "^1.4.10",
     "rimraf": "^3.0.2",
     "selenium-standalone": "^8.0.3",
     "through2": "^4.0.2",
     "typescript": "^4.3.2",
-    "webdriverio": "^7.0.3",
+    "webdriverio": "^8.0.5",
     "yargs": "^17.2.1"
   },
   "dependencies": {
-    "jsdom": "15.2.1"
+    "jsdom": "20.0.3"
   }
 }

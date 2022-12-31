@@ -1,17 +1,21 @@
 /* eslint-disable */
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) { // AMD
-    define(['../core'], factory);
+    define([], factory);
   } else if (typeof exports === 'object') { // Node.js
-    module.exports = factory(require('../core'));
+    module.exports = factory();
   } else { // Browser
-    root.Blockly.Msg = factory(root.Blockly);
+    var messages = factory();
+    for (var key in messages) {
+      root.Blockly.Msg[key] = messages[key];
+    }
   }
-}(this, function(Blockly) {
-
-      var Blockly = {};Blockly.Msg={};// This file was automatically generated.  Do not modify.
+}(this, function() {
+// This file was automatically generated.  Do not modify.
 
 'use strict';
+
+var Blockly = Blockly || { Msg: Object.create(null) };
 
 Blockly.Msg["ADD_COMMENT"] = "Adder commento";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "Impossibile deler le variabile '%1' perque illo face parte del definition del function '%2'";
@@ -96,7 +100,7 @@ Blockly.Msg["LISTS_CREATE_WITH_ITEM_TOOLTIP"] = "Adder un elemento al lista.";
 Blockly.Msg["LISTS_CREATE_WITH_TOOLTIP"] = "Crear un lista con un numero qualcunque de elementos.";
 Blockly.Msg["LISTS_GET_INDEX_FIRST"] = "prime";
 Blockly.Msg["LISTS_GET_INDEX_FROM_END"] = "№ ab fin";
-Blockly.Msg["LISTS_GET_INDEX_FROM_START"] = "#";  // untranslated
+Blockly.Msg["LISTS_GET_INDEX_FROM_START"] = "#";
 Blockly.Msg["LISTS_GET_INDEX_GET"] = "prender";
 Blockly.Msg["LISTS_GET_INDEX_GET_REMOVE"] = "prender e remover";
 Blockly.Msg["LISTS_GET_INDEX_LAST"] = "ultime";
@@ -262,20 +266,20 @@ Blockly.Msg["MATH_SINGLE_HELPURL"] = "https://ia.wikipedia.org/wiki/Radice_quadr
 Blockly.Msg["MATH_SINGLE_OP_ABSOLUTE"] = "absolute";
 Blockly.Msg["MATH_SINGLE_OP_ROOT"] = "radice quadrate";
 Blockly.Msg["MATH_SINGLE_TOOLTIP_ABS"] = "Retornar le valor absolute de un numero.";
-Blockly.Msg["MATH_SINGLE_TOOLTIP_EXP"] = "Retornar <em>e</em> elevate al potentia de un numero.";
+Blockly.Msg["MATH_SINGLE_TOOLTIP_EXP"] = "Retornar e elevate al potentia de un numero.";
 Blockly.Msg["MATH_SINGLE_TOOLTIP_LN"] = "Retornar le logarithmo natural de un numero.";
 Blockly.Msg["MATH_SINGLE_TOOLTIP_LOG10"] = "Retornar le logarithmo in base 10 de un numero.";
 Blockly.Msg["MATH_SINGLE_TOOLTIP_NEG"] = "Retornar le negation de un numero.";
 Blockly.Msg["MATH_SINGLE_TOOLTIP_POW10"] = "Retornar 10 elevate al potentia de un numero.";
 Blockly.Msg["MATH_SINGLE_TOOLTIP_ROOT"] = "Retornar le radice quadrate de un numero.";
 Blockly.Msg["MATH_SUBTRACTION_SYMBOL"] = "-";  // untranslated
-Blockly.Msg["MATH_TRIG_ACOS"] = "acos";  // untranslated
-Blockly.Msg["MATH_TRIG_ASIN"] = "asin";  // untranslated
-Blockly.Msg["MATH_TRIG_ATAN"] = "atan";  // untranslated
-Blockly.Msg["MATH_TRIG_COS"] = "cos";  // untranslated
+Blockly.Msg["MATH_TRIG_ACOS"] = "acos";
+Blockly.Msg["MATH_TRIG_ASIN"] = "asin";
+Blockly.Msg["MATH_TRIG_ATAN"] = "atan";
+Blockly.Msg["MATH_TRIG_COS"] = "cos";
 Blockly.Msg["MATH_TRIG_HELPURL"] = "https://en.wikipedia.org/wiki/Trigonometric_functions";  // untranslated
-Blockly.Msg["MATH_TRIG_SIN"] = "sin";  // untranslated
-Blockly.Msg["MATH_TRIG_TAN"] = "tan";  // untranslated
+Blockly.Msg["MATH_TRIG_SIN"] = "sin";
+Blockly.Msg["MATH_TRIG_TAN"] = "tan";
 Blockly.Msg["MATH_TRIG_TOOLTIP_ACOS"] = "Retornar le arcocosino de un numero.";
 Blockly.Msg["MATH_TRIG_TOOLTIP_ASIN"] = "Retornar le arcosino de un numero.";
 Blockly.Msg["MATH_TRIG_TOOLTIP_ATAN"] = "Retornar le arcotangente de un numero.";
@@ -433,4 +437,4 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 return Blockly.Msg;
-})); 
+}));

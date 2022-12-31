@@ -1,17 +1,21 @@
 /* eslint-disable */
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) { // AMD
-    define(['../core'], factory);
+    define([], factory);
   } else if (typeof exports === 'object') { // Node.js
-    module.exports = factory(require('../core'));
+    module.exports = factory();
   } else { // Browser
-    root.Blockly.Msg = factory(root.Blockly);
+    var messages = factory();
+    for (var key in messages) {
+      root.Blockly.Msg[key] = messages[key];
+    }
   }
-}(this, function(Blockly) {
-
-      var Blockly = {};Blockly.Msg={};// This file was automatically generated.  Do not modify.
+}(this, function() {
+// This file was automatically generated.  Do not modify.
 
 'use strict';
+
+var Blockly = Blockly || { Msg: Object.create(null) };
 
 Blockly.Msg["ADD_COMMENT"] = "Ŋlɔ Numeɖeɖe";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "Mate ŋu atutu teaŋutrɔna '%1' o elabe ewɔ akpa aɖe le teaŋutrɔna '%2' me.";
@@ -273,7 +277,7 @@ Blockly.Msg["MATH_TRIG_ACOS"] = "acos";  // untranslated
 Blockly.Msg["MATH_TRIG_ASIN"] = "asin";  // untranslated
 Blockly.Msg["MATH_TRIG_ATAN"] = "atan";  // untranslated
 Blockly.Msg["MATH_TRIG_COS"] = "cos";  // untranslated
-Blockly.Msg["MATH_TRIG_HELPURL"] = "https://en.wikipedia.org/wiki/Trigonometric_functions";
+Blockly.Msg["MATH_TRIG_HELPURL"] = "https://en.wikipedia.org/wiki/Trigonometric_functions";  // untranslated
 Blockly.Msg["MATH_TRIG_SIN"] = "sin";  // untranslated
 Blockly.Msg["MATH_TRIG_TAN"] = "tan";  // untranslated
 Blockly.Msg["MATH_TRIG_TOOLTIP_ACOS"] = "Return the arccosine of a number.";  // untranslated
@@ -433,4 +437,4 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 return Blockly.Msg;
-})); 
+}));

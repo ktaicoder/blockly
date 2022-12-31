@@ -1,17 +1,21 @@
 /* eslint-disable */
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) { // AMD
-    define(['../core'], factory);
+    define([], factory);
   } else if (typeof exports === 'object') { // Node.js
-    module.exports = factory(require('../core'));
+    module.exports = factory();
   } else { // Browser
-    root.Blockly.Msg = factory(root.Blockly);
+    var messages = factory();
+    for (var key in messages) {
+      root.Blockly.Msg[key] = messages[key];
+    }
   }
-}(this, function(Blockly) {
-
-      var Blockly = {};Blockly.Msg={};// This file was automatically generated.  Do not modify.
+}(this, function() {
+// This file was automatically generated.  Do not modify.
 
 'use strict';
+
+var Blockly = Blockly || { Msg: Object.create(null) };
 
 Blockly.Msg["ADD_COMMENT"] = "Megjegyzés hozzáadása";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "A(z) „%1” változó nem törölhető, mert része a(z) „%2” függvény definíciójának.";
@@ -155,7 +159,7 @@ Blockly.Msg["LISTS_SET_INDEX_TOOLTIP_SET_FIRST"] = "Az első elem cseréje a lis
 Blockly.Msg["LISTS_SET_INDEX_TOOLTIP_SET_FROM"] = "A megadott sorszámú elem cseréje a listában.";
 Blockly.Msg["LISTS_SET_INDEX_TOOLTIP_SET_LAST"] = "Az utolsó elem cseréje a listában.";
 Blockly.Msg["LISTS_SET_INDEX_TOOLTIP_SET_RANDOM"] = "Véletlenszerűen választott elem cseréje a listában.";
-Blockly.Msg["LISTS_SORT_HELPURL"] = "https://github.com/google/blockly/wiki/Lists#sorting-a-list";
+Blockly.Msg["LISTS_SORT_HELPURL"] = "https://github.com/google/blockly/wiki/Lists#sorting-a-list";  // untranslated
 Blockly.Msg["LISTS_SORT_ORDER_ASCENDING"] = "növekvő";
 Blockly.Msg["LISTS_SORT_ORDER_DESCENDING"] = "csökkenő";
 Blockly.Msg["LISTS_SORT_TITLE"] = "%1 %2 %3 rendezés";
@@ -298,7 +302,7 @@ Blockly.Msg["PROCEDURES_CALLRETURN_TOOLTIP"] = "Meghívja a függvényt.";
 Blockly.Msg["PROCEDURES_CALL_BEFORE_PARAMS"] = "paraméterlistaː";
 Blockly.Msg["PROCEDURES_CREATE_DO"] = "„%1” létrehozása";
 Blockly.Msg["PROCEDURES_DEFNORETURN_COMMENT"] = "Írj erről a funkcióról...";
-Blockly.Msg["PROCEDURES_DEFNORETURN_DO"] = "";
+Blockly.Msg["PROCEDURES_DEFNORETURN_DO"] = "";  // untranslated
 Blockly.Msg["PROCEDURES_DEFNORETURN_HELPURL"] = "https://en.wikipedia.org/wiki/Subroutine";  // untranslated
 Blockly.Msg["PROCEDURES_DEFNORETURN_PROCEDURE"] = "név";
 Blockly.Msg["PROCEDURES_DEFNORETURN_TITLE"] = "Eljárás";
@@ -308,7 +312,7 @@ Blockly.Msg["PROCEDURES_DEFRETURN_RETURN"] = "eredménye";
 Blockly.Msg["PROCEDURES_DEFRETURN_TOOLTIP"] = "Függvény eredménnyel.";
 Blockly.Msg["PROCEDURES_DEF_DUPLICATE_WARNING"] = "Figyelem: Az eljárásban azonos elnevezésű paramétert adtál meg.";
 Blockly.Msg["PROCEDURES_HIGHLIGHT_DEF"] = "Függvénydefiníció kiemelése";
-Blockly.Msg["PROCEDURES_IFRETURN_HELPURL"] = "http://c2.com/cgi/wiki?GuardClause";
+Blockly.Msg["PROCEDURES_IFRETURN_HELPURL"] = "http://c2.com/cgi/wiki?GuardClause";  // untranslated
 Blockly.Msg["PROCEDURES_IFRETURN_TOOLTIP"] = "Ha az érték igaz, akkor visszatér a függvény értékével.";
 Blockly.Msg["PROCEDURES_IFRETURN_WARNING"] = "Figyelem: Ez a blokk csak függvénydefiníción belül használható.";
 Blockly.Msg["PROCEDURES_MUTATORARG_TITLE"] = "változó:";
@@ -433,4 +437,4 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 return Blockly.Msg;
-})); 
+}));

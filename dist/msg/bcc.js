@@ -1,17 +1,21 @@
 /* eslint-disable */
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) { // AMD
-    define(['../core'], factory);
+    define([], factory);
   } else if (typeof exports === 'object') { // Node.js
-    module.exports = factory(require('../core'));
+    module.exports = factory();
   } else { // Browser
-    root.Blockly.Msg = factory(root.Blockly);
+    var messages = factory();
+    for (var key in messages) {
+      root.Blockly.Msg[key] = messages[key];
+    }
   }
-}(this, function(Blockly) {
-
-      var Blockly = {};Blockly.Msg={};// This file was automatically generated.  Do not modify.
+}(this, function() {
+// This file was automatically generated.  Do not modify.
 
 'use strict';
+
+var Blockly = Blockly || { Msg: Object.create(null) };
 
 Blockly.Msg["ADD_COMMENT"] = "افزودن نظر";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "Can't delete the variable '%1' because it's part of the definition of the function '%2'";  // untranslated
@@ -291,9 +295,9 @@ Blockly.Msg["NEW_VARIABLE_TYPE_TITLE"] = "New variable type:";  // untranslated
 Blockly.Msg["ORDINAL_NUMBER_SUFFIX"] = "";  // untranslated
 Blockly.Msg["PROCEDURES_ALLOW_STATEMENTS"] = "اجازه اظهارات";
 Blockly.Msg["PROCEDURES_BEFORE_PARAMS"] = "با:";
-Blockly.Msg["PROCEDURES_CALLNORETURN_HELPURL"] = "https://fa.wikipedia.org/wiki/%D8%B1%D9%88%DB%8C%D9%87_%28%D8%B9%D9%84%D9%88%D9%85_%D8%B1%D8%A7%DB%8C%D8%A7%D9%86%D9%87%29";
+Blockly.Msg["PROCEDURES_CALLNORETURN_HELPURL"] = "https://en.wikipedia.org/wiki/Subroutine";  // untranslated
 Blockly.Msg["PROCEDURES_CALLNORETURN_TOOLTIP"] = "اجرای تابع تعریف‌شده توسط کاربر «%1».";
-Blockly.Msg["PROCEDURES_CALLRETURN_HELPURL"] = "https://fa.wikipedia.org/wiki/%D8%B1%D9%88%DB%8C%D9%87_%28%D8%B9%D9%84%D9%88%D9%85_%D8%B1%D8%A7%DB%8C%D8%A7%D9%86%D9%87%29";
+Blockly.Msg["PROCEDURES_CALLRETURN_HELPURL"] = "https://en.wikipedia.org/wiki/Subroutine";  // untranslated
 Blockly.Msg["PROCEDURES_CALLRETURN_TOOLTIP"] = "اجرای تابع تعریف‌شده توسط کاربر «%1» و استفاده از خروجی آن.";
 Blockly.Msg["PROCEDURES_CALL_BEFORE_PARAMS"] = "با:";
 Blockly.Msg["PROCEDURES_CREATE_DO"] = "ساختن «%1»";
@@ -387,9 +391,9 @@ Blockly.Msg["TEXT_TRIM_OPERATOR_BOTH"] = "تراشیدن فاصله‌ها از 
 Blockly.Msg["TEXT_TRIM_OPERATOR_LEFT"] = "تراشیدن فاصله‌ها از  طرف چپ";
 Blockly.Msg["TEXT_TRIM_OPERATOR_RIGHT"] = "تراشیدن فاصله‌ها از  طرف چپ";
 Blockly.Msg["TEXT_TRIM_TOOLTIP"] = "کپی از متن با فاصله‌های حذف‌شده از یک یا هر دو پایان باز می‌گرداند.";
-Blockly.Msg["TODAY"] = "Today";  // untranslated
+Blockly.Msg["TODAY"] = "مرۏچی";
 Blockly.Msg["UNDO"] = "Undo";  // untranslated
-Blockly.Msg["UNNAMED_KEY"] = "unnamed";  // untranslated
+Blockly.Msg["UNNAMED_KEY"] = "بدون نام";
 Blockly.Msg["VARIABLES_DEFAULT_NAME"] = "مورد";
 Blockly.Msg["VARIABLES_GET_CREATE_SET"] = "درست‌کردن «تنظیم %1»";
 Blockly.Msg["VARIABLES_GET_HELPURL"] = "https://github.com/google/blockly/wiki/Variables#get";  // untranslated
@@ -433,4 +437,4 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 return Blockly.Msg;
-})); 
+}));

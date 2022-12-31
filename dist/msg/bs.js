@@ -1,17 +1,21 @@
 /* eslint-disable */
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) { // AMD
-    define(['../core'], factory);
+    define([], factory);
   } else if (typeof exports === 'object') { // Node.js
-    module.exports = factory(require('../core'));
+    module.exports = factory();
   } else { // Browser
-    root.Blockly.Msg = factory(root.Blockly);
+    var messages = factory();
+    for (var key in messages) {
+      root.Blockly.Msg[key] = messages[key];
+    }
   }
-}(this, function(Blockly) {
-
-      var Blockly = {};Blockly.Msg={};// This file was automatically generated.  Do not modify.
+}(this, function() {
+// This file was automatically generated.  Do not modify.
 
 'use strict';
+
+var Blockly = Blockly || { Msg: Object.create(null) };
 
 Blockly.Msg["ADD_COMMENT"] = "Dodaj komentar";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "Ne mogu izbrisati varijablu \"%1\" jer je dio definicije funckije \"%2\"";
@@ -58,8 +62,8 @@ Blockly.Msg["CONTROLS_IF_MSG_ELSEIF"] = "inače ako";
 Blockly.Msg["CONTROLS_IF_MSG_IF"] = "ako";
 Blockly.Msg["CONTROLS_IF_TOOLTIP_1"] = "Ako je vrijednost tačna, izvršava neke naredbe.";
 Blockly.Msg["CONTROLS_IF_TOOLTIP_2"] = "Ako je vrijednost tačna, izvršava neke naredbe. U suprotnom, izvršava drugi blok naredbi.";
-Blockly.Msg["CONTROLS_IF_TOOLTIP_3"] = "If the first value is true, then do the first block of statements. Otherwise, if the second value is true, do the second block of statements.";  // untranslated
-Blockly.Msg["CONTROLS_IF_TOOLTIP_4"] = "If the first value is true, then do the first block of statements. Otherwise, if the second value is true, do the second block of statements. If none of the values are true, do the last block of statements.";  // untranslated
+Blockly.Msg["CONTROLS_IF_TOOLTIP_3"] = "Ako je prva vrijednost tačna, onda izvrši prvi blok naredbi. U suprotnom, ako je druga vrijednost tačna, izvrši drugi blok naredbi.";
+Blockly.Msg["CONTROLS_IF_TOOLTIP_4"] = "Ako je prva vrijednost tačna, onda izvrši prvi blok naredbi. U suprotnom, ako je druga vrijednost tačna, izvrši drugi blok naredbi. Ako nijedna od vrijednosti nije tačna, izvrši posljednji blok naredbi.";
 Blockly.Msg["CONTROLS_REPEAT_HELPURL"] = "https://en.wikipedia.org/wiki/For_loop";  // untranslated
 Blockly.Msg["CONTROLS_REPEAT_INPUT_DO"] = "izvrši";
 Blockly.Msg["CONTROLS_REPEAT_TITLE"] = "ponovi %1 puta";
@@ -174,10 +178,10 @@ Blockly.Msg["LOGIC_BOOLEAN_HELPURL"] = "https://github.com/google/blockly/wiki/L
 Blockly.Msg["LOGIC_BOOLEAN_TOOLTIP"] = "Vraća ili tačno ili netačno.";
 Blockly.Msg["LOGIC_BOOLEAN_TRUE"] = "tačno";
 Blockly.Msg["LOGIC_COMPARE_HELPURL"] = "https://bs.wikipedia.org/wiki/Nejednakost";
-Blockly.Msg["LOGIC_COMPARE_TOOLTIP_EQ"] = "Return true if both inputs equal each other.";  // untranslated
-Blockly.Msg["LOGIC_COMPARE_TOOLTIP_GT"] = "Return true if the first input is greater than the second input.";  // untranslated
+Blockly.Msg["LOGIC_COMPARE_TOOLTIP_EQ"] = "Vraća tačno ako su oba ulaza jednaka jedan drugom.";
+Blockly.Msg["LOGIC_COMPARE_TOOLTIP_GT"] = "Vraća tačno ako je prvi ulaz veći od drugog ulaza.";
 Blockly.Msg["LOGIC_COMPARE_TOOLTIP_GTE"] = "Return true if the first input is greater than or equal to the second input.";  // untranslated
-Blockly.Msg["LOGIC_COMPARE_TOOLTIP_LT"] = "Return true if the first input is smaller than the second input.";  // untranslated
+Blockly.Msg["LOGIC_COMPARE_TOOLTIP_LT"] = "Vraća tačno ako je prvi ulaz manji od drugog ulaza.";
 Blockly.Msg["LOGIC_COMPARE_TOOLTIP_LTE"] = "Return true if the first input is smaller than or equal to the second input.";  // untranslated
 Blockly.Msg["LOGIC_COMPARE_TOOLTIP_NEQ"] = "Return true if both inputs are not equal to each other.";  // untranslated
 Blockly.Msg["LOGIC_NEGATE_HELPURL"] = "https://github.com/google/blockly/wiki/Logic#not";  // untranslated
@@ -189,7 +193,7 @@ Blockly.Msg["LOGIC_NULL_TOOLTIP"] = "Vraća \"bez vrijednosti\".";
 Blockly.Msg["LOGIC_OPERATION_AND"] = "i";
 Blockly.Msg["LOGIC_OPERATION_HELPURL"] = "https://github.com/google/blockly/wiki/Logic#logical-operations";  // untranslated
 Blockly.Msg["LOGIC_OPERATION_OR"] = "ili";
-Blockly.Msg["LOGIC_OPERATION_TOOLTIP_AND"] = "Return true if both inputs are true.";  // untranslated
+Blockly.Msg["LOGIC_OPERATION_TOOLTIP_AND"] = "Vraća tačno ako su oba ulaza tačna.";
 Blockly.Msg["LOGIC_OPERATION_TOOLTIP_OR"] = "Return true if at least one of the inputs is true.";  // untranslated
 Blockly.Msg["LOGIC_TERNARY_CONDITION"] = "test";
 Blockly.Msg["LOGIC_TERNARY_HELPURL"] = "https://en.wikipedia.org/wiki/%3F:";  // untranslated
@@ -269,13 +273,13 @@ Blockly.Msg["MATH_SINGLE_TOOLTIP_NEG"] = "Vraća negaciju broja.";
 Blockly.Msg["MATH_SINGLE_TOOLTIP_POW10"] = "Vraća 10 na eksponent broja.";
 Blockly.Msg["MATH_SINGLE_TOOLTIP_ROOT"] = "Vraća kvadratni korijen broja";
 Blockly.Msg["MATH_SUBTRACTION_SYMBOL"] = "-";  // untranslated
-Blockly.Msg["MATH_TRIG_ACOS"] = "acos";  // untranslated
-Blockly.Msg["MATH_TRIG_ASIN"] = "asin";  // untranslated
-Blockly.Msg["MATH_TRIG_ATAN"] = "atan";  // untranslated
-Blockly.Msg["MATH_TRIG_COS"] = "cos";  // untranslated
+Blockly.Msg["MATH_TRIG_ACOS"] = "acos";
+Blockly.Msg["MATH_TRIG_ASIN"] = "asin";
+Blockly.Msg["MATH_TRIG_ATAN"] = "atan";
+Blockly.Msg["MATH_TRIG_COS"] = "cos";
 Blockly.Msg["MATH_TRIG_HELPURL"] = "https://bs.wikipedia.org/wiki/Trigonometrijska_funkcija";
-Blockly.Msg["MATH_TRIG_SIN"] = "sin";  // untranslated
-Blockly.Msg["MATH_TRIG_TAN"] = "tan";  // untranslated
+Blockly.Msg["MATH_TRIG_SIN"] = "sin";
+Blockly.Msg["MATH_TRIG_TAN"] = "tan";
 Blockly.Msg["MATH_TRIG_TOOLTIP_ACOS"] = "Vraća arkuskosinus broja.";
 Blockly.Msg["MATH_TRIG_TOOLTIP_ASIN"] = "Vraća arkussinus broja.";
 Blockly.Msg["MATH_TRIG_TOOLTIP_ATAN"] = "Vraća arkustangens broja.";
@@ -433,4 +437,4 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 return Blockly.Msg;
-})); 
+}));

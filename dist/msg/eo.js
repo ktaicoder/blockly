@@ -1,17 +1,21 @@
 /* eslint-disable */
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) { // AMD
-    define(['../core'], factory);
+    define([], factory);
   } else if (typeof exports === 'object') { // Node.js
-    module.exports = factory(require('../core'));
+    module.exports = factory();
   } else { // Browser
-    root.Blockly.Msg = factory(root.Blockly);
+    var messages = factory();
+    for (var key in messages) {
+      root.Blockly.Msg[key] = messages[key];
+    }
   }
-}(this, function(Blockly) {
-
-      var Blockly = {};Blockly.Msg={};// This file was automatically generated.  Do not modify.
+}(this, function() {
+// This file was automatically generated.  Do not modify.
 
 'use strict';
+
+var Blockly = Blockly || { Msg: Object.create(null) };
 
 Blockly.Msg["ADD_COMMENT"] = "Aldoni komenton";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "Ne povas forigi la variablon '%1' ĉar ĝi estas parto de la difino de la funkcio '%2'";
@@ -155,7 +159,7 @@ Blockly.Msg["LISTS_SET_INDEX_TOOLTIP_SET_FIRST"] = "Difinas la unua elementon en
 Blockly.Msg["LISTS_SET_INDEX_TOOLTIP_SET_FROM"] = "Difinas la elementon ĉe la specifita pozicio en listo";
 Blockly.Msg["LISTS_SET_INDEX_TOOLTIP_SET_LAST"] = "Difinas la lastan elementon en listo.";
 Blockly.Msg["LISTS_SET_INDEX_TOOLTIP_SET_RANDOM"] = "Difinas hazardan elementon en listo.";
-Blockly.Msg["LISTS_SORT_HELPURL"] = "https://github.com/google/blockly/wiki/Lists#sorting-a-list";
+Blockly.Msg["LISTS_SORT_HELPURL"] = "https://github.com/google/blockly/wiki/Lists#sorting-a-list";  // untranslated
 Blockly.Msg["LISTS_SORT_ORDER_ASCENDING"] = "kreskante";
 Blockly.Msg["LISTS_SORT_ORDER_DESCENDING"] = "malkreskante";
 Blockly.Msg["LISTS_SORT_TITLE"] = "ordigi %1 %2 liston %3";
@@ -250,10 +254,10 @@ Blockly.Msg["MATH_POWER_SYMBOL"] = "^";  // untranslated
 Blockly.Msg["MATH_RANDOM_FLOAT_HELPURL"] = "https://eo.wikipedia.org/wiki/Hazardo";
 Blockly.Msg["MATH_RANDOM_FLOAT_TITLE_RANDOM"] = "hazarda frakcio";
 Blockly.Msg["MATH_RANDOM_FLOAT_TOOLTIP"] = "Liveras hazardan frakcion inter 0,0 (inkluzive) kaj 1,0 (ekskluzive).";
-Blockly.Msg["MATH_RANDOM_INT_HELPURL"] = "https://en.wikipedia.org/wiki/Random_number_generation";
+Blockly.Msg["MATH_RANDOM_INT_HELPURL"] = "https://en.wikipedia.org/wiki/Random_number_generation";  // untranslated
 Blockly.Msg["MATH_RANDOM_INT_TITLE"] = "hazarda entjero inter %1 kaj %2";
 Blockly.Msg["MATH_RANDOM_INT_TOOLTIP"] = "Nombro estos hazarde liverita, tiel ke ĝi egalas la limojn aŭ troviĝas inter ili.";
-Blockly.Msg["MATH_ROUND_HELPURL"] = "https://en.wikipedia.org/wiki/Rounding";
+Blockly.Msg["MATH_ROUND_HELPURL"] = "https://en.wikipedia.org/wiki/Rounding";  // untranslated
 Blockly.Msg["MATH_ROUND_OPERATOR_ROUND"] = "rondigi";
 Blockly.Msg["MATH_ROUND_OPERATOR_ROUNDDOWN"] = "rondigi malsupren";
 Blockly.Msg["MATH_ROUND_OPERATOR_ROUNDUP"] = "Rondigi supren";
@@ -433,4 +437,4 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 return Blockly.Msg;
-})); 
+}));

@@ -1,17 +1,21 @@
 /* eslint-disable */
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) { // AMD
-    define(['../core'], factory);
+    define([], factory);
   } else if (typeof exports === 'object') { // Node.js
-    module.exports = factory(require('../core'));
+    module.exports = factory();
   } else { // Browser
-    root.Blockly.Msg = factory(root.Blockly);
+    var messages = factory();
+    for (var key in messages) {
+      root.Blockly.Msg[key] = messages[key];
+    }
   }
-}(this, function(Blockly) {
-
-      var Blockly = {};Blockly.Msg={};// This file was automatically generated.  Do not modify.
+}(this, function() {
+// This file was automatically generated.  Do not modify.
 
 'use strict';
+
+var Blockly = Blockly || { Msg: Object.create(null) };
 
 Blockly.Msg["ADD_COMMENT"] = "टिप्पणी थप्ने";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "Can't delete the variable '%1' because it's part of the definition of the function '%2'";  // untranslated
@@ -74,7 +78,7 @@ Blockly.Msg["DELETE_BLOCK"] = "ब्लक हटाउने";
 Blockly.Msg["DELETE_VARIABLE"] = "Delete the '%1' variable";  // untranslated
 Blockly.Msg["DELETE_VARIABLE_CONFIRMATION"] = "Delete %1 uses of the '%2' variable?";  // untranslated
 Blockly.Msg["DELETE_X_BLOCKS"] = " %1 ब्लकहरू हटाउने";
-Blockly.Msg["DIALOG_CANCEL"] = "रद्द गर्ने";
+Blockly.Msg["DIALOG_CANCEL"] = "रद्द गर्नुहोस्";
 Blockly.Msg["DIALOG_OK"] = "हुन्छ";
 Blockly.Msg["DISABLE_BLOCK"] = "ब्लकलाई सक्रिय पार्ने";
 Blockly.Msg["DUPLICATE_BLOCK"] = "प्रतिलिपी गर्ने";
@@ -433,4 +437,4 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 return Blockly.Msg;
-})); 
+}));

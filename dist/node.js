@@ -18,4 +18,4 @@
 Blockly.setLocale(En);
 
 module.exports = Blockly;
-})(require('./core'), require('./msg/en'), require('./blocks'), require('./javascript'), require('./python'), require('./php'), require('./lua'), require('./dart')); 
+})(require('./core'), require('./msg/en'), require('./blocks'), require('./javascript'), require('./python'), require('./php'), require('./lua'), require('./dart'));

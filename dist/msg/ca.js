@@ -1,17 +1,21 @@
 /* eslint-disable */
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) { // AMD
-    define(['../core'], factory);
+    define([], factory);
   } else if (typeof exports === 'object') { // Node.js
-    module.exports = factory(require('../core'));
+    module.exports = factory();
   } else { // Browser
-    root.Blockly.Msg = factory(root.Blockly);
+    var messages = factory();
+    for (var key in messages) {
+      root.Blockly.Msg[key] = messages[key];
+    }
   }
-}(this, function(Blockly) {
-
-      var Blockly = {};Blockly.Msg={};// This file was automatically generated.  Do not modify.
+}(this, function() {
+// This file was automatically generated.  Do not modify.
 
 'use strict';
+
+var Blockly = Blockly || { Msg: Object.create(null) };
 
 Blockly.Msg["ADD_COMMENT"] = "Afegeix un comentari";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "No podem esborrar la variable '%1' perquè forma part de la definició de la funció '%2'";
@@ -155,7 +159,7 @@ Blockly.Msg["LISTS_SET_INDEX_TOOLTIP_SET_FIRST"] = "Modifica el primer element d
 Blockly.Msg["LISTS_SET_INDEX_TOOLTIP_SET_FROM"] = "Modifica l'element de la posició especificada d'una llista.";
 Blockly.Msg["LISTS_SET_INDEX_TOOLTIP_SET_LAST"] = "Modifica l'últim element d'una llista.";
 Blockly.Msg["LISTS_SET_INDEX_TOOLTIP_SET_RANDOM"] = "Modifica un element a l'atzar d'una llista.";
-Blockly.Msg["LISTS_SORT_HELPURL"] = "https://github.com/google/blockly/wiki/Lists#sorting-a-list";
+Blockly.Msg["LISTS_SORT_HELPURL"] = "https://github.com/google/blockly/wiki/Lists#sorting-a-list";  // untranslated
 Blockly.Msg["LISTS_SORT_ORDER_ASCENDING"] = "ascendent";
 Blockly.Msg["LISTS_SORT_ORDER_DESCENDING"] = "descendent";
 Blockly.Msg["LISTS_SORT_TITLE"] = "ordenar %1 %2 %3";
@@ -433,4 +437,4 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 return Blockly.Msg;
-})); 
+}));

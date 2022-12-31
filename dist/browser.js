@@ -27,4 +27,4 @@
 Blockly.setLocale(En);
 
 return Blockly;
-})); 
+}));

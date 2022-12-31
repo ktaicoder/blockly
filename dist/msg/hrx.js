@@ -1,17 +1,21 @@
 /* eslint-disable */
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) { // AMD
-    define(['../core'], factory);
+    define([], factory);
   } else if (typeof exports === 'object') { // Node.js
-    module.exports = factory(require('../core'));
+    module.exports = factory();
   } else { // Browser
-    root.Blockly.Msg = factory(root.Blockly);
+    var messages = factory();
+    for (var key in messages) {
+      root.Blockly.Msg[key] = messages[key];
+    }
   }
-}(this, function(Blockly) {
-
-      var Blockly = {};Blockly.Msg={};// This file was automatically generated.  Do not modify.
+}(this, function() {
+// This file was automatically generated.  Do not modify.
 
 'use strict';
+
+var Blockly = Blockly || { Msg: Object.create(null) };
 
 Blockly.Msg["ADD_COMMENT"] = "Kommentar hinzufüche";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "Can't delete the variable '%1' because it's part of the definition of the function '%2'";  // untranslated
@@ -291,9 +295,9 @@ Blockly.Msg["NEW_VARIABLE_TYPE_TITLE"] = "New variable type:";  // untranslated
 Blockly.Msg["ORDINAL_NUMBER_SUFFIX"] = "";  // untranslated
 Blockly.Msg["PROCEDURES_ALLOW_STATEMENTS"] = "allow statements";  // untranslated
 Blockly.Msg["PROCEDURES_BEFORE_PARAMS"] = "mit:";
-Blockly.Msg["PROCEDURES_CALLNORETURN_HELPURL"] = "https://hrx.wikipedia.org/wiki/Prozedur_%28Programmierung%29";
+Blockly.Msg["PROCEDURES_CALLNORETURN_HELPURL"] = "https://en.wikipedia.org/wiki/Subroutine";  // untranslated
 Blockly.Msg["PROCEDURES_CALLNORETURN_TOOLTIP"] = "Ruf en Funktionsblock ohne Rückgäweart uff.";
-Blockly.Msg["PROCEDURES_CALLRETURN_HELPURL"] = "https://hrx.wikipedia.org/wiki/Prozedur_%28Programmierung%29";
+Blockly.Msg["PROCEDURES_CALLRETURN_HELPURL"] = "https://en.wikipedia.org/wiki/Subroutine";  // untranslated
 Blockly.Msg["PROCEDURES_CALLRETURN_TOOLTIP"] = "Ruf en Funktionsblock mit Rückgäbweart uff.";
 Blockly.Msg["PROCEDURES_CALL_BEFORE_PARAMS"] = "mit:";
 Blockly.Msg["PROCEDURES_CREATE_DO"] = "Generier/erzeich \"Uffruf %1\"";
@@ -433,4 +437,4 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 return Blockly.Msg;
-})); 
+}));

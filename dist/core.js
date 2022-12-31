@@ -14,24 +14,18 @@
 /* eslint-disable */
 'use strict';
 
-// Add a helper method to set the Blockly locale.
-Blockly.setLocale = function (locale) {
-  Object.keys(locale).forEach(function (k) {
-    Blockly.Msg[k] = locale[k];
-  });
-};
 
 // Override textToDomDocument and provide Node.js alternatives to DOMParser and
 // XMLSerializer.
-const globalThis = Blockly.utils.global;
 if (typeof globalThis.document !== 'object') {
-  const jsdom = require('jsdom/lib/jsdom/living');
-  globalThis.DOMParser = jsdom.DOMParser;
-  globalThis.XMLSerializer = jsdom.XMLSerializer;
+  const {JSDOM} = require('jsdom');
+  const {window} = new JSDOM(`<!DOCTYPE html>`);
+  globalThis.DOMParser = window.DOMParser;
+  globalThis.XMLSerializer = window.XMLSerializer;
   const xmlDocument = Blockly.utils.xml.textToDomDocument(
-    `<xml xmlns="${Blockly.utils.xml.NAME_SPACE}"></xml>`);
+      `<xml xmlns="${Blockly.utils.xml.NAME_SPACE}"></xml>`);
   Blockly.utils.xml.setDocument(xmlDocument);
 }
 
 module.exports = Blockly;
-})(require('./blockly')); 
+})(require('./blockly'));

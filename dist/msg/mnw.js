@@ -1,17 +1,21 @@
 /* eslint-disable */
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) { // AMD
-    define(['../core'], factory);
+    define([], factory);
   } else if (typeof exports === 'object') { // Node.js
-    module.exports = factory(require('../core'));
+    module.exports = factory();
   } else { // Browser
-    root.Blockly.Msg = factory(root.Blockly);
+    var messages = factory();
+    for (var key in messages) {
+      root.Blockly.Msg[key] = messages[key];
+    }
   }
-}(this, function(Blockly) {
-
-      var Blockly = {};Blockly.Msg={};// This file was automatically generated.  Do not modify.
+}(this, function() {
+// This file was automatically generated.  Do not modify.
 
 'use strict';
+
+var Blockly = Blockly || { Msg: Object.create(null) };
 
 Blockly.Msg["ADD_COMMENT"] = "စုတ် လညာတ်";
 Blockly.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "မပြံင်လှာဲ '%1' ဂှ် ဇိုတ်ပလီု ဟွံဂွံ၊ ဟိုတ်နူ ဍေဟ်ဂှ် ဆက်စပ်ဒၟံင် ကုဝှင်ရှေန် '%2'";
@@ -26,7 +30,7 @@ Blockly.Msg["COLOUR_BLEND_HELPURL"] = "https://meyerweb.com/eric/tools/color-ble
 Blockly.Msg["COLOUR_BLEND_RATIO"] = "ဗၞတ်ဗ္ၜတ်";
 Blockly.Msg["COLOUR_BLEND_TITLE"] = "ပနှဴ";
 Blockly.Msg["COLOUR_BLEND_TOOLTIP"] = "ပနှဴ အသာ် ၜါ နကဵု ဗၞတ်ဗ္ၜတ် (0.0 - 1.0).";
-Blockly.Msg["COLOUR_PICKER_HELPURL"] = "https://en.wikipedia.org/wiki/Color";
+Blockly.Msg["COLOUR_PICKER_HELPURL"] = "https://en.wikipedia.org/wiki/Color";  // untranslated
 Blockly.Msg["COLOUR_PICKER_TOOLTIP"] = "ရုဲကေတ် အသာ် မွဲ နူကဵု ဖလာတ်";
 Blockly.Msg["COLOUR_RANDOM_HELPURL"] = "http://randomcolour.com";  // untranslated
 Blockly.Msg["COLOUR_RANDOM_TITLE"] = "ဇျောမ်ကေတ် အသာ်";
@@ -60,7 +64,7 @@ Blockly.Msg["CONTROLS_IF_TOOLTIP_1"] = "If a value is true, then do some stateme
 Blockly.Msg["CONTROLS_IF_TOOLTIP_2"] = "If a value is true, then do the first block of statements. Otherwise, do the second block of statements.";  // untranslated
 Blockly.Msg["CONTROLS_IF_TOOLTIP_3"] = "If the first value is true, then do the first block of statements. Otherwise, if the second value is true, do the second block of statements.";  // untranslated
 Blockly.Msg["CONTROLS_IF_TOOLTIP_4"] = "If the first value is true, then do the first block of statements. Otherwise, if the second value is true, do the second block of statements. If none of the values are true, do the last block of statements.";  // untranslated
-Blockly.Msg["CONTROLS_REPEAT_HELPURL"] = "https://en.wikipedia.org/wiki/For_loop";
+Blockly.Msg["CONTROLS_REPEAT_HELPURL"] = "https://en.wikipedia.org/wiki/For_loop";  // untranslated
 Blockly.Msg["CONTROLS_REPEAT_INPUT_DO"] = "ပ";
 Blockly.Msg["CONTROLS_REPEAT_TITLE"] = "ထပ်ဂလိုင်ပတိုန် %1 နာဍဳ";
 Blockly.Msg["CONTROLS_REPEAT_TOOLTIP"] = "ကၠောန်ပတိတ် လလောင်တြး မဂၠိုင် ကုအလန်၊၊";
@@ -197,7 +201,7 @@ Blockly.Msg["LOGIC_TERNARY_IF_FALSE"] = "ယဝ်ဗၠေတ်";
 Blockly.Msg["LOGIC_TERNARY_IF_TRUE"] = "ယဝ်ဍာံ";
 Blockly.Msg["LOGIC_TERNARY_TOOLTIP"] = "Check the condition in 'test'. If the condition is true, returns the 'if true' value; otherwise returns the 'if false' value.";  // untranslated
 Blockly.Msg["MATH_ADDITION_SYMBOL"] = "+";  // untranslated
-Blockly.Msg["MATH_ARITHMETIC_HELPURL"] = "https://en.wikipedia.org/wiki/Arithmetic";
+Blockly.Msg["MATH_ARITHMETIC_HELPURL"] = "https://en.wikipedia.org/wiki/Arithmetic";  // untranslated
 Blockly.Msg["MATH_ARITHMETIC_TOOLTIP_ADD"] = "Return the sum of the two numbers.";  // untranslated
 Blockly.Msg["MATH_ARITHMETIC_TOOLTIP_DIVIDE"] = "Return the quotient of the two numbers.";  // untranslated
 Blockly.Msg["MATH_ARITHMETIC_TOOLTIP_MINUS"] = "Return the difference of the two numbers.";  // untranslated
@@ -227,7 +231,7 @@ Blockly.Msg["MATH_MODULO_HELPURL"] = "https://en.wikipedia.org/wiki/Modulo_opera
 Blockly.Msg["MATH_MODULO_TITLE"] = "remainder of %1 ÷ %2";  // untranslated
 Blockly.Msg["MATH_MODULO_TOOLTIP"] = "Return the remainder from dividing the two numbers.";  // untranslated
 Blockly.Msg["MATH_MULTIPLICATION_SYMBOL"] = "×";  // untranslated
-Blockly.Msg["MATH_NUMBER_HELPURL"] = "https://en.wikipedia.org/wiki/Number";
+Blockly.Msg["MATH_NUMBER_HELPURL"] = "https://en.wikipedia.org/wiki/Number";  // untranslated
 Blockly.Msg["MATH_NUMBER_TOOLTIP"] = "မဂၞန်မွဲ";
 Blockly.Msg["MATH_ONLIST_HELPURL"] = "";  // untranslated
 Blockly.Msg["MATH_ONLIST_OPERATOR_AVERAGE"] = "average of list";  // untranslated
@@ -258,7 +262,7 @@ Blockly.Msg["MATH_ROUND_OPERATOR_ROUND"] = "round";  // untranslated
 Blockly.Msg["MATH_ROUND_OPERATOR_ROUNDDOWN"] = "round down";  // untranslated
 Blockly.Msg["MATH_ROUND_OPERATOR_ROUNDUP"] = "round up";  // untranslated
 Blockly.Msg["MATH_ROUND_TOOLTIP"] = "Round a number up or down.";  // untranslated
-Blockly.Msg["MATH_SINGLE_HELPURL"] = "https://en.wikipedia.org/wiki/Square_root";
+Blockly.Msg["MATH_SINGLE_HELPURL"] = "https://en.wikipedia.org/wiki/Square_root";  // untranslated
 Blockly.Msg["MATH_SINGLE_OP_ABSOLUTE"] = "ဍာံဍာံ";
 Blockly.Msg["MATH_SINGLE_OP_ROOT"] = "square root";  // untranslated
 Blockly.Msg["MATH_SINGLE_TOOLTIP_ABS"] = "Return the absolute value of a number.";  // untranslated
@@ -433,4 +437,4 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 return Blockly.Msg;
-})); 
+}));

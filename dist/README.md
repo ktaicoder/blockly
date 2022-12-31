@@ -4,11 +4,12 @@
 
 - [구글의 블록리](https://github.com/google/blockly) 를 [AI 코딩블록 사이트](https://aicodingblock.kt.co.kr)의 필요에 맞게 커스터마이징 했습니다.
 
-- [AI 코딩블록 사이트](https://aicodingblock.kt.co.kr)와 연동되는 S/W들이 같은 버전의 블록리를 사용하기 위해 만들었습니다. 예를 들면, PC 버전에서도 블록리를 이용하므로, 버전을 일치시킬 필요가 있습니다.
+- [AI 코딩블록 사이트](https://aicodingblock.kt.co.kr)와 연동되는 S/W들이 같은 버전의 블록리를 사용하기 위해 만들었습니다.
+  예를 들면, PC 버전에서도 블록리를 이용하므로, 버전을 일치시킬 필요가 있습니다.
 
 - [구글의 블록리](https://github.com/google/blockly) 라이브러리가 업데이트 될 때 함께 업데이트 해야 합니다.
 
-- 현재 적용한 구글의 블록리 버전은 `8.0.2`입니다.
+- 현재 적용한 구글의 블록리 버전은 `9.2.0`입니다.
 
 ## 설치 방법
 
@@ -19,7 +20,7 @@ yarn add @ktaicoder/blockly
 yarn add blockly@npm:@ktaicoder/blockly
 
 # or
-yarn add blockly@npm:@ktaicoder/blockly@8.0.2-p2
+yarn add blockly@npm:@ktaicoder/blockly@9.2.0-p1
 
 ```
 
@@ -53,8 +54,8 @@ vi package.json
 # python3 required for blockly build
 yarn dist
 
-git tag v8.0.2-p9
-git push origin v8.0.2-p9
+git tag v9.2.0-p1
+git push origin v9.2.0-p1
 ```
 
 ## 주요 변경 내용

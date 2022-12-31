@@ -1,7 +1,7 @@
 {
   "name": "@ktaicoder/blockly",
-  "version": "8.0.2-p12",
-  "description": "Blockly library for ktaicoder",
+  "version": "9.2.0-p1",
+  "description": "Blockly library for codiny",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ktaicoder/blockly.git"
@@ -9,7 +9,7 @@
   "bugs": {
     "url": "https://github.com/ktaicoder/blockly/issues"
   },
-  "homepage": "https://aicodingblock.kt.co.kr",
+  "homepage": "https://aicodiny.com",
   "main": "index.js",
   "author": {
     "name": "ktaicoder"
@@ -27,7 +27,7 @@
   },
   "keywords": [
     "kt",
-    "aicodingblock",
+    "codiny",
     "blockcoding"
   ]
 }

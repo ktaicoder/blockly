@@ -6,8 +6,6 @@
 import * as aria from './utils/aria.js';
 /**
  * Class representing an item in a menu.
- *
- * @alias Blockly.MenuItem
  */
 export declare class MenuItem {
     private readonly content;

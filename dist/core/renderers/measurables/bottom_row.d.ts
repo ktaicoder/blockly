@@ -12,28 +12,20 @@ import { Row } from './row.js';
  * a block as well as spacing information for the bottom row.
  * Elements in a bottom row can consist of corners, spacers and next
  * connections.
- *
- * @alias Blockly.blockRendering.BottomRow
  */
 export declare class BottomRow extends Row {
     /**
      * Whether this row has a next connection.
-     *
-     * @internal
      */
     hasNextConnection: boolean;
     /**
      * The next connection on the row, if any.
-     *
-     * @internal
      */
     connection: NextConnection | null;
     /**
      * The amount that the bottom of the block extends below the horizontal
      * edge, e.g. because of a next connection.  Must be non-negative (see
      * #2820).
-     *
-     * @internal
      */
     descenderHeight: number;
     /**
@@ -43,7 +35,6 @@ export declare class BottomRow extends Row {
     baseline: number;
     /**
      * @param constants The rendering constants provider.
-     * @internal
      */
     constructor(constants: ConstantProvider);
     /**

@@ -8,8 +8,6 @@ import type { WorkspaceSvg } from './workspace_svg.js';
 import type { ToolboxDefinition } from './utils/toolbox.js';
 /**
  * Blockly options.
- *
- * @alias Blockly.BlocklyOptions
  */
 export interface BlocklyOptions {
     collapse?: boolean;

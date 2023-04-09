@@ -8,14 +8,11 @@ import { Measurable } from './base.js';
 /**
  * An object containing information about a spacer between two elements on a
  * row.
- *
- * @alias Blockly.blockRendering.InRowSpacer
  */
 export declare class InRowSpacer extends Measurable {
     /**
      * @param constants The rendering constants provider.
      * @param width The width of the spacer.
-     * @internal
      */
     constructor(constants: ConstantProvider, width: number);
 }

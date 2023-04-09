@@ -46,8 +46,6 @@ import { ContextMenuOption } from './contextmenu_registry.js';
 /**
  * Class for a workspace.  This is an onscreen area with optional trashcan,
  * scrollbars, bubbles, and dragging.
- *
- * @alias Blockly.WorkspaceSvg
  */
 export declare class WorkspaceSvg extends Workspace implements IASTNodeLocationSvg {
     /**
@@ -764,8 +762,6 @@ export declare class WorkspaceSvg extends Workspace implements IASTNodeLocationS
     updateToolbox(toolboxDef: toolbox.ToolboxDefinition | null): void;
     /** Mark this workspace as the currently focused main workspace. */
     markFocused(): void;
-    /** Set the workspace to have focus in the browser. */
-    private setBrowserFocus;
     /**
      * Zooms the workspace in or out relative to/centered on the given (x, y)
      * coordinate.
@@ -805,11 +801,13 @@ export declare class WorkspaceSvg extends Workspace implements IASTNodeLocationS
     scrollCenter(): void;
     /**
      * Scroll the workspace to center on the given block. If the block has other
-     * blocks stacked below it, the workspace will be centered on the stack.
+     * blocks stacked below it, the workspace will be centered on the stack,
+     * unless blockOnly is true.
      *
      * @param id ID of block center on.
+     * @param blockOnly True to center only on the block itself, not its stack.
      */
-    centerOnBlock(id: string | null): void;
+    centerOnBlock(id: string | null, blockOnly?: boolean): void;
     /**
      * Set the workspace's zoom factor.
      *
@@ -1017,7 +1015,6 @@ export declare class WorkspaceSvg extends Workspace implements IASTNodeLocationS
  * scrollbars accordingly.
  *
  * @param workspace The workspace to resize.
- * @alias Blockly.WorkspaceSvg.resizeSvgContents
  * @internal
  */
 export declare function resizeSvgContents(workspace: WorkspaceSvg): void;

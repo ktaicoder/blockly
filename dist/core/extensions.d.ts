@@ -17,7 +17,6 @@ export declare const TEST_ONLY: {
  * @param initFn The function to initialize an extended block.
  * @throws {Error} if the extension name is empty, the extension is already
  *     registered, or extensionFn is not a function.
- * @alias Blockly.Extensions.register
  */
 export declare function register(name: string, initFn: Function): void;
 /**
@@ -27,7 +26,6 @@ export declare function register(name: string, initFn: Function): void;
  * @param mixinObj The values to mix in.
  * @throws {Error} if the extension name is empty or the extension is already
  *     registered.
- * @alias Blockly.Extensions.registerMixin
  */
 export declare function registerMixin(name: string, mixinObj: any): void;
 /**
@@ -42,14 +40,12 @@ export declare function registerMixin(name: string, mixinObj: any): void;
  * @param opt_blockList A list of blocks to appear in the flyout of the mutator
  *     dialog.
  * @throws {Error} if the mutation is invalid or can't be applied to the block.
- * @alias Blockly.Extensions.registerMutator
  */
 export declare function registerMutator(name: string, mixinObj: any, opt_helperFn?: () => any, opt_blockList?: string[]): void;
 /**
  * Unregisters the extension registered with the given name.
  *
  * @param name The name of the extension to unregister.
- * @alias Blockly.Extensions.unregister
  */
 export declare function unregister(name: string): void;
 /**
@@ -57,7 +53,6 @@ export declare function unregister(name: string): void;
  *
  * @param name The name of the extension to check for.
  * @returns True if the extension is registered.  False if it is not registered.
- * @alias Blockly.Extensions.isRegistered
  */
 export declare function isRegistered(name: string): boolean;
 /**
@@ -68,7 +63,6 @@ export declare function isRegistered(name: string): boolean;
  * @param block The block to apply the named extension to.
  * @param isMutator True if this extension defines a mutator.
  * @throws {Error} if the extension is not found.
- * @alias Blockly.Extensions.apply
  */
 export declare function apply(name: string, block: Block, isMutator: boolean): void;
 /**
@@ -97,7 +91,6 @@ export declare function runAfterPageLoad(fn: () => void): void;
  *     lookup table.
  * @param lookupTable The table of field values to tooltip text.
  * @returns The extension function.
- * @alias Blockly.Extensions.buildTooltipForDropdown
  */
 export declare function buildTooltipForDropdown(dropdownName: string, lookupTable: {
     [key: string]: string;
@@ -111,7 +104,6 @@ export declare function buildTooltipForDropdown(dropdownName: string, lookupTabl
  *     placeholder.
  * @param fieldName The field with the replacement text.
  * @returns The extension function.
- * @alias Blockly.Extensions.buildTooltipWithFieldText
  */
 export declare function buildTooltipWithFieldText(msgTemplate: string, fieldName: string): Function;
 //# sourceMappingURL=extensions.d.ts.map

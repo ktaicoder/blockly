@@ -8,8 +8,6 @@ import type { BlockSvg } from './block_svg.js';
 import { Icon } from './icon.js';
 /**
  * Class for a warning.
- *
- * @alias Blockly.Warning
  */
 export declare class Warning extends Icon {
     private text;

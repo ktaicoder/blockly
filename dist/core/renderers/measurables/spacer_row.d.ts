@@ -8,8 +8,6 @@ import { InRowSpacer } from './in_row_spacer.js';
 import { Row } from './row.js';
 /**
  * An object containing information about a spacer between two rows.
- *
- * @alias Blockly.blockRendering.SpacerRow
  */
 export declare class SpacerRow extends Row {
     height: number;
@@ -22,7 +20,6 @@ export declare class SpacerRow extends Row {
      * @param constants The rendering constants provider.
      * @param height The height of the spacer.
      * @param width The width of the spacer.
-     * @internal
      */
     constructor(constants: ConstantProvider, height: number, width: number);
     measure(): void;

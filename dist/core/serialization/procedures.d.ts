@@ -6,8 +6,6 @@
 import { IParameterModel } from '../interfaces/i_parameter_model.js';
 import { IProcedureModel } from '../interfaces/i_procedure_model.js';
 import type { ISerializer } from '../interfaces/i_serializer.js';
-import { ObservableProcedureModel } from '../procedures/observable_procedure_model.js';
-import { ObservableParameterModel } from '../procedures/observable_parameter_model.js';
 import type { Workspace } from '../workspace.js';
 /**
  * Representation of a procedure data model.
@@ -33,7 +31,7 @@ export interface ParameterState {
  * https://www.typescriptlang.org/docs/handbook/2/generics.html#using-class-types-in-generics
  * for what is going on with this.
  */
-declare type ProcedureModelConstructor<ProcedureModel extends IProcedureModel> = new (workspace: Workspace, name: string, id: string) => ProcedureModel;
+type ProcedureModelConstructor<ProcedureModel extends IProcedureModel> = new (workspace: Workspace, name: string, id: string) => ProcedureModel;
 /**
  * A newable signature for an IParameterModel.
  *
@@ -41,7 +39,7 @@ declare type ProcedureModelConstructor<ProcedureModel extends IProcedureModel> =
  * https://www.typescriptlang.org/docs/handbook/2/generics.html#using-class-types-in-generics
  * for what is going on with this.
  */
-declare type ParameterModelConstructor<ParameterModel extends IParameterModel> = new (workspace: Workspace, name: string, id: string) => ParameterModel;
+type ParameterModelConstructor<ParameterModel extends IParameterModel> = new (workspace: Workspace, name: string, id: string) => ParameterModel;
 /**
  * Serializes the given IProcedureModel to JSON.
  *
@@ -93,10 +91,5 @@ export declare class ProcedureSerializer<ProcedureModel extends IProcedureModel,
     /** Disposes of any procedure models that exist on the workspace. */
     clear(workspace: Workspace): void;
 }
-/**
- * A ProcedureSerializer that deserializes to create the built-in
- * ObservableProcedureModels and ObservableParameterModels.
- */
-export declare const observableProcedureSerializer: ProcedureSerializer<ObservableProcedureModel, ObservableParameterModel>;
 export {};
 //# sourceMappingURL=procedures.d.ts.map

@@ -10,11 +10,10 @@ import type { CommentDelete } from './events_comment_delete.js';
 import type { Workspace } from '../workspace.js';
 /**
  * Abstract class for a comment event.
- *
- * @alias Blockly.Events.CommentBase
  */
 export declare class CommentBase extends AbstractEvent {
     isBlank: boolean;
+    /** The ID of the comment that this event references. */
     commentId?: string;
     /**
      * @param opt_comment The comment this event corresponds to.  Undefined for a

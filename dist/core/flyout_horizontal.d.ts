@@ -9,8 +9,6 @@ import type { Coordinate } from './utils/coordinate.js';
 import { Rect } from './utils/rect.js';
 /**
  * Class for a flyout.
- *
- * @alias Blockly.HorizontalFlyout
  */
 export declare class HorizontalFlyout extends Flyout {
     horizontalLayout: boolean;

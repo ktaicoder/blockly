@@ -3,13 +3,10 @@
  * Copyright 2016 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
+import { Field } from './field.js';
 import { FieldInput, FieldInputConfig, FieldInputValidator } from './field_input.js';
-import type { Sentinel } from './utils/sentinel.js';
-export declare type FieldNumberValidator = FieldInputValidator<number>;
 /**
  * Class for an editable number field.
- *
- * @alias Blockly.FieldNumber
  */
 export declare class FieldNumber extends FieldInput<number> {
     /** The minimum value this number field can contain. */
@@ -23,33 +20,28 @@ export declare class FieldNumber extends FieldInput<number> {
      * decimal digits.
      */
     private decimalPlaces_;
-    /**
-     * Serializable fields are saved by the serializer, non-serializable fields
-     * are not. Editable fields should also be serializable.
-     */
-    SERIALIZABLE: boolean;
     /** Don't spellcheck numbers.  Our validator does a better job. */
     protected spellcheck_: boolean;
     /**
-     * @param opt_value The initial value of the field. Should cast to a number.
+     * @param value The initial value of the field. Should cast to a number.
      *     Defaults to 0. Also accepts Field.SKIP_SETUP if you wish to skip setup
      *     (only used by subclasses that want to handle configuration and setting
      *     the field value after their own constructors have run).
-     * @param opt_min Minimum value. Will only be used if opt_config is not
+     * @param min Minimum value. Will only be used if config is not
      *     provided.
-     * @param opt_max Maximum value. Will only be used if opt_config is not
+     * @param max Maximum value. Will only be used if config is not
      *     provided.
-     * @param opt_precision Precision for value. Will only be used if opt_config
+     * @param precision Precision for value. Will only be used if config
      *     is not provided.
-     * @param opt_validator A function that is called to validate changes to the
+     * @param validator A function that is called to validate changes to the
      *     field's value. Takes in a number & returns a validated number, or null
      *     to abort the change.
-     * @param opt_config A map of options used to configure the field.
+     * @param config A map of options used to configure the field.
      *     See the [field creation documentation]{@link
      * https://developers.google.com/blockly/guides/create-custom-blocks/fields/built-in-fields/number#creation}
      * for a list of properties this parameter supports.
      */
-    constructor(opt_value?: string | number | Sentinel, opt_min?: string | number | null, opt_max?: string | number | null, opt_precision?: string | number | null, opt_validator?: FieldNumberValidator | null, opt_config?: FieldNumberConfig);
+    constructor(value?: string | number | typeof Field.SKIP_SETUP, min?: string | number | null, max?: string | number | null, precision?: string | number | null, validator?: FieldNumberValidator | null, config?: FieldNumberConfig);
     /**
      * Configure the field based on the given map of options.
      *
@@ -138,16 +130,16 @@ export declare class FieldNumber extends FieldInput<number> {
      * Ensure that the input value is a valid number (must fulfill the
      * constraints placed on the field).
      *
-     * @param opt_newValue The input value.
+     * @param newValue The input value.
      * @returns A valid number, or null if invalid.
      */
-    protected doClassValidation_(opt_newValue?: any): number | null;
+    protected doClassValidation_(newValue?: any): number | null;
     /**
      * Create the number input editor widget.
      *
      * @returns The newly created number input editor.
      */
-    protected widgetCreate_(): HTMLElement;
+    protected widgetCreate_(): HTMLInputElement;
     /**
      * Construct a FieldNumber from a JSON arg object.
      *
@@ -172,4 +164,20 @@ export interface FieldNumberConfig extends FieldInputConfig {
 export interface FieldNumberFromJsonConfig extends FieldNumberConfig {
     value?: number;
 }
+/**
+ * A function that is called to validate changes to the field's value before
+ * they are set.
+ *
+ * @see {@link https://developers.google.com/blockly/guides/create-custom-blocks/fields/validators#return_values}
+ * @param newValue The value to be validated.
+ * @returns One of three instructions for setting the new value: `T`, `null`,
+ * or `undefined`.
+ *
+ * - `T` to set this function's returned value instead of `newValue`.
+ *
+ * - `null` to invoke `doValueInvalid_` and not set a value.
+ *
+ * - `undefined` to set `newValue` as is.
+ */
+export type FieldNumberValidator = FieldInputValidator<number>;
 //# sourceMappingURL=field_number.d.ts.map

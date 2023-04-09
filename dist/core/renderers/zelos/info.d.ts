@@ -19,8 +19,6 @@ import type { Renderer } from './renderer.js';
  * This measure pass does not propagate changes to the block (although fields
  * may choose to rerender when getSize() is called).  However, calling it
  * repeatedly may be expensive.
- *
- * @alias Blockly.zelos.RenderInfo
  */
 export declare class RenderInfo extends BaseRenderInfo {
     topRow: TopRow;
@@ -35,14 +33,12 @@ export declare class RenderInfo extends BaseRenderInfo {
     /**
      * @param renderer The renderer in use.
      * @param block The block to measure.
-     * @internal
      */
     constructor(renderer: Renderer, block: BlockSvg);
     /**
      * Get the block renderer in use.
      *
      * @returns The block renderer in use.
-     * @internal
      */
     getRenderer(): Renderer;
     measure(): void;

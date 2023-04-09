@@ -9,8 +9,6 @@ import type { WorkspaceSvg } from './workspace_svg.js';
  * Class for the registry of context menu items. This is intended to be a
  * singleton. You should not create a new instance, and only access this class
  * from ContextMenuRegistry.registry.
- *
- * @alias Blockly.ContextMenuRegistry
  */
 export declare class ContextMenuRegistry {
     static registry: ContextMenuRegistry;
@@ -101,10 +99,10 @@ export declare namespace ContextMenuRegistry {
         callback: (p1: Scope) => void;
     }
 }
-export declare type ScopeType = ContextMenuRegistry.ScopeType;
+export type ScopeType = ContextMenuRegistry.ScopeType;
 export declare const ScopeType: typeof ContextMenuRegistry.ScopeType;
-export declare type Scope = ContextMenuRegistry.Scope;
-export declare type RegistryItem = ContextMenuRegistry.RegistryItem;
-export declare type ContextMenuOption = ContextMenuRegistry.ContextMenuOption;
-export declare type LegacyContextMenuOption = ContextMenuRegistry.LegacyContextMenuOption;
+export type Scope = ContextMenuRegistry.Scope;
+export type RegistryItem = ContextMenuRegistry.RegistryItem;
+export type ContextMenuOption = ContextMenuRegistry.ContextMenuOption;
+export type LegacyContextMenuOption = ContextMenuRegistry.LegacyContextMenuOption;
 //# sourceMappingURL=contextmenu_registry.d.ts.map

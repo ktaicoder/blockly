@@ -9,8 +9,6 @@ import { Coordinate } from './utils/coordinate.js';
 import { Size } from './utils/size.js';
 /**
  * Class for an icon.
- *
- * @alias Blockly.Icon
  */
 export declare abstract class Icon {
     protected block_: BlockSvg | null;

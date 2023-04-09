@@ -8,11 +8,15 @@ import { UiBase } from './events_ui_base.js';
 import type { Workspace } from '../workspace.js';
 /**
  * Class for a selected event.
- *
- * @alias Blockly.Events.Selected
+ * Notifies listeners that a new element has been selected.
  */
 export declare class Selected extends UiBase {
+    /** The id of the last selected selectable element. */
     oldElementId?: string;
+    /**
+     * The id of the newly selected selectable element,
+     * or undefined if unselected.
+     */
     newElementId?: string;
     type: string;
     /**

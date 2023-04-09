@@ -3,7 +3,6 @@
  * Copyright 2020 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
-/** @alias Blockly.utils.Metrics */
 export interface Metrics {
     /** Height of the visible portion of the workspace. */
     viewHeight: number;

@@ -6,8 +6,6 @@
 /**
  * The interface for a workspace component that can be registered with the
  * ComponentManager.
- *
- * @alias Blockly.IComponent
  */
 export interface IComponent {
     /**

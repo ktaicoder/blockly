@@ -9,8 +9,6 @@ import type { Coordinate } from './utils/coordinate.js';
 import { Rect } from './utils/rect.js';
 /**
  * Class for a flyout.
- *
- * @alias Blockly.VerticalFlyout
  */
 export declare class VerticalFlyout extends Flyout {
     /** The name of the vertical flyout in the registry. */

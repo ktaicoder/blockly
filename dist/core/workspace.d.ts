@@ -18,8 +18,6 @@ import { IProcedureMap } from './interfaces/i_procedure_map.js';
 /**
  * Class for a workspace.  This is a data structure that contains blocks.
  * There is no UI, and can be created headlessly.
- *
- * @alias Blockly.Workspace
  */
 export declare class Workspace implements IASTNodeLocation {
     /**
@@ -303,7 +301,9 @@ export declare class Workspace implements IASTNodeLocation {
      *     to be created).
      * @returns True if there is capacity for the given map, false otherwise.
      */
-    isCapacityAvailable(typeCountsMap: any): boolean;
+    isCapacityAvailable(typeCountsMap: {
+        [key: string]: number;
+    }): boolean;
     /**
      * Checks if the workspace has any limits on the maximum number of blocks,
      *    or the maximum number of blocks of specific types.

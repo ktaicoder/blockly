@@ -9,13 +9,10 @@ import { Cursor } from './cursor.js';
  * Class for a basic cursor.
  * This will allow the user to get to all nodes in the AST by hitting next or
  * previous.
- *
- * @alias Blockly.BasicCursor
  */
 export declare class BasicCursor extends Cursor {
     /** Name used for registering a basic cursor. */
     static readonly registrationName = "basicCursor";
-    /** @alias Blockly.BasicCursor */
     constructor();
     /**
      * Find the next node in the pre order traversal.

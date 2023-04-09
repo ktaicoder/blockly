@@ -11,9 +11,8 @@ import type { RenderedConnection } from '../../rendered_connection.js';
 import type { WorkspaceSvg } from '../../workspace_svg.js';
 import type { ConstantProvider, Notch, PuzzleTab } from './constants.js';
 /**
- * Class for a marker.
- *
- * @alias Blockly.blockRendering.MarkerSvg
+ * Class for a marker, containing methods for graphically rendering a marker as
+ * SVG.
  */
 export declare class MarkerSvg {
     private readonly workspace;
@@ -64,7 +63,6 @@ export declare class MarkerSvg {
      * Create the DOM element for the marker.
      *
      * @returns The marker controls SVG group.
-     * @internal
      */
     createDom(): SVGElement;
     /**

@@ -7,8 +7,6 @@ import { Theme } from '../theme.js';
 /**
  * Classic theme.
  * Contains multi-coloured border to create shadow effect.
- *
- * @alias Blockly.Themes.Classic
  */
 export declare const Classic: Theme;
 //# sourceMappingURL=classic.d.ts.map

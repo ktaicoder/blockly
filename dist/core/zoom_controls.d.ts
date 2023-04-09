@@ -10,8 +10,6 @@ import { Rect } from './utils/rect.js';
 import type { WorkspaceSvg } from './workspace_svg.js';
 /**
  * Class for a zoom controls.
- *
- * @alias Blockly.ZoomControls
  */
 export declare class ZoomControls implements IPositionable {
     private readonly workspace;
@@ -21,20 +19,11 @@ export declare class ZoomControls implements IPositionable {
      */
     id: string;
     /**
-     * A handle to use to unbind the mouse down event handler for zoom reset
-     *    button. Opaque data returned from browserEvents.conditionalBind.
+     * Array holding info needed to unbind events.
+     * Used for disposing.
+     * Ex: [[node, name, func], [node, name, func]].
      */
-    private onZoomResetWrapper;
-    /**
-     * A handle to use to unbind the mouse down event handler for zoom in
-     * button. Opaque data returned from browserEvents.conditionalBind.
-     */
-    private onZoomInWrapper;
-    /**
-     * A handle to use to unbind the mouse down event handler for zoom out
-     * button. Opaque data returned from browserEvents.conditionalBind.
-     */
-    private onZoomOutWrapper;
+    private boundEvents;
     /** The zoom in svg <g> element. */
     private zoomInGroup;
     /** The zoom out svg <g> element. */

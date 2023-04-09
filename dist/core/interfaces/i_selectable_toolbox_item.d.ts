@@ -7,8 +7,6 @@ import type { FlyoutItemInfoArray } from '../utils/toolbox';
 import type { IToolboxItem } from './i_toolbox_item.js';
 /**
  * Interface for an item in the toolbox that can be selected.
- *
- * @alias Blockly.ISelectableToolboxItem
  */
 export interface ISelectableToolboxItem extends IToolboxItem {
     /**
@@ -46,4 +44,8 @@ export interface ISelectableToolboxItem extends IToolboxItem {
      */
     onClick(_e: Event): void;
 }
+/**
+ * Type guard that checks whether an IToolboxItem is an ISelectableToolboxItem.
+ */
+export declare function isSelectableToolboxItem(toolboxItem: IToolboxItem): toolboxItem is ISelectableToolboxItem;
 //# sourceMappingURL=i_selectable_toolbox_item.d.ts.map

@@ -37,7 +37,6 @@ export { aria, arrayUtils as array, browserEvents, colour, Coordinate, deprecati
  * @param element SVG element to find the coordinates of.
  * @returns Object with .x and .y properties.
  * @deprecated Use **Blockly.utils.svgMath.getRelativeXY** instead.
- * @alias Blockly.utils.getRelativeXY
  */
 export declare function getRelativeXY(element: Element): Coordinate;
 /**
@@ -48,7 +47,6 @@ export declare function getRelativeXY(element: Element): Coordinate;
  *     of the div Blockly was injected into, the behaviour is undefined.
  * @returns Object with .x and .y properties.
  * @deprecated Use **Blockly.utils.svgMath.getInjectionDivXY** instead.
- * @alias Blockly.utils.getInjectionDivXY_
  */
 declare function getInjectionDivXY(element: Element): Coordinate;
 export declare const getInjectionDivXY_: typeof getInjectionDivXY;
@@ -63,7 +61,6 @@ export declare const getInjectionDivXY_: typeof getInjectionDivXY;
  *     interpolation tokens.
  * @returns Array of strings and numbers.
  * @deprecated Use **Blockly.utils.parsing.tokenizeInterpolation** instead.
- * @alias Blockly.utils.tokenizeInterpolation
  */
 export declare function tokenizeInterpolation(message: string): Array<string | number>;
 /**
@@ -75,7 +72,6 @@ export declare function tokenizeInterpolation(message: string): Array<string | n
  *     references.
  * @returns String with message references replaced.
  * @deprecated Use **Blockly.utils.parsing.replaceMessageReferences** instead.
- * @alias Blockly.utils.replaceMessageReferences
  */
 export declare function replaceMessageReferences(message: string | any): string;
 /**
@@ -86,7 +82,6 @@ export declare function replaceMessageReferences(message: string | any): string;
  * @returns True if all message references have matching values.
  *     Otherwise, false.
  * @deprecated Use **Blockly.utils.parsing.checkMessageReferences** instead.
- * @alias Blockly.utils.checkMessageReferences
  */
 export declare function checkMessageReferences(message: string): boolean;
 /**
@@ -95,7 +90,6 @@ export declare function checkMessageReferences(message: string): boolean;
  *
  * @returns True if 3D transforms are supported.
  * @deprecated Use **Blockly.utils.svgMath.is3dSupported** instead.
- * @alias Blockly.utils.is3dSupported
  */
 export declare function is3dSupported(): boolean;
 /**
@@ -104,7 +98,6 @@ export declare function is3dSupported(): boolean;
  *
  * @returns An object containing window width, height, and scroll position in
  *     window coordinates.
- * @alias Blockly.utils.getViewportBBox
  * @deprecated Use **Blockly.utils.svgMath.getViewportBBox** instead.
  * @internal
  */
@@ -115,7 +108,6 @@ export declare function getViewportBBox(): Rect;
  * @param arr Array from which to remove value.
  * @param value Value to remove.
  * @returns True if an element was removed.
- * @alias Blockly.utils.arrayRemove
  * @deprecated Use **Blockly.array.removeElem** instead.
  * @internal
  */
@@ -126,7 +118,6 @@ export declare function arrayRemove<T>(arr: Array<T>, value: T): boolean;
  *
  * @returns Object with values 'x' and 'y'.
  * @deprecated Use **Blockly.utils.svgMath.getDocumentScroll** instead.
- * @alias Blockly.utils.getDocumentScroll
  */
 export declare function getDocumentScroll(): Coordinate;
 /**
@@ -138,7 +129,6 @@ export declare function getDocumentScroll(): Coordinate;
  *     that are not inside a value or statement input of the block).
  * @returns Map of types to type counts for descendants of the bock.
  * @deprecated Use **Blockly.common.getBlockTypeCounts** instead.
- * @alias Blockly.utils.getBlockTypeCounts
  */
 export declare function getBlockTypeCounts(block: Block, opt_stripFollowing?: boolean): {
     [key: string]: number;
@@ -163,7 +153,6 @@ export declare function screenToWsCoordinates(ws: WorkspaceSvg, screenCoordinate
  *     the input was an HSV hue value.
  * @throws {Error} If the colour cannot be parsed.
  * @deprecated Use **Blockly.utils.parsing.parseBlockColour** instead.
- * @alias Blockly.utils.parseBlockColour
  */
 export declare function parseBlockColour(colour: number | string): {
     hue: number | null;
@@ -175,7 +164,6 @@ export declare function parseBlockColour(colour: number | string): {
  * @param fn Function to run.
  * @throws Error Will throw if no global document can be found (e.g., Node.js).
  * @deprecated No longer provided by Blockly.
- * @alias Blockly.utils.runAfterPageLoad
  */
 export declare function runAfterPageLoad(fn: () => void): void;
 //# sourceMappingURL=utils.d.ts.map

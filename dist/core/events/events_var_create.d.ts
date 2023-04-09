@@ -7,13 +7,13 @@ import type { VariableModel } from '../variable_model.js';
 import { VarBase, VarBaseJson } from './events_var_base.js';
 import type { Workspace } from '../workspace.js';
 /**
- * Class for a variable creation event.
- *
- * @alias Blockly.Events.VarCreate
+ * Notifies listeners that a variable model has been created.
  */
 export declare class VarCreate extends VarBase {
     type: string;
+    /** The type of the variable that was created. */
     varType?: string;
+    /** The name of the variable that was created. */
     varName?: string;
     /**
      * @param opt_variable The created variable. Undefined for a blank event.

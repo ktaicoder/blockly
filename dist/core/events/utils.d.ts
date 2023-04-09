@@ -14,213 +14,138 @@ import type { CommentMove } from './events_comment_move.js';
  * Sets whether events should be added to the undo stack.
  *
  * @param newValue True if events should be added to the undo stack.
- * @alias Blockly.Events.utils.setRecordUndo
  */
 export declare function setRecordUndo(newValue: boolean): void;
 /**
  * Returns whether or not events will be added to the undo stack.
  *
  * @returns True if events will be added to the undo stack.
- * @alias Blockly.Events.utils.getRecordUndo
  */
 export declare function getRecordUndo(): boolean;
 /**
  * Name of event that creates a block. Will be deprecated for BLOCK_CREATE.
- *
- * @alias Blockly.Events.utils.CREATE
  */
 export declare const CREATE = "create";
 /**
  * Name of event that creates a block.
- *
- * @alias Blockly.Events.utils.BLOCK_CREATE
  */
 export declare const BLOCK_CREATE = "create";
 /**
  * Name of event that deletes a block. Will be deprecated for BLOCK_DELETE.
- *
- * @alias Blockly.Events.utils.DELETE
  */
 export declare const DELETE = "delete";
 /**
  * Name of event that deletes a block.
- *
- * @alias Blockly.Events.utils.BLOCK_DELETE
  */
 export declare const BLOCK_DELETE = "delete";
 /**
  * Name of event that changes a block. Will be deprecated for BLOCK_CHANGE.
- *
- * @alias Blockly.Events.utils.CHANGE
  */
 export declare const CHANGE = "change";
 /**
  * Name of event that changes a block.
- *
- * @alias Blockly.Events.utils.BLOCK_CHANGE
  */
 export declare const BLOCK_CHANGE = "change";
 /**
  * Name of event that moves a block. Will be deprecated for BLOCK_MOVE.
- *
- * @alias Blockly.Events.utils.MOVE
  */
 export declare const MOVE = "move";
 /**
  * Name of event that moves a block.
- *
- * @alias Blockly.Events.utils.BLOCK_MOVE
  */
 export declare const BLOCK_MOVE = "move";
 /**
  * Name of event that creates a variable.
- *
- * @alias Blockly.Events.utils.VAR_CREATE
  */
 export declare const VAR_CREATE = "var_create";
 /**
  * Name of event that deletes a variable.
- *
- * @alias Blockly.Events.utils.VAR_DELETE
  */
 export declare const VAR_DELETE = "var_delete";
 /**
  * Name of event that renames a variable.
- *
- * @alias Blockly.Events.utils.VAR_RENAME
  */
 export declare const VAR_RENAME = "var_rename";
 /**
  * Name of generic event that records a UI change.
- *
- * @alias Blockly.Events.utils.UI
  */
 export declare const UI = "ui";
 /**
  * Name of event that record a block drags a block.
- *
- * @alias Blockly.Events.utils.BLOCK_DRAG
  */
 export declare const BLOCK_DRAG = "drag";
 /**
  * Name of event that records a change in selected element.
- *
- * @alias Blockly.Events.utils.SELECTED
  */
 export declare const SELECTED = "selected";
 /**
  * Name of event that records a click.
- *
- * @alias Blockly.Events.utils.CLICK
  */
 export declare const CLICK = "click";
 /**
  * Name of event that records a marker move.
- *
- * @alias Blockly.Events.utils.MARKER_MOVE
  */
 export declare const MARKER_MOVE = "marker_move";
 /**
  * Name of event that records a bubble open.
- *
- * @alias Blockly.Events.utils.BUBBLE_OPEN
  */
 export declare const BUBBLE_OPEN = "bubble_open";
 /**
  * Name of event that records a trashcan open.
- *
- * @alias Blockly.Events.utils.TRASHCAN_OPEN
  */
 export declare const TRASHCAN_OPEN = "trashcan_open";
 /**
  * Name of event that records a toolbox item select.
- *
- * @alias Blockly.Events.utils.TOOLBOX_ITEM_SELECT
  */
 export declare const TOOLBOX_ITEM_SELECT = "toolbox_item_select";
 /**
  * Name of event that records a theme change.
- *
- * @alias Blockly.Events.utils.THEME_CHANGE
  */
 export declare const THEME_CHANGE = "theme_change";
 /**
  * Name of event that records a viewport change.
- *
- * @alias Blockly.Events.utils.VIEWPORT_CHANGE
  */
 export declare const VIEWPORT_CHANGE = "viewport_change";
 /**
  * Name of event that creates a comment.
- *
- * @alias Blockly.Events.utils.COMMENT_CREATE
  */
 export declare const COMMENT_CREATE = "comment_create";
 /**
  * Name of event that deletes a comment.
- *
- * @alias Blockly.Events.utils.COMMENT_DELETE
  */
 export declare const COMMENT_DELETE = "comment_delete";
 /**
  * Name of event that changes a comment.
- *
- * @alias Blockly.Events.utils.COMMENT_CHANGE
  */
 export declare const COMMENT_CHANGE = "comment_change";
 /**
  * Name of event that moves a comment.
- *
- * @alias Blockly.Events.utils.COMMENT_MOVE
  */
 export declare const COMMENT_MOVE = "comment_move";
 /**
  * Name of event that records a workspace load.
- *
- * @alias Blockly.Events.utils.FINISHED_LOADING
  */
 export declare const FINISHED_LOADING = "finished_loading";
-/** Name of event that creates a procedure model. */
-export declare const PROCEDURE_CREATE = "procedure_create";
-/** Name of event that deletes a procedure model. */
-export declare const PROCEDURE_DELETE = "procedure_delete";
-/** Name of event that renames a procedure model. */
-export declare const PROCEDURE_RENAME = "procedure_rename";
-/** Name of event that enables/disables a procedure model. */
-export declare const PROCEDURE_ENABLE = "procedure_enable";
-/** Name of event that changes the returntype of a procedure model. */
-export declare const PROCEDURE_CHANGE_RETURN = "procedure_change_return";
-/** Name of event that creates a procedure parameter. */
-export declare const PROCEDURE_PARAMETER_CREATE = "procedure_parameter_create";
-/** Name of event that deletes a procedure parameter. */
-export declare const PROCEDURE_PARAMETER_DELETE = "procedure_parameter_delete";
-/** Name of event that renames a procedure parameter. */
-export declare const PROCEDURE_PARAMETER_RENAME = "procedure_parameter_rename";
 /**
  * Type of events that cause objects to be bumped back into the visible
  * portion of the workspace.
  *
  * Not to be confused with bumping so that disconnected connections do not
  * appear connected.
- *
- * @alias Blockly.Events.utils.BumpEvent
  */
-export declare type BumpEvent = BlockCreate | BlockMove | CommentCreate | CommentMove;
+export type BumpEvent = BlockCreate | BlockMove | CommentCreate | CommentMove;
 /**
  * List of events that cause objects to be bumped back into the visible
  * portion of the workspace.
  *
  * Not to be confused with bumping so that disconnected connections do not
  * appear connected.
- *
- * @alias Blockly.Events.utils.BUMP_EVENTS
  */
 export declare const BUMP_EVENTS: string[];
 /**
  * Create a custom event and fire it.
  *
  * @param event Custom data for event.
- * @alias Blockly.Events.utils.fire
  */
 export declare function fire(event: Abstract): void;
 /**
@@ -235,41 +160,32 @@ declare function fireNow(): void;
  * @param queueIn Array of events.
  * @param forward True if forward (redo), false if backward (undo).
  * @returns Array of filtered events.
- * @alias Blockly.Events.utils.filter
  */
 export declare function filter(queueIn: Abstract[], forward: boolean): Abstract[];
 /**
  * Modify pending undo events so that when they are fired they don't land
  * in the undo stack.  Called by Workspace.clearUndo.
- *
- * @alias Blockly.Events.utils.clearPendingUndo
  */
 export declare function clearPendingUndo(): void;
 /**
  * Stop sending events.  Every call to this function MUST also call enable.
- *
- * @alias Blockly.Events.utils.disable
  */
 export declare function disable(): void;
 /**
  * Start sending events.  Unless events were already disabled when the
  * corresponding call to disable was made.
- *
- * @alias Blockly.Events.utils.enable
  */
 export declare function enable(): void;
 /**
  * Returns whether events may be fired or not.
  *
  * @returns True if enabled.
- * @alias Blockly.Events.utils.isEnabled
  */
 export declare function isEnabled(): boolean;
 /**
  * Current group.
  *
  * @returns ID string.
- * @alias Blockly.Events.utils.getGroup
  */
 export declare function getGroup(): string;
 /**
@@ -277,7 +193,6 @@ export declare function getGroup(): string;
  *
  * @param state True to start new group, false to end group.
  *   String to set group explicitly.
- * @alias Blockly.Events.utils.setGroup
  */
 export declare function setGroup(state: boolean | string): void;
 /**
@@ -289,7 +204,6 @@ declare function setGroupInternal(state: boolean | string): void;
  *
  * @param block The root block.
  * @returns List of block IDs.
- * @alias Blockly.Events.utils.getDescendantIds
  * @internal
  */
 export declare function getDescendantIds(block: Block): string[];
@@ -300,7 +214,6 @@ export declare function getDescendantIds(block: Block): string[];
  * @param workspace Target workspace for event.
  * @returns The event represented by the JSON.
  * @throws {Error} if an event type is not found in the registry.
- * @alias Blockly.Events.utils.fromJson
  */
 export declare function fromJson(json: any, workspace: Workspace): Abstract;
 /**
@@ -308,7 +221,6 @@ export declare function fromJson(json: any, workspace: Workspace): Abstract;
  *
  * @param eventType The type of the event to get.
  * @returns The event class with the given type.
- * @alias Blockly.Events.utils.get
  */
 export declare function get(eventType: string): (new (...p1: any[]) => Abstract);
 /**
@@ -318,7 +230,6 @@ export declare function get(eventType: string): (new (...p1: any[]) => Abstract)
  * users don't try to re-enable disabled orphan blocks.
  *
  * @param event Custom data for event.
- * @alias Blockly.Events.utils.disableOrphans
  */
 export declare function disableOrphans(event: Abstract): void;
 export declare const TEST_ONLY: {

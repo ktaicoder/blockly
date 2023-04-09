@@ -21,7 +21,6 @@ export declare const TEST_ONLY: {
  * primarily be used for IDs that end up in the DOM.
  *
  * @returns The next unique identifier.
- * @alias Blockly.utils.idGenerator.getNextUniqueId
  */
 export declare function getNextUniqueId(): string;
 /**
@@ -29,7 +28,6 @@ export declare function getNextUniqueId(): string;
  *
  * @see internal.genUid
  * @returns A globally unique ID string.
- * @alias Blockly.utils.idGenerator.genUid
  */
 export declare function genUid(): string;
 //# sourceMappingURL=idgenerator.d.ts.map

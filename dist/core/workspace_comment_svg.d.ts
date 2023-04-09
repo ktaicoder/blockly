@@ -14,8 +14,6 @@ import { WorkspaceComment } from './workspace_comment.js';
 import type { WorkspaceSvg } from './workspace_svg.js';
 /**
  * Class for a workspace comment's SVG representation.
- *
- * @alias Blockly.WorkspaceCommentSvg
  */
 export declare class WorkspaceCommentSvg extends WorkspaceComment implements IBoundedElement, IBubble, ICopyable {
     /**
@@ -44,7 +42,7 @@ export declare class WorkspaceCommentSvg extends WorkspaceComment implements IBo
     private focused_;
     private autoLayout_;
     private readonly svgGroup_;
-    svgRect_: any;
+    svgRect_: SVGRectElement;
     /** Whether the comment is rendered onscreen and is a part of the DOM. */
     private rendered_;
     private readonly useDragSurface_;

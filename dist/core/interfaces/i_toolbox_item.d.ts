@@ -5,8 +5,6 @@
  */
 /**
  * Interface for an item in the toolbox.
- *
- * @alias Blockly.IToolboxItem
  */
 export interface IToolboxItem {
     /**

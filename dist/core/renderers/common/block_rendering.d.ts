@@ -46,13 +46,11 @@ export declare function register(name: string, rendererClass: Function): void;
  * Unregisters the renderer registered with the given name.
  *
  * @param name The name of the renderer.
- * @alias Blockly.blockRendering.unregister
  */
 export declare function unregister(name: string): void;
 /**
  * Turn off the blocks debugger.
  *
- * @alias Blockly.blockRendering.stopDebugger
  * @deprecated Use the debug renderer in **\@blockly/dev-tools** (See {@link
  *     https://www.npmjs.com/package/@blockly/dev-tools}.)
  * @internal
@@ -66,7 +64,6 @@ export declare function stopDebugger(): void;
  * @param opt_rendererOverrides Rendering constant overrides.
  * @returns The new instance of a renderer.
  *     Already initialized.
- * @alias Blockly.blockRendering.init
  * @internal
  */
 export declare function init(name: string, theme: Theme, opt_rendererOverrides?: {

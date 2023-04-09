@@ -6,8 +6,6 @@
 import { GridOptions } from './options.js';
 /**
  * Class for a workspace's grid.
- *
- * @alias Blockly.Grid
  */
 export declare class Grid {
     private pattern;

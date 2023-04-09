@@ -9,8 +9,6 @@ import { Connection } from './connection.js';
 import { Coordinate } from './utils/coordinate.js';
 /**
  * Class for a connection between blocks that may be rendered on screen.
- *
- * @alias Blockly.RenderedConnection
  */
 export declare class RenderedConnection extends Connection {
     sourceBlock_: BlockSvg;
@@ -66,23 +64,29 @@ export declare class RenderedConnection extends Connection {
      *
      * @param x New absolute x coordinate, in workspace coordinates.
      * @param y New absolute y coordinate, in workspace coordinates.
+     * @return True if the position of the connection in the connection db
+     *     was updated.
      */
-    moveTo(x: number, y: number): void;
+    moveTo(x: number, y: number): boolean;
     /**
      * Change the connection's coordinates.
      *
      * @param dx Change to x coordinate, in workspace units.
      * @param dy Change to y coordinate, in workspace units.
+     * @return True if the position of the connection in the connection db
+     *     was updated.
      */
-    moveBy(dx: number, dy: number): void;
+    moveBy(dx: number, dy: number): boolean;
     /**
      * Move this connection to the location given by its offset within the block
      * and the location of the block's top left corner.
      *
      * @param blockTL The location of the top left corner of the block, in
      *     workspace coordinates.
+     * @return True if the position of the connection in the connection db
+     *     was updated.
      */
-    moveToOffset(blockTL: Coordinate): void;
+    moveToOffset(blockTL: Coordinate): boolean;
     /**
      * Set the offset of this connection relative to the top left of its block.
      *
@@ -103,6 +107,13 @@ export declare class RenderedConnection extends Connection {
      * @internal
      */
     tighten(): void;
+    /**
+     * Moves the blocks on either side of this connection right next to
+     * each other, based on their local offsets, not global positions.
+     *
+     * @internal
+     */
+    tightenEfficiently(): void;
     /**
      * Find the closest compatible connection to this connection.
      * All parameters are in workspace units.
@@ -147,7 +158,7 @@ export declare class RenderedConnection extends Connection {
      */
     startTrackingAll(): Block[];
     /**
-     * Behavior after a connection attempt fails.
+     * Behaviour after a connection attempt fails.
      * Bumps this connection away from the other connection. Called when an
      * attempted connection fails.
      *
@@ -159,10 +170,12 @@ export declare class RenderedConnection extends Connection {
     /**
      * Disconnect two blocks that are connected by this connection.
      *
-     * @param parentBlock The superior block.
-     * @param childBlock The inferior block.
+     * @param setParent Whether to set the parent of the disconnected block or
+     *     not, defaults to true.
+     *     If you do not set the parent, ensure that a subsequent action does,
+     *     otherwise the view and model will be out of sync.
      */
-    protected disconnectInternal_(parentBlock: Block, childBlock: Block): void;
+    disconnectInternal(setParent?: boolean): void;
     /**
      * Respawn the shadow block if there was one connected to the this connection.
      * Render/rerender blocks as needed.
@@ -208,6 +221,6 @@ export declare namespace RenderedConnection {
         TRACKED = 1
     }
 }
-export declare type TrackedState = RenderedConnection.TrackedState;
+export type TrackedState = RenderedConnection.TrackedState;
 export declare const TrackedState: typeof RenderedConnection.TrackedState;
 //# sourceMappingURL=rendered_connection.d.ts.map

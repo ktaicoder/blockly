@@ -10,7 +10,6 @@
  * @param parentCtor Parent class.
  * @suppress {strictMissingProperties} superClass_ is not defined on Function.
  * @deprecated No longer provided by Blockly.
- * @alias Blockly.utils.object.inherits
  */
 export declare function inherits(childCtor: Function, parentCtor: Function): void;
 /**
@@ -19,7 +18,6 @@ export declare function inherits(childCtor: Function, parentCtor: Function): voi
  * @param target Target.
  * @param source Source.
  * @deprecated Use the built-in **Object.assign** instead.
- * @alias Blockly.utils.object.mixin
  */
 export declare function mixin(target: any, source: any): void;
 /**
@@ -28,7 +26,6 @@ export declare function mixin(target: any, source: any): void;
  * @param target Target.
  * @param source Source.
  * @returns The resulting object.
- * @alias Blockly.utils.object.deepMerge
  */
 export declare function deepMerge(target: any, source: any): any;
 /**
@@ -37,7 +34,6 @@ export declare function deepMerge(target: any, source: any): any;
  * @param obj Object containing values.
  * @returns Array of values.
  * @deprecated Use the built-in **Object.values** instead.
- * @alias Blockly.utils.object.values
  */
 export declare function values(obj: any): any[];
 //# sourceMappingURL=object.d.ts.map

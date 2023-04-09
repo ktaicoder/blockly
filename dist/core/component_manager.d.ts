@@ -25,8 +25,6 @@ declare class Capability<_T> {
 }
 /**
  * Manager for all items registered with the workspace.
- *
- * @alias Blockly.ComponentManager
  */
 export declare class ComponentManager {
     static Capability: typeof Capability;
@@ -96,6 +94,6 @@ export declare namespace ComponentManager {
         weight: number;
     }
 }
-export declare type ComponentDatum = ComponentManager.ComponentDatum;
+export type ComponentDatum = ComponentManager.ComponentDatum;
 export {};
 //# sourceMappingURL=component_manager.d.ts.map

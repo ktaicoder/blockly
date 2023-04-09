@@ -9,7 +9,7 @@
 
 - [구글의 블록리](https://github.com/google/blockly) 라이브러리가 업데이트 될 때 함께 업데이트 해야 합니다.
 
-- 현재 적용한 구글의 블록리 버전은 `9.2.0`입니다.
+- 현재 적용한 구글의 블록리 버전은 `9.3.2`입니다.
 
 ## 설치 방법
 
@@ -20,7 +20,7 @@ yarn add @ktaicoder/blockly
 yarn add blockly@npm:@ktaicoder/blockly
 
 # or
-yarn add blockly@npm:@ktaicoder/blockly@9.2.0-p1
+yarn add blockly@npm:@ktaicoder/blockly@9.3.2-p1
 
 ```
 
@@ -54,8 +54,8 @@ vi package.json
 # python3 required for blockly build
 yarn dist
 
-git tag v9.2.0-p1
-git push origin v9.2.0-p1
+git tag v9.3.2-p1
+git push origin v9.3.2-p1
 ```
 
 ## 주요 변경 내용

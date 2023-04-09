@@ -9,8 +9,6 @@ import { Coordinate } from './utils/coordinate.js';
 import type { Size } from './utils/size.js';
 /**
  * A basic menu class.
- *
- * @alias Blockly.Menu
  */
 export declare class Menu {
     /**

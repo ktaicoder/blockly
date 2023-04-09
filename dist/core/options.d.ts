@@ -11,8 +11,6 @@ import type { WorkspaceSvg } from './workspace_svg.js';
 /**
  * Parse the user-specified options, using reasonable defaults where behaviour
  * is unspecified.
- *
- * @alias Blockly.Options
  */
 export declare class Options {
     RTL: boolean;
@@ -137,8 +135,8 @@ export declare namespace Options {
         wheel: boolean;
     }
 }
-export declare type GridOptions = Options.GridOptions;
-export declare type MoveOptions = Options.MoveOptions;
-export declare type ScrollbarOptions = Options.ScrollbarOptions;
-export declare type ZoomOptions = Options.ZoomOptions;
+export type GridOptions = Options.GridOptions;
+export type MoveOptions = Options.MoveOptions;
+export type ScrollbarOptions = Options.ScrollbarOptions;
+export type ZoomOptions = Options.ZoomOptions;
 //# sourceMappingURL=options.d.ts.map

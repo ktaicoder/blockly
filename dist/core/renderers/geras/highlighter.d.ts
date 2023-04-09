@@ -20,8 +20,6 @@ import type { InlineInput } from './measurables/inline_input.js';
  * position of each part of the block.  The resulting paths are not continuous
  * or closed paths.  The highlights for tabs and notches are loosely based on
  * tab and notch shapes, but are not exactly the same.
- *
- * @alias Blockly.geras.Highlighter
  */
 export declare class Highlighter {
     info_: RenderInfo;
@@ -40,69 +38,58 @@ export declare class Highlighter {
     /**
      * @param info An object containing all information needed to render this
      *     block.
-     * @internal
      */
     constructor(info: RenderInfo);
     /**
      * Get the steps for the highlight path.
      *
      * @returns The steps for the highlight path.
-     * @internal
      */
     getPath(): string;
     /**
      * Add a highlight to the top corner of a block.
      *
      * @param row The top row of the block.
-     * @internal
      */
     drawTopCorner(row: TopRow): void;
     /**
      * Add a highlight on a jagged edge for a collapsed block.
      *
      * @param row  The row to highlight.
-     * @internal
      */
     drawJaggedEdge_(row: Row): void;
     /**
      * Add a highlight on a value input.
      *
      * @param row The row the input belongs to.
-     * @internal
      */
     drawValueInput(row: Row): void;
     /**
      * Add a highlight on a statement input.
      *
      * @param row The row to highlight.
-     * @internal
      */
     drawStatementInput(row: Row): void;
     /**
      * Add a highlight on the right side of a row.
      *
      * @param row The row to highlight.
-     * @internal
      */
     drawRightSideRow(row: Row): void;
     /**
      * Add a highlight to the bottom row.
      *
      * @param row The row to highlight.
-     * @internal
      */
     drawBottomRow(row: BottomRow): void;
     /**
      * Draw the highlight on the left side of the block.
-     *
-     * @internal
      */
     drawLeft(): void;
     /**
      * Add a highlight to an inline input.
      *
      * @param input The input to highlight.
-     * @internal
      */
     drawInlineInput(input: InlineInput): void;
 }

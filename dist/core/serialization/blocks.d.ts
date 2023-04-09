@@ -9,8 +9,6 @@ import type { ISerializer } from '../interfaces/i_serializer.js';
 import type { Workspace } from '../workspace.js';
 /**
  * Represents the state of a connection.
- *
- * @alias Blockly.serialization.blocks.ConnectionState
  */
 export interface ConnectionState {
     shadow: State | undefined;
@@ -18,8 +16,6 @@ export interface ConnectionState {
 }
 /**
  * Represents the state of a given block.
- *
- * @alias Blockly.serialization.blocks.State
  */
 export interface State {
     type: string;
@@ -27,6 +23,9 @@ export interface State {
     x?: number;
     y?: number;
     collapsed?: boolean;
+    deletable?: boolean;
+    movable?: boolean;
+    editable?: boolean;
     enabled?: boolean;
     inline?: boolean;
     data?: string;
@@ -58,7 +57,6 @@ export interface State {
  *     exist. True by default.
  * @returns The serialized state of the block, or null if the block could not be
  *     serialied (eg it was an insertion marker).
- * @alias Blockly.serialization.blocks.save
  */
 export declare function save(block: Block, { addCoordinates, addInputBlocks, addNextBlocks, doFullSerialization, }?: {
     addCoordinates?: boolean;
@@ -74,7 +72,6 @@ export declare function save(block: Block, { addCoordinates, addInputBlocks, add
  * @param param1 recordUndo: If true, events triggered by this function will be
  *     undo-able by the user. False by default.
  * @returns The block that was just loaded.
- * @alias Blockly.serialization.blocks.append
  */
 export declare function append(state: State, workspace: Workspace, { recordUndo }?: {
     recordUndo?: boolean;
@@ -94,7 +91,6 @@ export declare function append(state: State, workspace: Workspace, { recordUndo 
  *     it is created. False by default. recordUndo: If true, events triggered by
  *     this function will be undo-able by the user. False by default.
  * @returns The block that was just appended.
- * @alias Blockly.serialization.blocks.appendInternal
  * @internal
  */
 export declare function appendInternal(state: State, workspace: Workspace, { parentConnection, isShadow, recordUndo }?: {
@@ -104,8 +100,6 @@ export declare function appendInternal(state: State, workspace: Workspace, { par
 }): Block;
 /**
  * Serializer for saving and loading block state.
- *
- * @alias Blockly.serialization.blocks.BlockSerializer
  */
 export declare class BlockSerializer implements ISerializer {
     priority: number;

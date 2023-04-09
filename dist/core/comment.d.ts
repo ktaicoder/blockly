@@ -10,8 +10,6 @@ import { Icon } from './icon.js';
 import type { Size } from './utils/size.js';
 /**
  * Class for a comment.
- *
- * @alias Blockly.Comment
  */
 export declare class Comment extends Icon {
     private readonly model;
@@ -20,14 +18,12 @@ export declare class Comment extends Icon {
      * Used to tell if an event should be fired at the end of an edit.
      */
     private cachedText;
-    /** Mouse up event data. */
-    private onMouseUpWrapper;
-    /** Wheel event data. */
-    private onWheelWrapper;
-    /** Change event data. */
-    private onChangeWrapper;
-    /** Input event data. */
-    private onInputWrapper;
+    /**
+     * Array holding info needed to unbind events.
+     * Used for disposing.
+     * Ex: [[node, name, func], [node, name, func]].
+     */
+    private boundEvents;
     /**
      * The SVG element that contains the text edit area, or null if not created.
      */

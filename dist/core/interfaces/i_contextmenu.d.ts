@@ -3,7 +3,6 @@
  * Copyright 2020 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
-/** @alias Blockly.IContextMenu */
 export interface IContextMenu {
     /**
      * Show the context menu for this object.

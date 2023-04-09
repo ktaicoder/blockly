@@ -5,8 +5,6 @@
  */
 /**
  * Interface for an object that a style can be added to.
- *
- * @alias Blockly.IStyleable
  */
 export interface IStyleable {
     /**

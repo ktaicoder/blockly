@@ -5,18 +5,14 @@
  */
 import './events/events_block_change.js';
 import type { Block } from './block.js';
-import { FieldConfig } from './field.js';
+import { Field, FieldConfig } from './field.js';
 import { FieldDropdown, FieldDropdownValidator, MenuGenerator, MenuOption } from './field_dropdown.js';
 import type { Menu } from './menu.js';
 import type { MenuItem } from './menuitem.js';
-import type { Sentinel } from './utils/sentinel.js';
 import { Size } from './utils/size.js';
 import { VariableModel } from './variable_model.js';
-export declare type FieldVariableValidator = FieldDropdownValidator;
 /**
  * Class for a variable's dropdown field.
- *
- * @alias Blockly.FieldVariable
  */
 export declare class FieldVariable extends FieldDropdown {
     protected menuGenerator_: MenuGenerator | undefined;
@@ -42,20 +38,20 @@ export declare class FieldVariable extends FieldDropdown {
      *     Also accepts Field.SKIP_SETUP if you wish to skip setup (only used by
      * subclasses that want to handle configuration and setting the field value
      * after their own constructors have run).
-     * @param opt_validator A function that is called to validate changes to the
+     * @param validator A function that is called to validate changes to the
      *     field's value. Takes in a variable ID  & returns a validated variable
      *     ID, or null to abort the change.
-     * @param opt_variableTypes A list of the types of variables to include in the
-     *     dropdown. Will only be used if opt_config is not provided.
-     * @param opt_defaultType The type of variable to create if this field's value
-     *     is not explicitly set.  Defaults to ''. Will only be used if opt_config
+     * @param variableTypes A list of the types of variables to include in the
+     *     dropdown. Will only be used if config is not provided.
+     * @param defaultType The type of variable to create if this field's value
+     *     is not explicitly set.  Defaults to ''. Will only be used if config
      *     is not provided.
-     * @param opt_config A map of options used to configure the field.
+     * @param config A map of options used to configure the field.
      *    See the [field creation documentation]{@link
      * https://developers.google.com/blockly/guides/create-custom-blocks/fields/built-in-fields/variable#creation}
      * for a list of properties this parameter supports.
      */
-    constructor(varName: string | null | Sentinel, opt_validator?: FieldVariableValidator, opt_variableTypes?: string[], opt_defaultType?: string, opt_config?: FieldVariableConfig);
+    constructor(varName: string | null | typeof Field.SKIP_SETUP, validator?: FieldVariableValidator, variableTypes?: string[], defaultType?: string, config?: FieldVariableConfig);
     /**
      * Configure the field based on the given map of options.
      *
@@ -139,14 +135,14 @@ export declare class FieldVariable extends FieldDropdown {
      *
      * @returns Validation function, or null.
      */
-    getValidator(): Function | null;
+    getValidator(): FieldVariableValidator | null;
     /**
      * Ensure that the ID belongs to a valid variable of an allowed type.
      *
-     * @param opt_newValue The ID of the new variable to set.
+     * @param newValue The ID of the new variable to set.
      * @returns The validated ID, or null if invalid.
      */
-    protected doClassValidation_(opt_newValue?: any): string | null;
+    protected doClassValidation_(newValue?: any): string | null;
     /**
      * Update the value of this variable field, as well as its variable and text.
      *
@@ -155,7 +151,7 @@ export declare class FieldVariable extends FieldDropdown {
      *
      * @param newId The value to be saved.
      */
-    protected doValueUpdate_(newId: any): void;
+    protected doValueUpdate_(newId: string): void;
     /**
      * Check whether the given variable type is allowed on this field.
      *
@@ -174,10 +170,10 @@ export declare class FieldVariable extends FieldDropdown {
      * Parse the optional arguments representing the allowed variable types and
      * the default variable type.
      *
-     * @param opt_variableTypes A list of the types of variables to include in the
+     * @param variableTypes A list of the types of variables to include in the
      *     dropdown.  If null or undefined, variables of all types will be
      *     displayed in the dropdown.
-     * @param opt_defaultType The type of the variable to create if this field's
+     * @param defaultType The type of the variable to create if this field's
      *     value is not explicitly set.  Defaults to ''.
      */
     private setTypes_;
@@ -238,4 +234,20 @@ export interface FieldVariableConfig extends FieldConfig {
 export interface FieldVariableFromJsonConfig extends FieldVariableConfig {
     variable?: string;
 }
+/**
+ * A function that is called to validate changes to the field's value before
+ * they are set.
+ *
+ * @see {@link https://developers.google.com/blockly/guides/create-custom-blocks/fields/validators#return_values}
+ * @param newValue The value to be validated.
+ * @returns One of three instructions for setting the new value: `T`, `null`,
+ * or `undefined`.
+ *
+ * - `T` to set this function's returned value instead of `newValue`.
+ *
+ * - `null` to invoke `doValueInvalid_` and not set a value.
+ *
+ * - `undefined` to set `newValue` as is.
+ */
+export type FieldVariableValidator = FieldDropdownValidator;
 //# sourceMappingURL=field_variable.d.ts.map

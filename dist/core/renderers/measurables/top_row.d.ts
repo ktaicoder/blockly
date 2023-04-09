@@ -14,16 +14,12 @@ import { Row } from './row.js';
  * connections.
  * After this constructor is called, the row will contain all non-spacer
  * elements it needs.
- *
- * @alias Blockly.blockRendering.TopRow
  */
 export declare class TopRow extends Row {
     /**
      * The starting point for drawing the row, in the y direction.
      * This allows us to draw hats and similar shapes that don't start at the
      * origin. Must be non-negative (see #2820).
-     *
-     * @internal
      */
     capline: number;
     /** How much the row extends up above its capline. */
@@ -34,7 +30,6 @@ export declare class TopRow extends Row {
     connection: PreviousConnection | null;
     /**
      * @param constants The rendering constants provider.
-     * @internal
      */
     constructor(constants: ConstantProvider);
     /**
@@ -42,7 +37,6 @@ export declare class TopRow extends Row {
      *
      * @param block The block whose top row this represents.
      * @returns Whether or not the top row has a left square corner.
-     * @internal
      */
     hasLeftSquareCorner(block: BlockSvg): boolean;
     /**

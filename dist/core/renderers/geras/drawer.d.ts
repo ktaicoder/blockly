@@ -11,9 +11,8 @@ import { Highlighter } from './highlighter.js';
 import type { RenderInfo } from './info.js';
 import type { InlineInput } from './measurables/inline_input.js';
 /**
- * An object that draws a block based on the given rendering information.
- *
- * @alias Blockly.geras.Drawer
+ * An object that draws a block based on the given rendering information,
+ * customized for the geras renderer.
  */
 export declare class Drawer extends BaseDrawer {
     highlighter_: Highlighter;
@@ -22,7 +21,6 @@ export declare class Drawer extends BaseDrawer {
      * @param block The block to render.
      * @param info An object containing all information needed to render this
      *     block.
-     * @internal
      */
     constructor(block: BlockSvg, info: RenderInfo);
     draw(): void;

@@ -8,8 +8,6 @@ import type { IConnectionChecker } from './interfaces/i_connection_checker.js';
 import type { RenderedConnection } from './rendered_connection.js';
 /**
  * Class for connection type checking logic.
- *
- * @alias Blockly.ConnectionChecker
  */
 export declare class ConnectionChecker implements IConnectionChecker {
     /**
@@ -68,7 +66,7 @@ export declare class ConnectionChecker implements IConnectionChecker {
     /**
      * Check whether this connection can be made by dragging.
      *
-     * @param a Connection to compare.
+     * @param a Connection to compare (on the block that's being dragged).
      * @param b Connection to compare against.
      * @param distance The maximum allowable distance between connections.
      * @returns True if the connection is allowed during a drag.

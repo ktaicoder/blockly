@@ -5,14 +5,12 @@
  */
 import type { Block } from '../block.js';
 import type { State } from './blocks.js';
-/** @alias Blockly.serialization.exceptions.DeserializationError */
 export declare class DeserializationError extends Error {
 }
 /**
  * Represents an error where the serialized state is expected to provide a
  * block type, but it is not provided.
  *
- * @alias Blockly.serialization.exceptions.MissingBlockType
  */
 export declare class MissingBlockType extends DeserializationError {
     state: State;
@@ -25,8 +23,6 @@ export declare class MissingBlockType extends DeserializationError {
 /**
  * Represents an error where deserialization encountered a block that did
  * not have a connection that was defined in the serialized state.
- *
- * @alias Blockly.serialization.exceptions.MissingConnection
  */
 export declare class MissingConnection extends DeserializationError {
     block: Block;
@@ -43,8 +39,6 @@ export declare class MissingConnection extends DeserializationError {
 /**
  * Represents an error where deserialization tried to connect two connections
  * that were not compatible.
- *
- * @alias Blockly.serialization.exceptions.BadConnectionCheck
  */
 export declare class BadConnectionCheck extends DeserializationError {
     childBlock: Block;
@@ -64,8 +58,6 @@ export declare class BadConnectionCheck extends DeserializationError {
  * was deserializing children of a shadow.
  * This is an error because it is an invariant of Blockly that shadow blocks
  * do not have real children.
- *
- * @alias Blockly.serialization.exceptions.RealChildOfShadow
  */
 export declare class RealChildOfShadow extends DeserializationError {
     state: State;

@@ -20,8 +20,6 @@ export interface InsideCorners {
 }
 /**
  * An object that provides constants for rendering blocks in Zelos mode.
- *
- * @alias Blockly.zelos.ConstantProvider
  */
 export declare class ConstantProvider extends BaseConstantProvider {
     GRID_UNIT: number;
@@ -29,8 +27,6 @@ export declare class ConstantProvider extends BaseConstantProvider {
     CURSOR_COLOUR: string;
     /**
      * Radius of the cursor for input and output connections.
-     *
-     * @internal
      */
     CURSOR_RADIUS: number;
     JAGGED_TEETH_HEIGHT: number;
@@ -50,8 +46,6 @@ export declare class ConstantProvider extends BaseConstantProvider {
      * When a block with the outer shape contains an input block with the inner
      * shape on its left or right edge, the block elements are aligned such that
      * the padding specified is reached.
-     *
-     * @internal
      */
     SHAPE_IN_SHAPE_PADDING: {
         [key: number]: {
@@ -78,8 +72,6 @@ export declare class ConstantProvider extends BaseConstantProvider {
     /**
      * The ID of the selected glow filter, or the empty string if no filter is
      * set.
-     *
-     * @internal
      */
     selectedGlowFilterId: string;
     /**
@@ -89,8 +81,6 @@ export declare class ConstantProvider extends BaseConstantProvider {
     /**
      * The ID of the replacement glow filter, or the empty string if no filter
      * is set.
-     *
-     * @internal
      */
     replacementGlowFilterId: string;
     /**
@@ -112,7 +102,6 @@ export declare class ConstantProvider extends BaseConstantProvider {
      * rectangular reporter block. Null before init is called.
      */
     SQUARED: Shape | null;
-    /** @internal */
     constructor();
     setFontConstants_(theme: Theme): void;
     init(): void;
@@ -128,25 +117,22 @@ export declare class ConstantProvider extends BaseConstantProvider {
      *
      * @returns An object containing sizing and path information about a hexagonal
      *     shape for connections.
-     * @internal
      */
-    makeHexagonal(): Shape;
+    protected makeHexagonal(): Shape;
     /**
      * Create sizing and path information about a rounded shape.
      *
      * @returns An object containing sizing and path information about a rounded
      *     shape for connections.
-     * @internal
      */
-    makeRounded(): Shape;
+    protected makeRounded(): Shape;
     /**
      * Create sizing and path information about a squared shape.
      *
      * @returns An object containing sizing and path information about a squared
      *     shape for connections.
-     * @internal
      */
-    makeSquared(): Shape;
+    protected makeSquared(): Shape;
     shapeFor(connection: RenderedConnection): Shape;
     makeNotch(): {
         type: number;

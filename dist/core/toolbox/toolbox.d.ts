@@ -21,8 +21,6 @@ import type { WorkspaceSvg } from '../workspace_svg.js';
 /**
  * Class for a Toolbox.
  * Creates the toolbox's DOM.
- *
- * @alias Blockly.Toolbox
  */
 export declare class Toolbox extends DeleteArea implements IAutoHideable, IKeyboardAccessible, IStyleable, IToolbox {
     /**
@@ -32,9 +30,9 @@ export declare class Toolbox extends DeleteArea implements IAutoHideable, IKeybo
     id: string;
     protected toolboxDef_: toolbox.ToolboxInfo;
     private readonly horizontalLayout_;
-    /** The html container for the toolbox. */
+    /** The HTML container for the toolbox. */
     HtmlDiv: HTMLDivElement | null;
-    /** The html container for the contents of a toolbox. */
+    /** The HTML container for the contents of a toolbox. */
     protected contentsDiv_: HTMLDivElement | null;
     /** Whether the Toolbox is visible. */
     protected isVisible_: boolean;
@@ -61,7 +59,6 @@ export declare class Toolbox extends DeleteArea implements IAutoHideable, IKeybo
      * Ex: [[node, name, func], [node, name, func]].
      */
     protected boundEvents_: browserEvents.Data[];
-    wouldDelete_: any;
     /** The workspace this toolbox is on. */
     protected readonly workspace_: WorkspaceSvg;
     /** @param workspace The workspace in which to create new blocks. */

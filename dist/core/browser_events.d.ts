@@ -6,10 +6,8 @@
 /**
  * Blockly opaque event data used to unbind events when using
  * `bind` and `conditionalBind`.
- *
- * @alias Blockly.browserEvents.Data
  */
-export declare type Data = [EventTarget, string, (e: Event) => void][];
+export type Data = [EventTarget, string, (e: Event) => void][];
 /**
  * Bind an event handler that can be ignored if it is not part of the active
  * touch stream.
@@ -25,7 +23,6 @@ export declare type Data = [EventTarget, string, (e: Event) => void][];
  *     simultaneous touches.  False by default.
  * @param opt_noPreventDefault No-op, deprecated and will be removed in v10.
  * @returns Opaque data that can be passed to unbindEvent_.
- * @alias Blockly.browserEvents.conditionalBind
  */
 export declare function conditionalBind(node: EventTarget, name: string, thisObject: Object | null, func: Function, opt_noCaptureIdentifier?: boolean, opt_noPreventDefault?: boolean): Data;
 /**
@@ -39,7 +36,6 @@ export declare function conditionalBind(node: EventTarget, name: string, thisObj
  * @param thisObject The value of 'this' in the function.
  * @param func Function to call when event is triggered.
  * @returns Opaque data that can be passed to unbindEvent_.
- * @alias Blockly.browserEvents.bind
  */
 export declare function bind(node: EventTarget, name: string, thisObject: Object | null, func: Function): Data;
 /**
@@ -48,7 +44,6 @@ export declare function bind(node: EventTarget, name: string, thisObject: Object
  * @param bindData Opaque data from bindEvent_.
  *     This list is emptied during the course of calling this function.
  * @returns The function call.
- * @alias Blockly.browserEvents.unbind
  */
 export declare function unbind(bindData: Data): (e: Event) => void;
 /**
@@ -56,7 +51,6 @@ export declare function unbind(bindData: Data): (e: Event) => void;
  *
  * @param e An event.
  * @returns True if text input.
- * @alias Blockly.browserEvents.isTargetInput
  */
 export declare function isTargetInput(e: Event): boolean;
 /**
@@ -64,7 +58,6 @@ export declare function isTargetInput(e: Event): boolean;
  *
  * @param e Mouse event.
  * @returns True if right-click.
- * @alias Blockly.browserEvents.isRightButton
  */
 export declare function isRightButton(e: MouseEvent): boolean;
 /**
@@ -75,7 +68,6 @@ export declare function isRightButton(e: MouseEvent): boolean;
  * @param svg SVG element.
  * @param matrix Inverted screen CTM to use.
  * @returns Object with .x and .y properties.
- * @alias Blockly.browserEvents.mouseToSvg
  */
 export declare function mouseToSvg(e: MouseEvent, svg: SVGSVGElement, matrix: SVGMatrix | null): SVGPoint;
 /**
@@ -83,7 +75,6 @@ export declare function mouseToSvg(e: MouseEvent, svg: SVGSVGElement, matrix: SV
  *
  * @param e Mouse event.
  * @returns Scroll delta object with .x and .y properties.
- * @alias Blockly.browserEvents.getScrollDeltaPixels
  */
 export declare function getScrollDeltaPixels(e: WheelEvent): {
     x: number;

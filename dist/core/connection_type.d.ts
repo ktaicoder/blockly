@@ -5,8 +5,6 @@
  */
 /**
  * Enum for the type of a connection or input.
- *
- * @alias Blockly.ConnectionType
  */
 export declare enum ConnectionType {
     INPUT_VALUE = 1,

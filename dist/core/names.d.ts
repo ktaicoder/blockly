@@ -7,8 +7,6 @@ import type { VariableMap } from './variable_map.js';
 import type { Workspace } from './workspace.js';
 /**
  * Class for a database of entity names (variables, procedures, etc).
- *
- * @alias Blockly.Names
  */
 export declare class Names {
     static DEVELOPER_VARIABLE_TYPE: NameType;
@@ -123,7 +121,6 @@ export declare namespace Names {
      * getName('foo', 'VARIABLE') = 'foo'
      * getName('foo', 'PROCEDURE') = 'foo2'
      *
-     * @alias Blockly.Names.NameType
      */
     enum NameType {
         DEVELOPER_VARIABLE = "DEVELOPER_VARIABLE",
@@ -131,6 +128,6 @@ export declare namespace Names {
         PROCEDURE = "PROCEDURE"
     }
 }
-export declare type NameType = Names.NameType;
+export type NameType = Names.NameType;
 export declare const NameType: typeof Names.NameType;
 //# sourceMappingURL=names.d.ts.map

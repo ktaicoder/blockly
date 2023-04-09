@@ -46,8 +46,6 @@ export interface JaggedTeeth {
  * Some highlights are simple offsets of the parent paths and can be generated
  * programmatically.  Others, especially on curves, are just made out of piles
  * of constants and are hard to tweak.
- *
- * @alias Blockly.geras.HighlightConstantProvider
  */
 export declare class HighlightConstantProvider {
     constantProvider: ConstantProvider;
@@ -62,50 +60,41 @@ export declare class HighlightConstantProvider {
     START_HAT: StartHat;
     /**
      * @param constants The rendering constants provider.
-     * @internal
      */
     constructor(constants: ConstantProvider);
     /**
      * Initialize shape objects based on the constants set in the constructor.
-     *
-     * @internal
      */
     init(): void;
     /**
      * @returns An object containing sizing and path information about inside
      *     corner highlights.
-     * @internal
      */
-    makeInsideCorner(): InsideCorner;
+    protected makeInsideCorner(): InsideCorner;
     /**
      * @returns An object containing sizing and path information about outside
      *     corner highlights.
-     * @internal
      */
-    makeOutsideCorner(): OutsideCorner;
+    protected makeOutsideCorner(): OutsideCorner;
     /**
      * @returns An object containing sizing and path information about puzzle tab
      *     highlights.
-     * @internal
      */
-    makePuzzleTab(): PuzzleTab;
+    protected makePuzzleTab(): PuzzleTab;
     /**
      * @returns An object containing sizing and path information about notch
      *     highlights.
-     * @internal
      */
-    makeNotch(): Notch;
+    protected makeNotch(): Notch;
     /**
      * @returns An object containing sizing and path information about collapsed
      *     block edge highlights.
-     * @internal
      */
-    makeJaggedTeeth(): JaggedTeeth;
+    protected makeJaggedTeeth(): JaggedTeeth;
     /**
      * @returns An object containing sizing and path information about start
      *     highlights.
-     * @internal
      */
-    makeStartHat(): StartHat;
+    protected makeStartHat(): StartHat;
 }
 //# sourceMappingURL=highlight_constants.d.ts.map

@@ -9,7 +9,6 @@ import type { Workspace } from '../workspace.js';
  *
  * @param workspace The workspace to serialize.
  * @returns The serialized state of the workspace.
- * @alias Blockly.serialization.workspaces.save
  */
 export declare function save(workspace: Workspace): {
     [key: string]: any;
@@ -21,7 +20,6 @@ export declare function save(workspace: Workspace): {
  * @param workspace The workspace to add the new state to.
  * @param param1 recordUndo: If true, events triggered by this function will be
  *     undo-able by the user. False by default.
- * @alias Blockly.serialization.workspaces.load
  */
 export declare function load(state: {
     [key: string]: any;

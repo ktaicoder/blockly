@@ -6,8 +6,6 @@
 import { KeyboardShortcut } from '../shortcut_registry.js';
 /**
  * An interface for an object that handles keyboard shortcuts.
- *
- * @alias Blockly.IKeyboardAccessible
  */
 export interface IKeyboardAccessible {
     /**

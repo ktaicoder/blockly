@@ -5,8 +5,6 @@
  */
 /**
  * Class for representing rectangular regions.
- *
- * @alias Blockly.utils.Rect
  */
 export declare class Rect {
     top: number;

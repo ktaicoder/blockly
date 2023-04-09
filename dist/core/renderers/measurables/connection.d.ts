@@ -9,8 +9,6 @@ import { Measurable } from './base.js';
 /**
  * The base class to represent a connection and the space that it takes up on
  * the block.
- *
- * @alias Blockly.blockRendering.Connection
  */
 export declare class Connection extends Measurable {
     connectionModel: RenderedConnection;
@@ -20,7 +18,6 @@ export declare class Connection extends Measurable {
      * @param constants The rendering constants provider.
      * @param connectionModel The connection object on the block that this
      *     represents.
-     * @internal
      */
     constructor(constants: ConstantProvider, connectionModel: RenderedConnection);
 }

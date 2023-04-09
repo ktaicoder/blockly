@@ -8,7 +8,6 @@
  * components such as fields and the toolbox to store separate CSS.
  *
  * @param cssContent Multiline CSS string or an array of single lines of CSS.
- * @alias Blockly.Css.register
  */
 export declare function register(cssContent: string): void;
 /**
@@ -21,7 +20,6 @@ export declare function register(cssContent: string): void;
  * @param hasCss If false, don't inject CSS (providing CSS becomes the
  *     document's responsibility).
  * @param pathToMedia Path from page to the Blockly media directory.
- * @alias Blockly.Css.inject
  */
 export declare function inject(hasCss: boolean, pathToMedia: string): void;
 //# sourceMappingURL=css.d.ts.map

@@ -7,8 +7,6 @@ import { Coordinate } from './utils/coordinate.js';
 import type { Workspace } from './workspace.js';
 /**
  * Class for a workspace comment.
- *
- * @alias Blockly.WorkspaceComment
  */
 export declare class WorkspaceComment {
     workspace: Workspace;
@@ -75,7 +73,7 @@ export declare class WorkspaceComment {
      *   This is not valid if the comment is currently being dragged.
      * @internal
      */
-    getXY(): Coordinate;
+    getRelativeToSurfaceXY(): Coordinate;
     /**
      * Move a comment by a relative offset.
      *

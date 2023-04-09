@@ -8,9 +8,7 @@ import type { ConstantProvider } from '../common/constants.js';
 import { Measurable } from './base.js';
 /**
  * An object containing information about the space an icon takes up during
- * rendering
- *
- * @alias Blockly.blockRendering.Icon
+ * rendering.
  */
 export declare class Icon extends Measurable {
     icon: BlocklyIcon;
@@ -18,11 +16,10 @@ export declare class Icon extends Measurable {
     flipRtl: boolean;
     /**
      * An object containing information about the space an icon takes up during
-     * rendering
+     * rendering.
      *
      * @param constants The rendering constants provider.
      * @param icon The icon to measure and store information for.
-     * @internal
      */
     constructor(constants: ConstantProvider, icon: BlocklyIcon);
 }

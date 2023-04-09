@@ -12,7 +12,6 @@ import { Rect } from './rect.js';
  *
  * @param element SVG element to find the coordinates of.
  * @returns Object with .x and .y properties.
- * @alias Blockly.utils.svgMath.getRelativeXY
  */
 export declare function getRelativeXY(element: Element): Coordinate;
 /**
@@ -22,7 +21,6 @@ export declare function getRelativeXY(element: Element): Coordinate;
  * @param element SVG element to find the coordinates of. If this is not a child
  *     of the div Blockly was injected into, the behaviour is undefined.
  * @returns Object with .x and .y properties.
- * @alias Blockly.utils.svgMath.getInjectionDivXY
  */
 export declare function getInjectionDivXY(element: Element): Coordinate;
 /**
@@ -31,7 +29,6 @@ export declare function getInjectionDivXY(element: Element): Coordinate;
  *
  * @returns True if 3D transforms are supported.
  * @deprecated No longer provided by Blockly.
- * @alias Blockly.utils.svgMath.is3dSupported
  */
 export declare function is3dSupported(): boolean;
 /**
@@ -40,7 +37,6 @@ export declare function is3dSupported(): boolean;
  *
  * @returns An object containing window width, height, and scroll position in
  *     window coordinates.
- * @alias Blockly.utils.svgMath.getViewportBBox
  * @internal
  */
 export declare function getViewportBBox(): Rect;
@@ -49,7 +45,6 @@ export declare function getViewportBBox(): Rect;
  * Copied from Closure's goog.dom.getDocumentScroll.
  *
  * @returns Object with values 'x' and 'y'.
- * @alias Blockly.utils.svgMath.getDocumentScroll
  */
 export declare function getDocumentScroll(): Coordinate;
 /**
@@ -59,7 +54,6 @@ export declare function getDocumentScroll(): Coordinate;
  * @param screenCoordinates The screen coordinates to be converted to workspace
  *     coordinates
  * @returns The workspace coordinates.
- * @alias Blockly.utils.svgMath.screenToWsCoordinates
  */
 export declare function screenToWsCoordinates(ws: WorkspaceSvg, screenCoordinates: Coordinate): Coordinate;
 export declare const TEST_ONLY: {

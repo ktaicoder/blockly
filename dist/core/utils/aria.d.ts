@@ -6,8 +6,6 @@
 /**
  * ARIA role values.
  * Copied from Closure's goog.a11y.aria.Role
- *
- * @alias Blockly.utils.aria.Role
  */
 export declare enum Role {
     GRID = "grid",
@@ -26,8 +24,6 @@ export declare enum Role {
 /**
  * ARIA states and properties.
  * Copied from Closure's goog.a11y.aria.State
- *
- * @alias Blockly.utils.aria.State
  */
 export declare enum State {
     ACTIVEDESCENDANT = "activedescendant",
@@ -53,7 +49,6 @@ export declare enum State {
  *
  * @param element DOM node to set role of.
  * @param roleName Role name.
- * @alias Blockly.utils.aria.setRole
  */
 export declare function setRole(element: Element, roleName: Role): void;
 /**
@@ -65,7 +60,6 @@ export declare function setRole(element: Element, roleName: Role): void;
  *     Automatically adds prefix 'aria-' to the state name if the attribute is
  * not an extra attribute.
  * @param value Value for the state attribute.
- * @alias Blockly.utils.aria.setState
  */
 export declare function setState(element: Element, stateName: State, value: string | boolean | number | string[]): void;
 //# sourceMappingURL=aria.d.ts.map

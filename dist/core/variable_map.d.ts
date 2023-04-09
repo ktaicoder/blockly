@@ -12,8 +12,6 @@ import type { Workspace } from './workspace.js';
  * Class for a variable map.  This contains a dictionary data structure with
  * variable types as keys and lists of variables as values.  The list of
  * variables are the type indicated by the key.
- *
- * @alias Blockly.VariableMap
  */
 export declare class VariableMap {
     workspace: Workspace;
@@ -25,7 +23,7 @@ export declare class VariableMap {
     private variableMap;
     /** @param workspace The workspace this map belongs to. */
     constructor(workspace: Workspace);
-    /** Clear the variable map. */
+    /** Clear the variable map.  Fires events for every deletion. */
     clear(): void;
     /**
      * Rename the given variable by updating its name in the variable map.

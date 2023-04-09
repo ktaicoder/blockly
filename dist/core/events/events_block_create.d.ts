@@ -8,15 +8,17 @@ import * as blocks from '../serialization/blocks.js';
 import { BlockBase, BlockBaseJson } from './events_block_base.js';
 import { Workspace } from '../workspace.js';
 /**
- * Class for a block creation event.
- *
- * @alias Blockly.Events.BlockCreate
+ * Notifies listeners when a block (or connected stack of blocks) is
+ * created.
  */
 export declare class BlockCreate extends BlockBase {
     type: string;
+    /** The XML representation of the created block(s). */
     xml?: Element | DocumentFragment;
-    ids?: string[];
+    /** The JSON respresentation of the created block(s). */
     json?: blocks.State;
+    /** All of the IDs of created blocks. */
+    ids?: string[];
     /** @param opt_block The created block.  Undefined for a blank event. */
     constructor(opt_block?: Block);
     /**

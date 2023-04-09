@@ -28,8 +28,6 @@ import type { WorkspaceSvg } from './workspace_svg.js';
 /**
  * Class for a block's SVG representation.
  * Not normally called directly, workspace.newBlock() is preferred.
- *
- * @alias Blockly.BlockSvg
  */
 export declare class BlockSvg extends Block implements IASTNodeLocationSvg, IBoundedElement, ICopyable, IDraggable {
     /**
@@ -43,9 +41,9 @@ export declare class BlockSvg extends Block implements IASTNodeLocationSvg, IBou
      * the block.
      */
     static readonly COLLAPSED_WARNING_ID = "TEMP_COLLAPSED_WARNING_";
-    decompose?: ((p1: Workspace) => BlockSvg);
-    saveConnections?: ((p1: BlockSvg) => any);
-    customContextMenu?: ((p1: Array<ContextMenuOption | LegacyContextMenuOption>) => any) | null;
+    decompose?: (p1: Workspace) => BlockSvg;
+    saveConnections?: (p1: BlockSvg) => void;
+    customContextMenu?: (p1: Array<ContextMenuOption | LegacyContextMenuOption>) => void;
     /**
      * An property used internally to reference the block's rendering debugger.
      *
@@ -78,6 +76,7 @@ export declare class BlockSvg extends Block implements IASTNodeLocationSvg, IBou
     /** @internal */
     pathObject: IPathObject;
     rendered: boolean;
+    private visuallyDisabled;
     /**
      * Is this block currently rendering? Used to stop recursive render calls
      * from actually triggering a re-render.
@@ -90,6 +89,20 @@ export declare class BlockSvg extends Block implements IASTNodeLocationSvg, IBou
     nextConnection: RenderedConnection;
     previousConnection: RenderedConnection;
     private readonly useDragSurface_;
+    private translation;
+    /**
+     * The ID of the setTimeout callback for bumping neighbours, or 0 if no bump
+     * is currently scheduled.
+     */
+    private bumpNeighboursPid;
+    /**
+     * The location of the top left of this block (in workspace coordinates)
+     * relative to either its parent block, or the workspace origin if it has no
+     * parent.
+     *
+     * @internal
+     */
+    relativeCoords: Coordinate;
     /**
      * @param workspace The block's workspace.
      * @param prototypeName Name of the language object containing type-specific
@@ -163,6 +176,12 @@ export declare class BlockSvg extends Block implements IASTNodeLocationSvg, IBou
      * @param y The y coordinate of the translation in workspace units.
      */
     translate(x: number, y: number): void;
+    /**
+     * Returns the SVG translation of this block.
+     *
+     * @internal
+     */
+    getTranslation(): string;
     /**
      * Move this block to its workspace's drag surface, accounting for
      * positioning. Generally should be called at the same time as
@@ -319,6 +338,11 @@ export declare class BlockSvg extends Block implements IASTNodeLocationSvg, IBou
      * @suppress {checkTypes}
      */
     dispose(healStack?: boolean, animate?: boolean): void;
+    /**
+     * Disposes of this block without doing things required by the top block.
+     * E.g. does trigger UI effects, remove nodes, etc.
+     */
+    disposeInternal(): void;
     /**
      * Delete a block and hide chaff when doing so. The block will not be deleted
      * if it's in a flyout. This is called from the context menu and keyboard
@@ -508,7 +532,7 @@ export declare class BlockSvg extends Block implements IASTNodeLocationSvg, IBou
      *
      * @param all If true, return all connections even hidden ones.
      *     Otherwise, for a non-rendered block return an empty list, and for a
-     * collapsed block don't return inputs connections.
+     *     collapsed block don't return inputs connections.
      * @returns Array of connections.
      * @internal
      */
@@ -599,20 +623,46 @@ export declare class BlockSvg extends Block implements IASTNodeLocationSvg, IBou
      */
     getChildren(ordered: boolean): BlockSvg[];
     /**
-     * Lays out and reflows a block based on its contents and settings.
+     * Triggers a rerender after a delay to allow for batching.
+     *
+     * @internal
+     */
+    queueRender(): void;
+    /**
+     * Immediately lays out and reflows a block based on its contents and
+     * settings.
      *
      * @param opt_bubble If false, just render this block.
      *   If true, also render block's parent, grandparent, etc.  Defaults to true.
      */
     render(opt_bubble?: boolean): void;
+    /**
+     * Renders this block in a way that's compatible with the more efficient
+     * render management system.
+     *
+     * @internal
+     */
+    renderEfficiently(): void;
+    /**
+     * Tightens all children of this block so they are snuggly rendered against
+     * their parent connections.
+     *
+     * Does not update connection locations, so that they can be updated more
+     * efficiently by the render management system.
+     *
+     * @internal
+     */
+    tightenChildrenEfficiently(): void;
     /** Redraw any attached marker or cursor svgs if needed. */
     protected updateMarkers_(): void;
     /**
      * Update all of the connections on this block with the new locations
      * calculated during rendering.  Also move all of the connected blocks based
      * on the new connection locations.
+     *
+     * @internal
      */
-    private updateConnectionLocations_;
+    updateConnectionLocations(): void;
     /**
      * Add the cursor SVG to this block's SVG group.
      *

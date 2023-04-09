@@ -11,8 +11,6 @@ import { MarkerSvg as BaseMarkerSvg } from '../common/marker_svg.js';
 import type { ConstantProvider as ZelosConstantProvider } from './constants.js';
 /**
  * Class to draw a marker.
- *
- * @alias Blockly.zelos.MarkerSvg
  */
 export declare class MarkerSvg extends BaseMarkerSvg {
     constants_: ZelosConstantProvider;

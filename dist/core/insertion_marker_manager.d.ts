@@ -10,8 +10,6 @@ import type { Coordinate } from './utils/coordinate.js';
  * Class that controls updates to connections during drags.  It is primarily
  * responsible for finding the closest eligible connection and highlighting or
  * unhighlighting it as needed during a drag.
- *
- * @alias Blockly.InsertionMarkerManager
  */
 export declare class InsertionMarkerManager {
     /**
@@ -114,10 +112,8 @@ export declare class InsertionMarkerManager {
      */
     private createMarkerBlock;
     /**
-     * Populate the list of available connections on this block stack.  This
-     * should only be called once, at the beginning of a drag. If the stack has
-     * more than one block, this function will populate lastOnStack and create
-     * the corresponding insertion marker.
+     * Populate the list of available connections on this block stack. If the
+     * stack has more than one block, this function will also update lastOnStack.
      *
      * @returns A list of available connections.
      */
@@ -230,6 +226,10 @@ export declare class InsertionMarkerManager {
      * @internal
      */
     getInsertionMarkers(): BlockSvg[];
+    /**
+     * Safely disposes of an insertion marker.
+     */
+    private disposeInsertionMarker;
 }
 export declare namespace InsertionMarkerManager {
     /**
@@ -242,6 +242,6 @@ export declare namespace InsertionMarkerManager {
         REPLACEMENT_FADE = 2
     }
 }
-export declare type PreviewType = InsertionMarkerManager.PREVIEW_TYPE;
+export type PreviewType = InsertionMarkerManager.PREVIEW_TYPE;
 export declare const PreviewType: typeof InsertionMarkerManager.PREVIEW_TYPE;
 //# sourceMappingURL=insertion_marker_manager.d.ts.map

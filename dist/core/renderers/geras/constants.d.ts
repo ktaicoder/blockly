@@ -6,8 +6,6 @@
 import { ConstantProvider as BaseConstantProvider } from '../common/constants.js';
 /**
  * An object that provides constants for rendering blocks in Geras mode.
- *
- * @alias Blockly.geras.ConstantProvider
  */
 export declare class ConstantProvider extends BaseConstantProvider {
     FIELD_TEXT_BASELINE_CENTER: boolean;
@@ -18,9 +16,6 @@ export declare class ConstantProvider extends BaseConstantProvider {
      */
     MAX_BOTTOM_WIDTH: number;
     STATEMENT_BOTTOM_SPACER: number;
-    /**
-     * @internal
-     */
     constructor();
     getCSS_(selector: string): string[];
 }

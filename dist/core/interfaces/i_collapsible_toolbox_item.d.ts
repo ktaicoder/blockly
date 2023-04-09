@@ -7,8 +7,6 @@ import type { ISelectableToolboxItem } from './i_selectable_toolbox_item.js';
 import type { IToolboxItem } from './i_toolbox_item.js';
 /**
  * Interface for an item in the toolbox that can be collapsed.
- *
- * @alias Blockly.ICollapsibleToolboxItem
  */
 export interface ICollapsibleToolboxItem extends ISelectableToolboxItem {
     /**

@@ -7,12 +7,11 @@ import type { Block } from '../block.js';
 import type { Workspace } from '../workspace.js';
 import { Abstract as AbstractEvent, AbstractEventJson } from './events_abstract.js';
 /**
- * Abstract class for a block event.
- *
- * @alias Blockly.Events.BlockBase
+ * Abstract class for any event related to blocks.
  */
 export declare class BlockBase extends AbstractEvent {
     isBlank: boolean;
+    /** The ID of the block associated with this event. */
     blockId?: string;
     /**
      * @param opt_block The block this event corresponds to.

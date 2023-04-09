@@ -7,12 +7,11 @@ import type { WorkspaceComment } from '../workspace_comment.js';
 import { CommentBase, CommentBaseJson } from './events_comment_base.js';
 import type { Workspace } from '../workspace.js';
 /**
- * Class for a comment deletion event.
- *
- * @alias Blockly.Events.CommentDelete
+ * Notifies listeners that a workspace comment has been deleted.
  */
 export declare class CommentDelete extends CommentBase {
     type: string;
+    /** The XML representation of the deleted workspace comment. */
     xml?: Element;
     /**
      * @param opt_comment The deleted comment.

@@ -5,7 +5,6 @@
  */
 import type { WorkspaceSvg } from '../workspace_svg.js';
 import type { ISelectable } from './i_selectable.js';
-/** @alias Blockly.ICopyable */
 export interface ICopyable extends ISelectable {
     /**
      * Encode for copying.
@@ -19,8 +18,10 @@ export declare namespace ICopyable {
     interface CopyData {
         saveInfo: Object | Element;
         source: WorkspaceSvg;
-        typeCounts: Object | null;
+        typeCounts: {
+            [key: string]: number;
+        } | null;
     }
 }
-export declare type CopyData = ICopyable.CopyData;
+export type CopyData = ICopyable.CopyData;
 //# sourceMappingURL=i_copyable.d.ts.map

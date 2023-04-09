@@ -5,12 +5,8 @@
  */
 import './events/events_block_change.js';
 import { Field, FieldConfig, FieldValidator } from './field.js';
-import type { Sentinel } from './utils/sentinel.js';
-export declare type FieldColourValidator = FieldValidator<string>;
 /**
  * Class for a colour input field.
- *
- * @alias Blockly.FieldColour
  */
 export declare class FieldColour extends Field<string> {
     /**
@@ -31,19 +27,15 @@ export declare class FieldColour extends Field<string> {
      */
     static COLUMNS: number;
     /** The field's colour picker element. */
-    private picker_;
+    private picker;
     /** Index of the currently highlighted element. */
-    private highlightedIndex_;
-    /** Mouse click event data. */
-    private onClickWrapper_;
-    /** Mouse move event data. */
-    private onMouseMoveWrapper_;
-    /** Mouse enter event data. */
-    private onMouseEnterWrapper_;
-    /** Mouse leave event data. */
-    private onMouseLeaveWrapper_;
-    /** Key down event data. */
-    private onKeyDownWrapper_;
+    private highlightedIndex;
+    /**
+     * Array holding info needed to unbind events.
+     * Used for disposing.
+     * Ex: [[node, name, func], [node, name, func]].
+     */
+    private boundEvents;
     /**
      * Serializable fields are saved by the serializer, non-serializable fields
      * are not. Editable fields should also be serializable.
@@ -58,35 +50,32 @@ export declare class FieldColour extends Field<string> {
      */
     protected isDirty_: boolean;
     /** Array of colours used by this field.  If null, use the global list. */
-    private colours_;
+    private colours;
     /**
      * Array of colour tooltips used by this field.  If null, use the global
      * list.
      */
-    private titles_;
+    private titles;
     /**
      * Number of colour columns used by this field.  If 0, use the global
      * setting. By default use the global constants for columns.
      */
-    private columns_;
-    size_: any;
-    clickTarget_: any;
-    value_: any;
+    private columns;
     /**
-     * @param opt_value The initial value of the field. Should be in '#rrggbb'
+     * @param value The initial value of the field. Should be in '#rrggbb'
      *     format. Defaults to the first value in the default colour array. Also
      *     accepts Field.SKIP_SETUP if you wish to skip setup (only used by
      *     subclasses that want to handle configuration and setting the field
      *     value after their own constructors have run).
-     * @param opt_validator A function that is called to validate changes to the
+     * @param validator A function that is called to validate changes to the
      *     field's value. Takes in a colour string & returns a validated colour
-     *     string ('#rrggbb' format), or null to abort the change.Blockly.
-     * @param opt_config A map of options used to configure the field.
+     *     string ('#rrggbb' format), or null to abort the change.
+     * @param config A map of options used to configure the field.
      *     See the [field creation documentation]{@link
      * https://developers.google.com/blockly/guides/create-custom-blocks/fields/built-in-fields/colour}
      * for a list of properties this parameter supports.
      */
-    constructor(opt_value?: string | Sentinel, opt_validator?: FieldColourValidator, opt_config?: FieldColourConfig);
+    constructor(value?: string | typeof Field.SKIP_SETUP, validator?: FieldColourValidator, config?: FieldColourConfig);
     /**
      * Configure the field based on the given map of options.
      *
@@ -99,21 +88,26 @@ export declare class FieldColour extends Field<string> {
      * @internal
      */
     initView(): void;
+    /**
+     * Updates text field to match the colour/style of the block.
+     *
+     * @internal
+     */
     applyColour(): void;
     /**
      * Ensure that the input value is a valid colour.
      *
-     * @param opt_newValue The input value.
+     * @param newValue The input value.
      * @returns A valid colour, or null if invalid.
      */
-    protected doClassValidation_(opt_newValue?: any): string | null;
+    protected doClassValidation_(newValue?: any): string | null;
     /**
      * Update the value of this colour field, and update the displayed colour.
      *
      * @param newValue The value to be saved. The default validator guarantees
      *     that this is a colour in '#rrggbb' format.
      */
-    protected doValueUpdate_(newValue: any): void;
+    protected doValueUpdate_(newValue: string): void;
     /**
      * Get the text for this field.  Used when the block is collapsed.
      *
@@ -125,11 +119,11 @@ export declare class FieldColour extends Field<string> {
      *
      * @param colours Array of colours for this block, or null to use default
      *     (FieldColour.COLOURS).
-     * @param opt_titles Optional array of colour tooltips, or null to use default
+     * @param titles Optional array of colour tooltips, or null to use default
      *     (FieldColour.TITLES).
      * @returns Returns itself (for method chaining).
      */
-    setColours(colours: string[], opt_titles?: string[]): FieldColour;
+    setColours(colours: string[], titles?: string[]): FieldColour;
     /**
      * Set a custom grid size for this field.
      *
@@ -145,51 +139,51 @@ export declare class FieldColour extends Field<string> {
      *
      * @param e Mouse event.
      */
-    private onClick_;
+    private onClick;
     /**
      * Handle a key down event. Navigate around the grid with the
      * arrow keys. Enter selects the highlighted colour.
      *
      * @param e Keyboard event.
      */
-    private onKeyDown_;
+    private onKeyDown;
     /**
      * Move the currently highlighted position by dx and dy.
      *
-     * @param dx Change of x
-     * @param dy Change of y
+     * @param dx Change of x.
+     * @param dy Change of y.
      */
-    private moveHighlightBy_;
+    private moveHighlightBy;
     /**
      * Handle a mouse move event. Highlight the hovered colour.
      *
      * @param e Mouse event.
      */
-    private onMouseMove_;
+    private onMouseMove;
     /** Handle a mouse enter event. Focus the picker. */
-    private onMouseEnter_;
+    private onMouseEnter;
     /**
      * Handle a mouse leave event. Blur the picker and unhighlight
      * the currently highlighted colour.
      */
-    private onMouseLeave_;
+    private onMouseLeave;
     /**
      * Returns the currently highlighted item (if any).
      *
      * @returns Highlighted item (null if none).
      */
-    private getHighlighted_;
+    private getHighlighted;
     /**
      * Update the currently highlighted cell.
      *
-     * @param cell the new cell to highlight
-     * @param index the index of the new cell
+     * @param cell The new cell to highlight.
+     * @param index The index of the new cell.
      */
-    private setHighlightedCell_;
+    private setHighlightedCell;
     /** Create a colour picker dropdown editor. */
-    private dropdownCreate_;
+    private dropdownCreate;
     /** Disposes of events and DOM-references belonging to the colour editor. */
-    private dropdownDispose_;
+    private dropdownDispose;
     /**
      * Construct a FieldColour from a JSON arg object.
      *
@@ -214,4 +208,20 @@ export interface FieldColourConfig extends FieldConfig {
 export interface FieldColourFromJsonConfig extends FieldColourConfig {
     colour?: string;
 }
+/**
+ * A function that is called to validate changes to the field's value before
+ * they are set.
+ *
+ * @see {@link https://developers.google.com/blockly/guides/create-custom-blocks/fields/validators#return_values}
+ * @param newValue The value to be validated.
+ * @returns One of three instructions for setting the new value: `T`, `null`,
+ * or `undefined`.
+ *
+ * - `T` to set this function's returned value instead of `newValue`.
+ *
+ * - `null` to invoke `doValueInvalid_` and not set a value.
+ *
+ * - `undefined` to set `newValue` as is.
+ */
+export type FieldColourValidator = FieldValidator<string>;
 //# sourceMappingURL=field_colour.d.ts.map

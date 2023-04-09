@@ -27,162 +27,43 @@ module$exports$Blockly$PHP.phpGenerator.multiline_quote_=function(a){return a.sp
 module$exports$Blockly$PHP.phpGenerator.scrub_=function(a,b,c){let d="";if(!a.outputConnection||!a.outputConnection.targetConnection){var e=a.getCommentText();e&&(e=$.module$build$src$core$utils$string.wrap(e,this.COMMENT_WRAP-3),d+=this.prefixLines(e,"// ")+"\n");for(let f=0;f<a.inputList.length;f++)a.inputList[f].type===$.module$build$src$core$input_types.inputTypes.VALUE&&(e=a.inputList[f].connection.targetBlock())&&(e=this.allNestedComments(e))&&(d+=this.prefixLines(e,"// "))}a=a.nextConnection&&
 a.nextConnection.targetBlock();c=c?"":this.blockToCode(a);return d+b+c};
 module$exports$Blockly$PHP.phpGenerator.getAdjusted=function(a,b,c,d,e){c=c||0;e=e||this.ORDER_NONE;a.workspace.options.oneBasedIndex&&c--;let f=a.workspace.options.oneBasedIndex?"1":"0",g=e,h;0<c?h=g=this.ORDER_ADDITION:0>c?h=g=this.ORDER_SUBTRACTION:d&&(h=g=this.ORDER_UNARY_NEGATION);a=this.valueToCode(a,b,g)||f;$.module$build$src$core$utils$string.isNumber(a)?(a=Number(a)+c,d&&(a=-a)):(0<c?a=a+" + "+c:0>c&&(a=a+" - "+-c),d&&(a=c?"-("+a+")":"-"+a),h=Math.floor(h),e=Math.floor(e),h&&e>=h&&(a="("+
-a+")"));return a};var module$exports$Blockly$PHP$variables={},module$contents$Blockly$PHP$variables_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$PHP.phpGenerator.variables_get=function(a){return[module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE),module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC]};
-module$exports$Blockly$PHP.phpGenerator.variables_set=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"0";return module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE)+" = "+b+";\n"};var module$exports$Blockly$PHP$variablesDynamic={};module$exports$Blockly$PHP.phpGenerator.variables_get_dynamic=module$exports$Blockly$PHP.phpGenerator.variables_get;module$exports$Blockly$PHP.phpGenerator.variables_set_dynamic=module$exports$Blockly$PHP.phpGenerator.variables_set;var module$exports$Blockly$PHP$texts={},module$contents$Blockly$PHP$texts_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$PHP.phpGenerator.text=function(a){return[module$exports$Blockly$PHP.phpGenerator.quote_(a.getFieldValue("TEXT")),module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC]};
-module$exports$Blockly$PHP.phpGenerator.text_multiline=function(a){a=module$exports$Blockly$PHP.phpGenerator.multiline_quote_(a.getFieldValue("TEXT"));const b=-1!==a.indexOf(".")?module$exports$Blockly$PHP.phpGenerator.ORDER_STRING_CONCAT:module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC;return[a,b]};
-module$exports$Blockly$PHP.phpGenerator.text_join=function(a){if(0===a.itemCount_)return["''",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC];if(1===a.itemCount_)return[module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"ADD0",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE];if(2===a.itemCount_){var b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"ADD0",module$exports$Blockly$PHP.phpGenerator.ORDER_STRING_CONCAT)||"''";
-a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"ADD1",module$exports$Blockly$PHP.phpGenerator.ORDER_STRING_CONCAT)||"''";return[b+" . "+a,module$exports$Blockly$PHP.phpGenerator.ORDER_STRING_CONCAT]}b=Array(a.itemCount_);for(let c=0;c<a.itemCount_;c++)b[c]=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"ADD"+c,module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";return["implode('', array("+b.join(",")+"))",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.text_append=function(a){const b=module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"''";return b+" .= "+a+";\n"};module$exports$Blockly$PHP.phpGenerator.text_length=function(a){const b=module$exports$Blockly$PHP.phpGenerator.provideFunction_("length",`
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($value) {
-  if (is_string($value)) {
-    return strlen($value);
-  }
-  return count($value);
+a+")"));return a};var module$exports$Blockly$PHP$colour={};module$exports$Blockly$PHP.phpGenerator.colour_picker=function(a){return[module$exports$Blockly$PHP.phpGenerator.quote_(a.getFieldValue("COLOUR")),module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC]};module$exports$Blockly$PHP.phpGenerator.colour_random=function(a){return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("colour_random",`
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}() {
+  return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
 }
-`);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";return[b+"("+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};module$exports$Blockly$PHP.phpGenerator.text_isEmpty=function(a){return["empty("+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''")+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.text_indexOf=function(a){const b="FIRST"===a.getFieldValue("END")?"strpos":"strrpos",c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"FIND",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''",d=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";let e=" -1",f="";a.workspace.options.oneBasedIndex&&(e=" 0",f=" + 1");return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("FIRST"===
-a.getFieldValue("END")?"text_indexOf":"text_lastIndexOf",`
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($text, $search) {
-  $pos = ${b}($text, $search);
-  return $pos === false ? ${e} : $pos${f};
+`)+"()",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+module$exports$Blockly$PHP.phpGenerator.colour_rgb=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"RED",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||0,c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"GREEN",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||0;a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"BLUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||0;return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("colour_rgb",`
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($r, $g, $b) {
+  $r = round(max(min($r, 100), 0) * 2.55);
+  $g = round(max(min($g, 100), 0) * 2.55);
+  $b = round(max(min($b, 100), 0) * 2.55);
+  $hex = '#';
+  $hex .= str_pad(dechex($r), 2, '0', STR_PAD_LEFT);
+  $hex .= str_pad(dechex($g), 2, '0', STR_PAD_LEFT);
+  $hex .= str_pad(dechex($b), 2, '0', STR_PAD_LEFT);
+  return $hex;
 }
-`)+"("+d+", "+c+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.text_charAt=function(a){const b=a.getFieldValue("WHERE")||"FROM_START",c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";switch(b){case "FIRST":return["substr("+c+", 0, 1)",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL];case "LAST":return["substr("+c+", -1)",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL];case "FROM_START":return a=module$exports$Blockly$PHP.phpGenerator.getAdjusted(a,
-"AT"),["substr("+c+", "+a+", 1)",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL];case "FROM_END":return a=module$exports$Blockly$PHP.phpGenerator.getAdjusted(a,"AT",1,!0),["substr("+c+", "+a+", 1)",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL];case "RANDOM":return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("text_random_letter",`
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($text) {
-  return $text[rand(0, strlen($text) - 1)];
-}
-`)+"("+c+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]}throw Error("Unhandled option (text_charAt).");};
-module$exports$Blockly$PHP.phpGenerator.text_getSubstring=function(a){const b=a.getFieldValue("WHERE1"),c=a.getFieldValue("WHERE2"),d=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"STRING",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";if("FIRST"===b&&"LAST"===c)return[d,module$exports$Blockly$PHP.phpGenerator.ORDER_NONE];const e=module$exports$Blockly$PHP.phpGenerator.getAdjusted(a,"AT1");a=module$exports$Blockly$PHP.phpGenerator.getAdjusted(a,"AT2");return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("text_get_substring",
+`)+"("+b+", "+c+", "+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+module$exports$Blockly$PHP.phpGenerator.colour_blend=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"COLOUR1",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"'#000000'",c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"COLOUR2",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"'#000000'";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"RATIO",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||.5;return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("colour_blend",
 `
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($text, $where1, $at1, $where2, $at2) {
-  if ($where1 == 'FROM_END') {
-    $at1 = strlen($text) - 1 - $at1;
-  } else if ($where1 == 'FIRST') {
-    $at1 = 0;
-  } else if ($where1 != 'FROM_START') {
-    throw new Exception('Unhandled option (text_get_substring).');
-  }
-  $length = 0;
-  if ($where2 == 'FROM_START') {
-    $length = $at2 - $at1 + 1;
-  } else if ($where2 == 'FROM_END') {
-    $length = strlen($text) - $at1 - $at2;
-  } else if ($where2 == 'LAST') {
-    $length = strlen($text) - $at1;
-  } else {
-    throw new Exception('Unhandled option (text_get_substring).');
-  }
-  return substr($text, $at1, $length);
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($c1, $c2, $ratio) {
+  $ratio = max(min($ratio, 1), 0);
+  $r1 = hexdec(substr($c1, 1, 2));
+  $g1 = hexdec(substr($c1, 3, 2));
+  $b1 = hexdec(substr($c1, 5, 2));
+  $r2 = hexdec(substr($c2, 1, 2));
+  $g2 = hexdec(substr($c2, 3, 2));
+  $b2 = hexdec(substr($c2, 5, 2));
+  $r = round($r1 * (1 - $ratio) + $r2 * $ratio);
+  $g = round($g1 * (1 - $ratio) + $g2 * $ratio);
+  $b = round($b1 * (1 - $ratio) + $b2 * $ratio);
+  $hex = '#';
+  $hex .= str_pad(dechex($r), 2, '0', STR_PAD_LEFT);
+  $hex .= str_pad(dechex($g), 2, '0', STR_PAD_LEFT);
+  $hex .= str_pad(dechex($b), 2, '0', STR_PAD_LEFT);
+  return $hex;
 }
-`)+"("+d+", '"+b+"', "+e+", '"+c+"', "+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.text_changeCase=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";let c;"UPPERCASE"===a.getFieldValue("CASE")?c="strtoupper("+b+")":"LOWERCASE"===a.getFieldValue("CASE")?c="strtolower("+b+")":"TITLECASE"===a.getFieldValue("CASE")&&(c="ucwords(strtolower("+b+"))");return[c,module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.text_trim=function(a){const b={LEFT:"ltrim",RIGHT:"rtrim",BOTH:"trim"}[a.getFieldValue("MODE")];a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";return[b+"("+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.text_print=function(a){return"print("+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''")+");\n"};
-module$exports$Blockly$PHP.phpGenerator.text_prompt_ext=function(a){let b="readline("+(a.getField("TEXT")?module$exports$Blockly$PHP.phpGenerator.quote_(a.getFieldValue("TEXT")):module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''")+")";"NUMBER"===a.getFieldValue("TYPE")&&(b="floatval("+b+")");return[b,module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};module$exports$Blockly$PHP.phpGenerator.text_prompt=module$exports$Blockly$PHP.phpGenerator.text_prompt_ext;
-module$exports$Blockly$PHP.phpGenerator.text_count=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"SUB",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";return["strlen("+a+") === 0 ? strlen("+b+") + 1 : substr_count("+b+", "+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_CONDITIONAL]};
-module$exports$Blockly$PHP.phpGenerator.text_replace=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''",c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"FROM",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TO",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";return["str_replace("+c+", "+a+", "+b+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.text_reverse=function(a){return["strrev("+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''")+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};var module$exports$Blockly$PHP$procedures={},module$contents$Blockly$PHP$procedures_Variables=$.module$build$src$core$variables,module$contents$Blockly$PHP$procedures_NameType=$.NameType$$module$build$src$core$names;
-module$exports$Blockly$PHP.phpGenerator.procedures_defreturn=function(a){var b=[],c=a.workspace,d=$.module$build$src$core$variables.allUsedVarModels(c)||[];for(let m=0,n;n=d[m];m++){var e=n.name;-1===a.getVars().indexOf(e)&&b.push(module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(e,$.NameType$$module$build$src$core$names.VARIABLE))}c=$.module$build$src$core$variables.allDeveloperVariables(c);for(d=0;d<c.length;d++)b.push(module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(c[d],$.NameType$$module$build$src$core$names.DEVELOPER_VARIABLE));
-c=b.length?module$exports$Blockly$PHP.phpGenerator.INDENT+"global "+b.join(", ")+";\n":"";b=module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("NAME"),$.NameType$$module$build$src$core$names.PROCEDURE);d="";module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX&&(d+=module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX,a));module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX&&(d+=module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX,
-a));d&&(d=module$exports$Blockly$PHP.phpGenerator.prefixLines(d,module$exports$Blockly$PHP.phpGenerator.INDENT));e="";module$exports$Blockly$PHP.phpGenerator.INFINITE_LOOP_TRAP&&(e=module$exports$Blockly$PHP.phpGenerator.prefixLines(module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.INFINITE_LOOP_TRAP,a),module$exports$Blockly$PHP.phpGenerator.INDENT));const f=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"STACK");let g=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,
-"RETURN",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"",h="";f&&g&&(h=d);g&&(g=module$exports$Blockly$PHP.phpGenerator.INDENT+"return "+g+";\n");const k=[],l=a.getVars();for(let m=0;m<l.length;m++)k[m]=module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(l[m],$.NameType$$module$build$src$core$names.VARIABLE);c="function "+b+"("+k.join(", ")+") {\n"+c+d+e+f+h+g+"}";c=module$exports$Blockly$PHP.phpGenerator.scrub_(a,c);module$exports$Blockly$PHP.phpGenerator.definitions_["%"+b]=c;return null};
-module$exports$Blockly$PHP.phpGenerator.procedures_defnoreturn=module$exports$Blockly$PHP.phpGenerator.procedures_defreturn;
-module$exports$Blockly$PHP.phpGenerator.procedures_callreturn=function(a){const b=module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("NAME"),$.NameType$$module$build$src$core$names.PROCEDURE),c=[],d=a.getVars();for(let e=0;e<d.length;e++)c[e]=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"ARG"+e,module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"null";return[b+"("+c.join(", ")+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.procedures_callnoreturn=function(a){return module$exports$Blockly$PHP.phpGenerator.procedures_callreturn(a)[0]+";\n"};
-module$exports$Blockly$PHP.phpGenerator.procedures_ifreturn=function(a){let b="if ("+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"CONDITION",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"false")+") {\n";module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX&&(b+=module$exports$Blockly$PHP.phpGenerator.prefixLines(module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX,a),module$exports$Blockly$PHP.phpGenerator.INDENT));a.hasReturnValue_?
-(a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"null",b+=module$exports$Blockly$PHP.phpGenerator.INDENT+"return "+a+";\n"):b+=module$exports$Blockly$PHP.phpGenerator.INDENT+"return;\n";return b+"}\n"};var module$exports$Blockly$PHP$math={},module$contents$Blockly$PHP$math_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$PHP.phpGenerator.math_number=function(a){a=Number(a.getFieldValue("NUM"));const b=0<=a?module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC:module$exports$Blockly$PHP.phpGenerator.ORDER_UNARY_NEGATION;Infinity===a?a="INF":-Infinity===a&&(a="-INF");return[a,b]};
-module$exports$Blockly$PHP.phpGenerator.math_arithmetic=function(a){var b={ADD:[" + ",module$exports$Blockly$PHP.phpGenerator.ORDER_ADDITION],MINUS:[" - ",module$exports$Blockly$PHP.phpGenerator.ORDER_SUBTRACTION],MULTIPLY:[" * ",module$exports$Blockly$PHP.phpGenerator.ORDER_MULTIPLICATION],DIVIDE:[" / ",module$exports$Blockly$PHP.phpGenerator.ORDER_DIVISION],POWER:[" ** ",module$exports$Blockly$PHP.phpGenerator.ORDER_POWER]}[a.getFieldValue("OP")];const c=b[0];b=b[1];const d=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,
-"A",b)||"0";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"B",b)||"0";return[d+c+a,b]};
-module$exports$Blockly$PHP.phpGenerator.math_single=function(a){const b=a.getFieldValue("OP");let c;if("NEG"===b)return a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"NUM",module$exports$Blockly$PHP.phpGenerator.ORDER_UNARY_NEGATION)||"0","-"===a[0]&&(a=" "+a),["-"+a,module$exports$Blockly$PHP.phpGenerator.ORDER_UNARY_NEGATION];a="SIN"===b||"COS"===b||"TAN"===b?module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"NUM",module$exports$Blockly$PHP.phpGenerator.ORDER_DIVISION)||"0":module$exports$Blockly$PHP.phpGenerator.valueToCode(a,
-"NUM",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0";switch(b){case "ABS":c="abs("+a+")";break;case "ROOT":c="sqrt("+a+")";break;case "LN":c="log("+a+")";break;case "EXP":c="exp("+a+")";break;case "POW10":c="pow(10,"+a+")";break;case "ROUND":c="round("+a+")";break;case "ROUNDUP":c="ceil("+a+")";break;case "ROUNDDOWN":c="floor("+a+")";break;case "SIN":c="sin("+a+" / 180 * pi())";break;case "COS":c="cos("+a+" / 180 * pi())";break;case "TAN":c="tan("+a+" / 180 * pi())"}if(c)return[c,module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL];
-switch(b){case "LOG10":c="log("+a+") / log(10)";break;case "ASIN":c="asin("+a+") / pi() * 180";break;case "ACOS":c="acos("+a+") / pi() * 180";break;case "ATAN":c="atan("+a+") / pi() * 180";break;default:throw Error("Unknown math operator: "+b);}return[c,module$exports$Blockly$PHP.phpGenerator.ORDER_DIVISION]};
-module$exports$Blockly$PHP.phpGenerator.math_constant=function(a){return{PI:["M_PI",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC],E:["M_E",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC],GOLDEN_RATIO:["(1 + sqrt(5)) / 2",module$exports$Blockly$PHP.phpGenerator.ORDER_DIVISION],SQRT2:["M_SQRT2",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC],SQRT1_2:["M_SQRT1_2",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC],INFINITY:["INF",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC]}[a.getFieldValue("CONSTANT")]};
-module$exports$Blockly$PHP.phpGenerator.math_number_property=function(a){var b={EVEN:[""," % 2 == 0",module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS,module$exports$Blockly$PHP.phpGenerator.ORDER_EQUALITY],ODD:[""," % 2 == 1",module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS,module$exports$Blockly$PHP.phpGenerator.ORDER_EQUALITY],WHOLE:["is_int(",")",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE,module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL],POSITIVE:[""," > 0",module$exports$Blockly$PHP.phpGenerator.ORDER_RELATIONAL,
-module$exports$Blockly$PHP.phpGenerator.ORDER_RELATIONAL],NEGATIVE:[""," < 0",module$exports$Blockly$PHP.phpGenerator.ORDER_RELATIONAL,module$exports$Blockly$PHP.phpGenerator.ORDER_RELATIONAL],DIVISIBLE_BY:[null,null,module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS,module$exports$Blockly$PHP.phpGenerator.ORDER_EQUALITY],PRIME:[null,null,module$exports$Blockly$PHP.phpGenerator.ORDER_NONE,module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};const c=a.getFieldValue("PROPERTY"),[d,e,f,g]=
-b[c];b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"NUMBER_TO_CHECK",f)||"0";if("PRIME"===c)a=module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_isPrime",`
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($n) {
-  // https://en.wikipedia.org/wiki/Primality_test#Naive_methods
-  if ($n == 2 || $n == 3) {
-    return true;
-  }
-  // False if n is NaN, negative, is 1, or not whole.
-  // And false if n is divisible by 2 or 3.
-  if (!is_numeric($n) || $n <= 1 || $n % 1 != 0 || $n % 2 == 0 || $n % 3 == 0) {
-    return false;
-  }
-  // Check all the numbers of form 6k +/- 1, up to sqrt(n).
-  for ($x = 6; $x <= sqrt($n) + 1; $x += 6) {
-    if ($n % ($x - 1) == 0 || $n % ($x + 1) == 0) {
-      return false;
-    }
-  }
-  return true;
-}
-`)+"("+b+")";else if("DIVISIBLE_BY"===c){a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"DIVISOR",module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS)||"0";if("0"===a)return["false",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC];a=b+" % "+a+" == 0"}else a=d+b+e;return[a,g]};
-module$exports$Blockly$PHP.phpGenerator.math_change=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"DELTA",module$exports$Blockly$PHP.phpGenerator.ORDER_ADDITION)||"0";return module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE)+" += "+b+";\n"};module$exports$Blockly$PHP.phpGenerator.math_round=module$exports$Blockly$PHP.phpGenerator.math_single;module$exports$Blockly$PHP.phpGenerator.math_trig=module$exports$Blockly$PHP.phpGenerator.math_single;
-module$exports$Blockly$PHP.phpGenerator.math_on_list=function(a){var b=a.getFieldValue("OP");switch(b){case "SUM":a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL)||"array()";a="array_sum("+a+")";break;case "MIN":a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL)||"array()";a="min("+a+")";break;case "MAX":a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,
-"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL)||"array()";a="max("+a+")";break;case "AVERAGE":b=module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_mean",`
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($myList) {
-  return array_sum($myList) / count($myList);
-}
-`);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"array()";a=b+"("+a+")";break;case "MEDIAN":b=module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_median",`
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($arr) {
-  sort($arr,SORT_NUMERIC);
-  return (count($arr) % 2) ? $arr[floor(count($arr) / 2)] :
-      ($arr[floor(count($arr) / 2)] + $arr[floor(count($arr) / 2) - 1]) / 2;
-}
-`);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"[]";a=b+"("+a+")";break;case "MODE":b=module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_modes",`
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($values) {
-  if (empty($values)) return array();
-  $counts = array_count_values($values);
-  arsort($counts); // Sort counts in descending order
-  $modes = array_keys($counts, current($counts), true);
-  return $modes;
-}
-`);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"[]";a=b+"("+a+")";break;case "STD_DEV":b=module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_standard_deviation",`
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($numbers) {
-  $n = count($numbers);
-  if (!$n) return null;
-  $mean = array_sum($numbers) / count($numbers);
-  foreach($numbers as $key => $num) $devs[$key] = pow($num - $mean, 2);
-  return sqrt(array_sum($devs) / (count($devs) - 1));
-}
-`);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"[]";a=b+"("+a+")";break;case "RANDOM":b=module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_random_list",`
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($list) {
-  $x = rand(0, count($list)-1);
-  return $list[$x];
-}
-`);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"[]";a=b+"("+a+")";break;default:throw Error("Unknown operator: "+b);}return[a,module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.math_modulo=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"DIVIDEND",module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS)||"0";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"DIVISOR",module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS)||"0";return[b+" % "+a,module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS]};
-module$exports$Blockly$PHP.phpGenerator.math_constrain=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0",c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LOW",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"HIGH",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"Infinity";return["min(max("+b+", "+c+"), "+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.math_random_int=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"FROM",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TO",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0";return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_random_int",`
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($a, $b) {
-  if ($a > $b) {
-    return rand($b, $a);
-  }
-  return rand($a, $b);
-}
-`)+"("+b+", "+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};module$exports$Blockly$PHP.phpGenerator.math_random_float=function(a){return["(float)rand()/(float)getrandmax()",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.math_atan2=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"X",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0";return["atan2("+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"Y",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0")+", "+b+") / pi() * 180",module$exports$Blockly$PHP.phpGenerator.ORDER_DIVISION]};var module$exports$Blockly$PHP$loops={},module$contents$Blockly$PHP$loops_stringUtils=$.module$build$src$core$utils$string,module$contents$Blockly$PHP$loops_NameType=$.NameType$$module$build$src$core$names;
-module$exports$Blockly$PHP.phpGenerator.controls_repeat_ext=function(a){let b;b=a.getField("TIMES")?String(Number(a.getFieldValue("TIMES"))):module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TIMES",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"0";let c=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"DO");c=module$exports$Blockly$PHP.phpGenerator.addLoopTrap(c,a);a="";const d=module$exports$Blockly$PHP.phpGenerator.nameDB_.getDistinctName("count",$.NameType$$module$build$src$core$names.VARIABLE);
-let e=b;b.match(/^\w+$/)||$.module$build$src$core$utils$string.isNumber(b)||(e=module$exports$Blockly$PHP.phpGenerator.nameDB_.getDistinctName("repeat_end",$.NameType$$module$build$src$core$names.VARIABLE),a+=e+" = "+b+";\n");return a+("for ("+d+" = 0; "+d+" < "+e+"; "+d+"++) {\n"+c+"}\n")};module$exports$Blockly$PHP.phpGenerator.controls_repeat=module$exports$Blockly$PHP.phpGenerator.controls_repeat_ext;
-module$exports$Blockly$PHP.phpGenerator.controls_whileUntil=function(a){const b="UNTIL"===a.getFieldValue("MODE");let c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"BOOL",b?module$exports$Blockly$PHP.phpGenerator.ORDER_LOGICAL_NOT:module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"false",d=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"DO");d=module$exports$Blockly$PHP.phpGenerator.addLoopTrap(d,a);b&&(c="!"+c);return"while ("+c+") {\n"+d+"}\n"};
-module$exports$Blockly$PHP.phpGenerator.controls_for=function(a){var b=module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE),c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"FROM",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"0",d=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TO",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"0";const e=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,
-"BY",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"1";let f=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"DO");f=module$exports$Blockly$PHP.phpGenerator.addLoopTrap(f,a);if($.module$build$src$core$utils$string.isNumber(c)&&$.module$build$src$core$utils$string.isNumber(d)&&$.module$build$src$core$utils$string.isNumber(e)){var g=Number(c)<=Number(d);a="for ("+b+" = "+c+"; "+b+(g?" <= ":" >= ")+d+"; "+b;b=Math.abs(Number(e));a=1===b?a+(g?"++":"--"):a+((g?" += ":" -= ")+b);
-a+=") {\n"+f+"}\n"}else a="",g=c,c.match(/^\w+$/)||$.module$build$src$core$utils$string.isNumber(c)||(g=module$exports$Blockly$PHP.phpGenerator.nameDB_.getDistinctName(b+"_start",$.NameType$$module$build$src$core$names.VARIABLE),a+=g+" = "+c+";\n"),c=d,d.match(/^\w+$/)||$.module$build$src$core$utils$string.isNumber(d)||(c=module$exports$Blockly$PHP.phpGenerator.nameDB_.getDistinctName(b+"_end",$.NameType$$module$build$src$core$names.VARIABLE),a+=c+" = "+d+";\n"),d=module$exports$Blockly$PHP.phpGenerator.nameDB_.getDistinctName(b+
-"_inc",$.NameType$$module$build$src$core$names.VARIABLE),a+=d+" = ",a=$.module$build$src$core$utils$string.isNumber(e)?a+(Math.abs(e)+";\n"):a+("abs("+e+");\n"),a+="if ("+g+" > "+c+") {\n",a+=module$exports$Blockly$PHP.phpGenerator.INDENT+d+" = -"+d+";\n",a=a+"}\nfor ("+(b+" = "+g+"; "+d+" >= 0 ? "+b+" <= "+c+" : "+b+" >= "+c+"; "+b+" += "+d+") {\n"+f+"}\n");return a};
-module$exports$Blockly$PHP.phpGenerator.controls_forEach=function(a){const b=module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE),c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"[]";let d=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"DO");d=module$exports$Blockly$PHP.phpGenerator.addLoopTrap(d,a);return"foreach ("+c+" as "+b+") {\n"+d+
-"}\n"};
-module$exports$Blockly$PHP.phpGenerator.controls_flow_statements=function(a){let b="";module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX&&(b+=module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX,a));module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX&&(b+=module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX,a));if(module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX){const c=a.getSurroundLoop();
-c&&!c.suppressPrefixSuffix&&(b+=module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX,c))}switch(a.getFieldValue("FLOW")){case "BREAK":return b+"break;\n";case "CONTINUE":return b+"continue;\n"}throw Error("Unknown flow statement.");};var module$exports$Blockly$PHP$logic={};
-module$exports$Blockly$PHP.phpGenerator.controls_if=function(a){let b=0,c="",d,e;module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX&&(c+=module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX,a));do e=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"IF"+b,module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"false",d=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"DO"+b),module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX&&(d=
-module$exports$Blockly$PHP.phpGenerator.prefixLines(module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX,a),module$exports$Blockly$PHP.phpGenerator.INDENT)+d),c+=(0<b?" else ":"")+"if ("+e+") {\n"+d+"}",b++;while(a.getInput("IF"+b));if(a.getInput("ELSE")||module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX)d=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"ELSE"),module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX&&(d=module$exports$Blockly$PHP.phpGenerator.prefixLines(module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX,
-a),module$exports$Blockly$PHP.phpGenerator.INDENT)+d),c+=" else {\n"+d+"}";return c+"\n"};module$exports$Blockly$PHP.phpGenerator.controls_ifelse=module$exports$Blockly$PHP.phpGenerator.controls_if;
-module$exports$Blockly$PHP.phpGenerator.logic_compare=function(a){const b={EQ:"==",NEQ:"!=",LT:"<",LTE:"<=",GT:">",GTE:">="}[a.getFieldValue("OP")],c="=="===b||"!="===b?module$exports$Blockly$PHP.phpGenerator.ORDER_EQUALITY:module$exports$Blockly$PHP.phpGenerator.ORDER_RELATIONAL,d=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"A",c)||"0";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"B",c)||"0";return[d+" "+b+" "+a,c]};
-module$exports$Blockly$PHP.phpGenerator.logic_operation=function(a){const b="AND"===a.getFieldValue("OP")?"&&":"||",c="&&"===b?module$exports$Blockly$PHP.phpGenerator.ORDER_LOGICAL_AND:module$exports$Blockly$PHP.phpGenerator.ORDER_LOGICAL_OR;let d=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"A",c);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"B",c);if(d||a){const e="&&"===b?"true":"false";d||(d=e);a||(a=e)}else a=d="false";return[d+" "+b+" "+a,c]};
-module$exports$Blockly$PHP.phpGenerator.logic_negate=function(a){const b=module$exports$Blockly$PHP.phpGenerator.ORDER_LOGICAL_NOT;return["!"+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"BOOL",b)||"true"),b]};module$exports$Blockly$PHP.phpGenerator.logic_boolean=function(a){return["TRUE"===a.getFieldValue("BOOL")?"true":"false",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC]};module$exports$Blockly$PHP.phpGenerator.logic_null=function(a){return["null",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC]};
-module$exports$Blockly$PHP.phpGenerator.logic_ternary=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"IF",module$exports$Blockly$PHP.phpGenerator.ORDER_CONDITIONAL)||"false",c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"THEN",module$exports$Blockly$PHP.phpGenerator.ORDER_CONDITIONAL)||"null";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"ELSE",module$exports$Blockly$PHP.phpGenerator.ORDER_CONDITIONAL)||"null";return[b+" ? "+c+" : "+a,module$exports$Blockly$PHP.phpGenerator.ORDER_CONDITIONAL]};var module$exports$Blockly$PHP$lists={},module$contents$Blockly$PHP$lists_stringUtils=$.module$build$src$core$utils$string,module$contents$Blockly$PHP$lists_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$PHP.phpGenerator.lists_create_empty=function(a){return["array()",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+`)+"("+b+", "+c+", "+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};var module$exports$Blockly$PHP$lists={},module$contents$Blockly$PHP$lists_stringUtils=$.module$build$src$core$utils$string,module$contents$Blockly$PHP$lists_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$PHP.phpGenerator.lists_create_empty=function(a){return["array()",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
 module$exports$Blockly$PHP.phpGenerator.lists_create_with=function(a){let b=Array(a.itemCount_);for(let c=0;c<a.itemCount_;c++)b[c]=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"ADD"+c,module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"null";b="array("+b.join(", ")+")";return[b,module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};module$exports$Blockly$PHP.phpGenerator.lists_repeat=function(a){const b=module$exports$Blockly$PHP.phpGenerator.provideFunction_("lists_repeat",`
 function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($value, $count) {
   $array = array();
@@ -294,43 +175,162 @@ function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($
 }
 `)+"("+b+', "'+a+'", '+c+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
 module$exports$Blockly$PHP.phpGenerator.lists_split=function(a){let b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"INPUT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE);const c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"DELIM",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";a=a.getFieldValue("MODE");if("SPLIT"===a)b||(b="''"),a="explode";else if("JOIN"===a)b||(b="array()"),a="implode";else throw Error("Unknown mode: "+a);return[a+"("+c+", "+b+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.lists_reverse=function(a){return["array_reverse("+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"[]")+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};var module$exports$Blockly$PHP$colour={};module$exports$Blockly$PHP.phpGenerator.colour_picker=function(a){return[module$exports$Blockly$PHP.phpGenerator.quote_(a.getFieldValue("COLOUR")),module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC]};module$exports$Blockly$PHP.phpGenerator.colour_random=function(a){return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("colour_random",`
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}() {
-  return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
+module$exports$Blockly$PHP.phpGenerator.lists_reverse=function(a){return["array_reverse("+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"[]")+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};var module$exports$Blockly$PHP$logic={};
+module$exports$Blockly$PHP.phpGenerator.controls_if=function(a){let b=0,c="",d,e;module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX&&(c+=module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX,a));do e=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"IF"+b,module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"false",d=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"DO"+b),module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX&&(d=
+module$exports$Blockly$PHP.phpGenerator.prefixLines(module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX,a),module$exports$Blockly$PHP.phpGenerator.INDENT)+d),c+=(0<b?" else ":"")+"if ("+e+") {\n"+d+"}",b++;while(a.getInput("IF"+b));if(a.getInput("ELSE")||module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX)d=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"ELSE"),module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX&&(d=module$exports$Blockly$PHP.phpGenerator.prefixLines(module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX,
+a),module$exports$Blockly$PHP.phpGenerator.INDENT)+d),c+=" else {\n"+d+"}";return c+"\n"};module$exports$Blockly$PHP.phpGenerator.controls_ifelse=module$exports$Blockly$PHP.phpGenerator.controls_if;
+module$exports$Blockly$PHP.phpGenerator.logic_compare=function(a){const b={EQ:"==",NEQ:"!=",LT:"<",LTE:"<=",GT:">",GTE:">="}[a.getFieldValue("OP")],c="=="===b||"!="===b?module$exports$Blockly$PHP.phpGenerator.ORDER_EQUALITY:module$exports$Blockly$PHP.phpGenerator.ORDER_RELATIONAL,d=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"A",c)||"0";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"B",c)||"0";return[d+" "+b+" "+a,c]};
+module$exports$Blockly$PHP.phpGenerator.logic_operation=function(a){const b="AND"===a.getFieldValue("OP")?"&&":"||",c="&&"===b?module$exports$Blockly$PHP.phpGenerator.ORDER_LOGICAL_AND:module$exports$Blockly$PHP.phpGenerator.ORDER_LOGICAL_OR;let d=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"A",c);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"B",c);if(d||a){const e="&&"===b?"true":"false";d||(d=e);a||(a=e)}else a=d="false";return[d+" "+b+" "+a,c]};
+module$exports$Blockly$PHP.phpGenerator.logic_negate=function(a){const b=module$exports$Blockly$PHP.phpGenerator.ORDER_LOGICAL_NOT;return["!"+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"BOOL",b)||"true"),b]};module$exports$Blockly$PHP.phpGenerator.logic_boolean=function(a){return["TRUE"===a.getFieldValue("BOOL")?"true":"false",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC]};module$exports$Blockly$PHP.phpGenerator.logic_null=function(a){return["null",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC]};
+module$exports$Blockly$PHP.phpGenerator.logic_ternary=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"IF",module$exports$Blockly$PHP.phpGenerator.ORDER_CONDITIONAL)||"false",c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"THEN",module$exports$Blockly$PHP.phpGenerator.ORDER_CONDITIONAL)||"null";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"ELSE",module$exports$Blockly$PHP.phpGenerator.ORDER_CONDITIONAL)||"null";return[b+" ? "+c+" : "+a,module$exports$Blockly$PHP.phpGenerator.ORDER_CONDITIONAL]};var module$exports$Blockly$PHP$loops={},module$contents$Blockly$PHP$loops_stringUtils=$.module$build$src$core$utils$string,module$contents$Blockly$PHP$loops_NameType=$.NameType$$module$build$src$core$names;
+module$exports$Blockly$PHP.phpGenerator.controls_repeat_ext=function(a){let b;b=a.getField("TIMES")?String(Number(a.getFieldValue("TIMES"))):module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TIMES",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"0";let c=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"DO");c=module$exports$Blockly$PHP.phpGenerator.addLoopTrap(c,a);a="";const d=module$exports$Blockly$PHP.phpGenerator.nameDB_.getDistinctName("count",$.NameType$$module$build$src$core$names.VARIABLE);
+let e=b;b.match(/^\w+$/)||$.module$build$src$core$utils$string.isNumber(b)||(e=module$exports$Blockly$PHP.phpGenerator.nameDB_.getDistinctName("repeat_end",$.NameType$$module$build$src$core$names.VARIABLE),a+=e+" = "+b+";\n");return a+("for ("+d+" = 0; "+d+" < "+e+"; "+d+"++) {\n"+c+"}\n")};module$exports$Blockly$PHP.phpGenerator.controls_repeat=module$exports$Blockly$PHP.phpGenerator.controls_repeat_ext;
+module$exports$Blockly$PHP.phpGenerator.controls_whileUntil=function(a){const b="UNTIL"===a.getFieldValue("MODE");let c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"BOOL",b?module$exports$Blockly$PHP.phpGenerator.ORDER_LOGICAL_NOT:module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"false",d=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"DO");d=module$exports$Blockly$PHP.phpGenerator.addLoopTrap(d,a);b&&(c="!"+c);return"while ("+c+") {\n"+d+"}\n"};
+module$exports$Blockly$PHP.phpGenerator.controls_for=function(a){var b=module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE),c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"FROM",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"0",d=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TO",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"0";const e=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,
+"BY",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"1";let f=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"DO");f=module$exports$Blockly$PHP.phpGenerator.addLoopTrap(f,a);if($.module$build$src$core$utils$string.isNumber(c)&&$.module$build$src$core$utils$string.isNumber(d)&&$.module$build$src$core$utils$string.isNumber(e)){var g=Number(c)<=Number(d);a="for ("+b+" = "+c+"; "+b+(g?" <= ":" >= ")+d+"; "+b;b=Math.abs(Number(e));a=1===b?a+(g?"++":"--"):a+((g?" += ":" -= ")+b);
+a+=") {\n"+f+"}\n"}else a="",g=c,c.match(/^\w+$/)||$.module$build$src$core$utils$string.isNumber(c)||(g=module$exports$Blockly$PHP.phpGenerator.nameDB_.getDistinctName(b+"_start",$.NameType$$module$build$src$core$names.VARIABLE),a+=g+" = "+c+";\n"),c=d,d.match(/^\w+$/)||$.module$build$src$core$utils$string.isNumber(d)||(c=module$exports$Blockly$PHP.phpGenerator.nameDB_.getDistinctName(b+"_end",$.NameType$$module$build$src$core$names.VARIABLE),a+=c+" = "+d+";\n"),d=module$exports$Blockly$PHP.phpGenerator.nameDB_.getDistinctName(b+
+"_inc",$.NameType$$module$build$src$core$names.VARIABLE),a+=d+" = ",a=$.module$build$src$core$utils$string.isNumber(e)?a+(Math.abs(e)+";\n"):a+("abs("+e+");\n"),a+="if ("+g+" > "+c+") {\n",a+=module$exports$Blockly$PHP.phpGenerator.INDENT+d+" = -"+d+";\n",a=a+"}\nfor ("+(b+" = "+g+"; "+d+" >= 0 ? "+b+" <= "+c+" : "+b+" >= "+c+"; "+b+" += "+d+") {\n"+f+"}\n");return a};
+module$exports$Blockly$PHP.phpGenerator.controls_forEach=function(a){const b=module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE),c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"[]";let d=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"DO");d=module$exports$Blockly$PHP.phpGenerator.addLoopTrap(d,a);return"foreach ("+c+" as "+b+") {\n"+d+
+"}\n"};
+module$exports$Blockly$PHP.phpGenerator.controls_flow_statements=function(a){let b="";module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX&&(b+=module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX,a));module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX&&(b+=module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX,a));if(module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX){const c=a.getSurroundLoop();
+c&&!c.suppressPrefixSuffix&&(b+=module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX,c))}switch(a.getFieldValue("FLOW")){case "BREAK":return b+"break;\n";case "CONTINUE":return b+"continue;\n"}throw Error("Unknown flow statement.");};var module$exports$Blockly$PHP$math={},module$contents$Blockly$PHP$math_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$PHP.phpGenerator.math_number=function(a){a=Number(a.getFieldValue("NUM"));const b=0<=a?module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC:module$exports$Blockly$PHP.phpGenerator.ORDER_UNARY_NEGATION;Infinity===a?a="INF":-Infinity===a&&(a="-INF");return[a,b]};
+module$exports$Blockly$PHP.phpGenerator.math_arithmetic=function(a){var b={ADD:[" + ",module$exports$Blockly$PHP.phpGenerator.ORDER_ADDITION],MINUS:[" - ",module$exports$Blockly$PHP.phpGenerator.ORDER_SUBTRACTION],MULTIPLY:[" * ",module$exports$Blockly$PHP.phpGenerator.ORDER_MULTIPLICATION],DIVIDE:[" / ",module$exports$Blockly$PHP.phpGenerator.ORDER_DIVISION],POWER:[" ** ",module$exports$Blockly$PHP.phpGenerator.ORDER_POWER]}[a.getFieldValue("OP")];const c=b[0];b=b[1];const d=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,
+"A",b)||"0";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"B",b)||"0";return[d+c+a,b]};
+module$exports$Blockly$PHP.phpGenerator.math_single=function(a){const b=a.getFieldValue("OP");let c;if("NEG"===b)return a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"NUM",module$exports$Blockly$PHP.phpGenerator.ORDER_UNARY_NEGATION)||"0","-"===a[0]&&(a=" "+a),["-"+a,module$exports$Blockly$PHP.phpGenerator.ORDER_UNARY_NEGATION];a="SIN"===b||"COS"===b||"TAN"===b?module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"NUM",module$exports$Blockly$PHP.phpGenerator.ORDER_DIVISION)||"0":module$exports$Blockly$PHP.phpGenerator.valueToCode(a,
+"NUM",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0";switch(b){case "ABS":c="abs("+a+")";break;case "ROOT":c="sqrt("+a+")";break;case "LN":c="log("+a+")";break;case "EXP":c="exp("+a+")";break;case "POW10":c="pow(10,"+a+")";break;case "ROUND":c="round("+a+")";break;case "ROUNDUP":c="ceil("+a+")";break;case "ROUNDDOWN":c="floor("+a+")";break;case "SIN":c="sin("+a+" / 180 * pi())";break;case "COS":c="cos("+a+" / 180 * pi())";break;case "TAN":c="tan("+a+" / 180 * pi())"}if(c)return[c,module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL];
+switch(b){case "LOG10":c="log("+a+") / log(10)";break;case "ASIN":c="asin("+a+") / pi() * 180";break;case "ACOS":c="acos("+a+") / pi() * 180";break;case "ATAN":c="atan("+a+") / pi() * 180";break;default:throw Error("Unknown math operator: "+b);}return[c,module$exports$Blockly$PHP.phpGenerator.ORDER_DIVISION]};
+module$exports$Blockly$PHP.phpGenerator.math_constant=function(a){return{PI:["M_PI",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC],E:["M_E",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC],GOLDEN_RATIO:["(1 + sqrt(5)) / 2",module$exports$Blockly$PHP.phpGenerator.ORDER_DIVISION],SQRT2:["M_SQRT2",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC],SQRT1_2:["M_SQRT1_2",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC],INFINITY:["INF",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC]}[a.getFieldValue("CONSTANT")]};
+module$exports$Blockly$PHP.phpGenerator.math_number_property=function(a){var b={EVEN:[""," % 2 == 0",module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS,module$exports$Blockly$PHP.phpGenerator.ORDER_EQUALITY],ODD:[""," % 2 == 1",module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS,module$exports$Blockly$PHP.phpGenerator.ORDER_EQUALITY],WHOLE:["is_int(",")",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE,module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL],POSITIVE:[""," > 0",module$exports$Blockly$PHP.phpGenerator.ORDER_RELATIONAL,
+module$exports$Blockly$PHP.phpGenerator.ORDER_RELATIONAL],NEGATIVE:[""," < 0",module$exports$Blockly$PHP.phpGenerator.ORDER_RELATIONAL,module$exports$Blockly$PHP.phpGenerator.ORDER_RELATIONAL],DIVISIBLE_BY:[null,null,module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS,module$exports$Blockly$PHP.phpGenerator.ORDER_EQUALITY],PRIME:[null,null,module$exports$Blockly$PHP.phpGenerator.ORDER_NONE,module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};const c=a.getFieldValue("PROPERTY"),[d,e,f,g]=
+b[c];b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"NUMBER_TO_CHECK",f)||"0";if("PRIME"===c)a=module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_isPrime",`
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($n) {
+  // https://en.wikipedia.org/wiki/Primality_test#Naive_methods
+  if ($n == 2 || $n == 3) {
+    return true;
+  }
+  // False if n is NaN, negative, is 1, or not whole.
+  // And false if n is divisible by 2 or 3.
+  if (!is_numeric($n) || $n <= 1 || $n % 1 != 0 || $n % 2 == 0 || $n % 3 == 0) {
+    return false;
+  }
+  // Check all the numbers of form 6k +/- 1, up to sqrt(n).
+  for ($x = 6; $x <= sqrt($n) + 1; $x += 6) {
+    if ($n % ($x - 1) == 0 || $n % ($x + 1) == 0) {
+      return false;
+    }
+  }
+  return true;
 }
-`)+"()",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.colour_rgb=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"RED",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||0,c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"GREEN",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||0;a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"BLUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||0;return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("colour_rgb",`
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($r, $g, $b) {
-  $r = round(max(min($r, 100), 0) * 2.55);
-  $g = round(max(min($g, 100), 0) * 2.55);
-  $b = round(max(min($b, 100), 0) * 2.55);
-  $hex = '#';
-  $hex .= str_pad(dechex($r), 2, '0', STR_PAD_LEFT);
-  $hex .= str_pad(dechex($g), 2, '0', STR_PAD_LEFT);
-  $hex .= str_pad(dechex($b), 2, '0', STR_PAD_LEFT);
-  return $hex;
+`)+"("+b+")";else if("DIVISIBLE_BY"===c){a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"DIVISOR",module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS)||"0";if("0"===a)return["false",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC];a=b+" % "+a+" == 0"}else a=d+b+e;return[a,g]};
+module$exports$Blockly$PHP.phpGenerator.math_change=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"DELTA",module$exports$Blockly$PHP.phpGenerator.ORDER_ADDITION)||"0";return module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE)+" += "+b+";\n"};module$exports$Blockly$PHP.phpGenerator.math_round=module$exports$Blockly$PHP.phpGenerator.math_single;module$exports$Blockly$PHP.phpGenerator.math_trig=module$exports$Blockly$PHP.phpGenerator.math_single;
+module$exports$Blockly$PHP.phpGenerator.math_on_list=function(a){var b=a.getFieldValue("OP");switch(b){case "SUM":a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL)||"array()";a="array_sum("+a+")";break;case "MIN":a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL)||"array()";a="min("+a+")";break;case "MAX":a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,
+"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL)||"array()";a="max("+a+")";break;case "AVERAGE":b=module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_mean",`
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($myList) {
+  return array_sum($myList) / count($myList);
 }
-`)+"("+b+", "+c+", "+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
-module$exports$Blockly$PHP.phpGenerator.colour_blend=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"COLOUR1",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"'#000000'",c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"COLOUR2",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"'#000000'";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"RATIO",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||.5;return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("colour_blend",
+`);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"array()";a=b+"("+a+")";break;case "MEDIAN":b=module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_median",`
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($arr) {
+  sort($arr,SORT_NUMERIC);
+  return (count($arr) % 2) ? $arr[floor(count($arr) / 2)] :
+      ($arr[floor(count($arr) / 2)] + $arr[floor(count($arr) / 2) - 1]) / 2;
+}
+`);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"[]";a=b+"("+a+")";break;case "MODE":b=module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_modes",`
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($values) {
+  if (empty($values)) return array();
+  $counts = array_count_values($values);
+  arsort($counts); // Sort counts in descending order
+  $modes = array_keys($counts, current($counts), true);
+  return $modes;
+}
+`);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"[]";a=b+"("+a+")";break;case "STD_DEV":b=module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_standard_deviation",`
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($numbers) {
+  $n = count($numbers);
+  if (!$n) return null;
+  $mean = array_sum($numbers) / count($numbers);
+  foreach($numbers as $key => $num) $devs[$key] = pow($num - $mean, 2);
+  return sqrt(array_sum($devs) / (count($devs) - 1));
+}
+`);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"[]";a=b+"("+a+")";break;case "RANDOM":b=module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_random_list",`
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($list) {
+  $x = rand(0, count($list)-1);
+  return $list[$x];
+}
+`);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LIST",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"[]";a=b+"("+a+")";break;default:throw Error("Unknown operator: "+b);}return[a,module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+module$exports$Blockly$PHP.phpGenerator.math_modulo=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"DIVIDEND",module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS)||"0";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"DIVISOR",module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS)||"0";return[b+" % "+a,module$exports$Blockly$PHP.phpGenerator.ORDER_MODULUS]};
+module$exports$Blockly$PHP.phpGenerator.math_constrain=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0",c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"LOW",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"HIGH",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"Infinity";return["min(max("+b+", "+c+"), "+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+module$exports$Blockly$PHP.phpGenerator.math_random_int=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"FROM",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TO",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0";return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("math_random_int",`
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($a, $b) {
+  if ($a > $b) {
+    return rand($b, $a);
+  }
+  return rand($a, $b);
+}
+`)+"("+b+", "+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};module$exports$Blockly$PHP.phpGenerator.math_random_float=function(a){return["(float)rand()/(float)getrandmax()",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+module$exports$Blockly$PHP.phpGenerator.math_atan2=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"X",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0";return["atan2("+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"Y",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"0")+", "+b+") / pi() * 180",module$exports$Blockly$PHP.phpGenerator.ORDER_DIVISION]};var module$exports$Blockly$PHP$procedures={},module$contents$Blockly$PHP$procedures_Variables=$.module$build$src$core$variables,module$contents$Blockly$PHP$procedures_NameType=$.NameType$$module$build$src$core$names;
+module$exports$Blockly$PHP.phpGenerator.procedures_defreturn=function(a){var b=[],c=a.workspace,d=$.module$build$src$core$variables.allUsedVarModels(c)||[];for(let m=0,n;n=d[m];m++){var e=n.name;-1===a.getVars().indexOf(e)&&b.push(module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(e,$.NameType$$module$build$src$core$names.VARIABLE))}c=$.module$build$src$core$variables.allDeveloperVariables(c);for(d=0;d<c.length;d++)b.push(module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(c[d],$.NameType$$module$build$src$core$names.DEVELOPER_VARIABLE));
+c=b.length?module$exports$Blockly$PHP.phpGenerator.INDENT+"global "+b.join(", ")+";\n":"";b=module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("NAME"),$.NameType$$module$build$src$core$names.PROCEDURE);d="";module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX&&(d+=module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_PREFIX,a));module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX&&(d+=module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX,
+a));d&&(d=module$exports$Blockly$PHP.phpGenerator.prefixLines(d,module$exports$Blockly$PHP.phpGenerator.INDENT));e="";module$exports$Blockly$PHP.phpGenerator.INFINITE_LOOP_TRAP&&(e=module$exports$Blockly$PHP.phpGenerator.prefixLines(module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.INFINITE_LOOP_TRAP,a),module$exports$Blockly$PHP.phpGenerator.INDENT));const f=module$exports$Blockly$PHP.phpGenerator.statementToCode(a,"STACK");let g=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,
+"RETURN",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"",h="";f&&g&&(h=d);g&&(g=module$exports$Blockly$PHP.phpGenerator.INDENT+"return "+g+";\n");const k=[],l=a.getVars();for(let m=0;m<l.length;m++)k[m]=module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(l[m],$.NameType$$module$build$src$core$names.VARIABLE);c="function "+b+"("+k.join(", ")+") {\n"+c+d+e+f+h+g+"}";c=module$exports$Blockly$PHP.phpGenerator.scrub_(a,c);module$exports$Blockly$PHP.phpGenerator.definitions_["%"+b]=c;return null};
+module$exports$Blockly$PHP.phpGenerator.procedures_defnoreturn=module$exports$Blockly$PHP.phpGenerator.procedures_defreturn;
+module$exports$Blockly$PHP.phpGenerator.procedures_callreturn=function(a){const b=module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("NAME"),$.NameType$$module$build$src$core$names.PROCEDURE),c=[],d=a.getVars();for(let e=0;e<d.length;e++)c[e]=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"ARG"+e,module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"null";return[b+"("+c.join(", ")+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+module$exports$Blockly$PHP.phpGenerator.procedures_callnoreturn=function(a){return module$exports$Blockly$PHP.phpGenerator.procedures_callreturn(a)[0]+";\n"};
+module$exports$Blockly$PHP.phpGenerator.procedures_ifreturn=function(a){let b="if ("+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"CONDITION",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"false")+") {\n";module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX&&(b+=module$exports$Blockly$PHP.phpGenerator.prefixLines(module$exports$Blockly$PHP.phpGenerator.injectId(module$exports$Blockly$PHP.phpGenerator.STATEMENT_SUFFIX,a),module$exports$Blockly$PHP.phpGenerator.INDENT));a.hasReturnValue_?
+(a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"null",b+=module$exports$Blockly$PHP.phpGenerator.INDENT+"return "+a+";\n"):b+=module$exports$Blockly$PHP.phpGenerator.INDENT+"return;\n";return b+"}\n"};var module$exports$Blockly$PHP$texts={},module$contents$Blockly$PHP$texts_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$PHP.phpGenerator.text=function(a){return[module$exports$Blockly$PHP.phpGenerator.quote_(a.getFieldValue("TEXT")),module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC]};
+module$exports$Blockly$PHP.phpGenerator.text_multiline=function(a){a=module$exports$Blockly$PHP.phpGenerator.multiline_quote_(a.getFieldValue("TEXT"));const b=-1!==a.indexOf(".")?module$exports$Blockly$PHP.phpGenerator.ORDER_STRING_CONCAT:module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC;return[a,b]};
+module$exports$Blockly$PHP.phpGenerator.text_join=function(a){if(0===a.itemCount_)return["''",module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC];if(1===a.itemCount_)return[module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"ADD0",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE];if(2===a.itemCount_){var b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"ADD0",module$exports$Blockly$PHP.phpGenerator.ORDER_STRING_CONCAT)||"''";
+a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"ADD1",module$exports$Blockly$PHP.phpGenerator.ORDER_STRING_CONCAT)||"''";return[b+" . "+a,module$exports$Blockly$PHP.phpGenerator.ORDER_STRING_CONCAT]}b=Array(a.itemCount_);for(let c=0;c<a.itemCount_;c++)b[c]=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"ADD"+c,module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";return["implode('', array("+b.join(",")+"))",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+module$exports$Blockly$PHP.phpGenerator.text_append=function(a){const b=module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"''";return b+" .= "+a+";\n"};module$exports$Blockly$PHP.phpGenerator.text_length=function(a){const b=module$exports$Blockly$PHP.phpGenerator.provideFunction_("length",`
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($value) {
+  if (is_string($value)) {
+    return strlen($value);
+  }
+  return count($value);
+}
+`);a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";return[b+"("+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};module$exports$Blockly$PHP.phpGenerator.text_isEmpty=function(a){return["empty("+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''")+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+module$exports$Blockly$PHP.phpGenerator.text_indexOf=function(a){const b="FIRST"===a.getFieldValue("END")?"strpos":"strrpos",c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"FIND",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''",d=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";let e=" -1",f="";a.workspace.options.oneBasedIndex&&(e=" 0",f=" + 1");return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("FIRST"===
+a.getFieldValue("END")?"text_indexOf":"text_lastIndexOf",`
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($text, $search) {
+  $pos = ${b}($text, $search);
+  return $pos === false ? ${e} : $pos${f};
+}
+`)+"("+d+", "+c+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+module$exports$Blockly$PHP.phpGenerator.text_charAt=function(a){const b=a.getFieldValue("WHERE")||"FROM_START",c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";switch(b){case "FIRST":return["substr("+c+", 0, 1)",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL];case "LAST":return["substr("+c+", -1)",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL];case "FROM_START":return a=module$exports$Blockly$PHP.phpGenerator.getAdjusted(a,
+"AT"),["substr("+c+", "+a+", 1)",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL];case "FROM_END":return a=module$exports$Blockly$PHP.phpGenerator.getAdjusted(a,"AT",1,!0),["substr("+c+", "+a+", 1)",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL];case "RANDOM":return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("text_random_letter",`
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($text) {
+  return $text[rand(0, strlen($text) - 1)];
+}
+`)+"("+c+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]}throw Error("Unhandled option (text_charAt).");};
+module$exports$Blockly$PHP.phpGenerator.text_getSubstring=function(a){const b=a.getFieldValue("WHERE1"),c=a.getFieldValue("WHERE2"),d=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"STRING",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";if("FIRST"===b&&"LAST"===c)return[d,module$exports$Blockly$PHP.phpGenerator.ORDER_NONE];const e=module$exports$Blockly$PHP.phpGenerator.getAdjusted(a,"AT1");a=module$exports$Blockly$PHP.phpGenerator.getAdjusted(a,"AT2");return[module$exports$Blockly$PHP.phpGenerator.provideFunction_("text_get_substring",
 `
-function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($c1, $c2, $ratio) {
-  $ratio = max(min($ratio, 1), 0);
-  $r1 = hexdec(substr($c1, 1, 2));
-  $g1 = hexdec(substr($c1, 3, 2));
-  $b1 = hexdec(substr($c1, 5, 2));
-  $r2 = hexdec(substr($c2, 1, 2));
-  $g2 = hexdec(substr($c2, 3, 2));
-  $b2 = hexdec(substr($c2, 5, 2));
-  $r = round($r1 * (1 - $ratio) + $r2 * $ratio);
-  $g = round($g1 * (1 - $ratio) + $g2 * $ratio);
-  $b = round($b1 * (1 - $ratio) + $b2 * $ratio);
-  $hex = '#';
-  $hex .= str_pad(dechex($r), 2, '0', STR_PAD_LEFT);
-  $hex .= str_pad(dechex($g), 2, '0', STR_PAD_LEFT);
-  $hex .= str_pad(dechex($b), 2, '0', STR_PAD_LEFT);
-  return $hex;
+function ${module$exports$Blockly$PHP.phpGenerator.FUNCTION_NAME_PLACEHOLDER_}($text, $where1, $at1, $where2, $at2) {
+  if ($where1 == 'FROM_END') {
+    $at1 = strlen($text) - 1 - $at1;
+  } else if ($where1 == 'FIRST') {
+    $at1 = 0;
+  } else if ($where1 != 'FROM_START') {
+    throw new Exception('Unhandled option (text_get_substring).');
+  }
+  $length = 0;
+  if ($where2 == 'FROM_START') {
+    $length = $at2 - $at1 + 1;
+  } else if ($where2 == 'FROM_END') {
+    $length = strlen($text) - $at1 - $at2;
+  } else if ($where2 == 'LAST') {
+    $length = strlen($text) - $at1;
+  } else {
+    throw new Exception('Unhandled option (text_get_substring).');
+  }
+  return substr($text, $at1, $length);
 }
-`)+"("+b+", "+c+", "+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};var module$exports$Blockly$PHP$all=module$exports$Blockly$PHP;
+`)+"("+d+", '"+b+"', "+e+", '"+c+"', "+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+module$exports$Blockly$PHP.phpGenerator.text_changeCase=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";let c;"UPPERCASE"===a.getFieldValue("CASE")?c="strtoupper("+b+")":"LOWERCASE"===a.getFieldValue("CASE")?c="strtolower("+b+")":"TITLECASE"===a.getFieldValue("CASE")&&(c="ucwords(strtolower("+b+"))");return[c,module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+module$exports$Blockly$PHP.phpGenerator.text_trim=function(a){const b={LEFT:"ltrim",RIGHT:"rtrim",BOTH:"trim"}[a.getFieldValue("MODE")];a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";return[b+"("+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+module$exports$Blockly$PHP.phpGenerator.text_print=function(a){return"print("+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''")+");\n"};
+module$exports$Blockly$PHP.phpGenerator.text_prompt_ext=function(a){let b="readline("+(a.getField("TEXT")?module$exports$Blockly$PHP.phpGenerator.quote_(a.getFieldValue("TEXT")):module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''")+")";"NUMBER"===a.getFieldValue("TYPE")&&(b="floatval("+b+")");return[b,module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};module$exports$Blockly$PHP.phpGenerator.text_prompt=module$exports$Blockly$PHP.phpGenerator.text_prompt_ext;
+module$exports$Blockly$PHP.phpGenerator.text_count=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"SUB",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";return["strlen("+a+") === 0 ? strlen("+b+") + 1 : substr_count("+b+", "+a+")",module$exports$Blockly$PHP.phpGenerator.ORDER_CONDITIONAL]};
+module$exports$Blockly$PHP.phpGenerator.text_replace=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''",c=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"FROM",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";a=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TO",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''";return["str_replace("+c+", "+a+", "+b+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};
+module$exports$Blockly$PHP.phpGenerator.text_reverse=function(a){return["strrev("+(module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"TEXT",module$exports$Blockly$PHP.phpGenerator.ORDER_NONE)||"''")+")",module$exports$Blockly$PHP.phpGenerator.ORDER_FUNCTION_CALL]};var module$exports$Blockly$PHP$variables={},module$contents$Blockly$PHP$variables_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$PHP.phpGenerator.variables_get=function(a){return[module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE),module$exports$Blockly$PHP.phpGenerator.ORDER_ATOMIC]};
+module$exports$Blockly$PHP.phpGenerator.variables_set=function(a){const b=module$exports$Blockly$PHP.phpGenerator.valueToCode(a,"VALUE",module$exports$Blockly$PHP.phpGenerator.ORDER_ASSIGNMENT)||"0";return module$exports$Blockly$PHP.phpGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE)+" = "+b+";\n"};var module$exports$Blockly$PHP$variablesDynamic={};module$exports$Blockly$PHP.phpGenerator.variables_get_dynamic=module$exports$Blockly$PHP.phpGenerator.variables_get;module$exports$Blockly$PHP.phpGenerator.variables_set_dynamic=module$exports$Blockly$PHP.phpGenerator.variables_set;var module$exports$Blockly$PHP$all=module$exports$Blockly$PHP;
 module$exports$Blockly$PHP.__namespace__=$;
 return module$exports$Blockly$PHP;
 }));

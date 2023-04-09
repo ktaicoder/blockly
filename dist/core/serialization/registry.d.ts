@@ -10,14 +10,12 @@ import type { ISerializer } from '../interfaces/i_serializer.js';
  *
  * @param name The name of the serializer to register.
  * @param serializer The serializer to register.
- * @alias Blockly.serialization.registry.register
  */
 export declare function register(name: string, serializer: ISerializer): void;
 /**
  * Unregisters the serializer associated with the given name.
  *
  * @param name The name of the serializer to unregister.
- * @alias Blockly.serialization.registry.unregister
  */
 export declare function unregister(name: string): void;
 //# sourceMappingURL=registry.d.ts.map

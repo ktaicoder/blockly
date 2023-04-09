@@ -10,8 +10,6 @@ import type { Connection } from './connection.js';
 import type { Field } from './field.js';
 /**
  * Class for an input with an optional field.
- *
- * @alias Blockly.Input
  */
 export declare class Input {
     type: number;
@@ -131,7 +129,6 @@ export declare namespace Input {
     /**
      * Enum for alignment of inputs.
      *
-     * @alias Blockly.Input.Align
      */
     enum Align {
         LEFT = -1,
@@ -139,6 +136,6 @@ export declare namespace Input {
         RIGHT = 1
     }
 }
-export declare type Align = Input.Align;
+export type Align = Input.Align;
 export declare const Align: typeof Input.Align;
 //# sourceMappingURL=input.d.ts.map

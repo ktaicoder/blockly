@@ -7,13 +7,13 @@ import type { WorkspaceComment } from '../workspace_comment.js';
 import { CommentBase, CommentBaseJson } from './events_comment_base.js';
 import type { Workspace } from '../workspace.js';
 /**
- * Class for a comment change event.
- *
- * @alias Blockly.Events.CommentChange
+ * Notifies listeners that the contents of a workspace comment has changed.
  */
 export declare class CommentChange extends CommentBase {
     type: string;
+    /** The previous contents of the comment. */
     oldContents_?: string;
+    /** The new contents of the comment. */
     newContents_?: string;
     /**
      * @param opt_comment The comment that is being changed.  Undefined for a

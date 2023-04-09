@@ -10,8 +10,6 @@ import type { IConnectionChecker } from './interfaces/i_connection_checker.js';
 import * as blocks from './serialization/blocks.js';
 /**
  * Class for a connection between blocks.
- *
- * @alias Blockly.Connection
  */
 export declare class Connection implements IASTNodeLocationWithBlock {
     type: number;
@@ -111,15 +109,30 @@ export declare class Connection implements IASTNodeLocationWithBlock {
      * @returns Whether the the blocks are now connected or not.
      */
     connect(otherConnection: Connection): boolean;
-    /** Disconnect this connection. */
+    /**
+     * Disconnect this connection.
+     */
     disconnect(): void;
     /**
      * Disconnect two blocks that are connected by this connection.
      *
-     * @param parentBlock The superior block.
-     * @param childBlock The inferior block.
+     * @param setParent Whether to set the parent of the disconnected block or
+     *     not, defaults to true.
+     *     If you do not set the parent, ensure that a subsequent action does,
+     *     otherwise the view and model will be out of sync.
      */
-    protected disconnectInternal_(parentBlock: Block, childBlock: Block): void;
+    protected disconnectInternal(setParent?: boolean): void;
+    /**
+     * Returns the parent connection (superior) and child connection (inferior)
+     * given this connection and the connection it is connected to.
+     *
+     * @returns The parent connection and child connection, given this connection
+     *     and the connection it is connected to.
+     */
+    protected getParentAndChildConnections(): {
+        parentConnection?: Connection;
+        childConnection?: Connection;
+    };
     /**
      * Respawn the shadow block if there was one connected to the this connection.
      */

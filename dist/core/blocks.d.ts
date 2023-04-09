@@ -7,11 +7,9 @@
  * A block definition.  For now this very loose, but it can potentially
  * be refined e.g. by replacing this typedef with a class definition.
  */
-export declare type BlockDefinition = any;
+export type BlockDefinition = any;
 /**
  * A mapping of block type names to block prototype objects.
- *
- * @alias Blockly.blocks.Blocks
  */
 export declare const Blocks: {
     [key: string]: BlockDefinition;

@@ -9,7 +9,6 @@ import { UiBase } from './events_ui_base.js';
  * Class for a UI event.
  *
  * @deprecated December 2020. Instead use a more specific UI event.
- * @alias Blockly.Events.Ui
  */
 export declare class Ui extends UiBase {
     blockId: any;

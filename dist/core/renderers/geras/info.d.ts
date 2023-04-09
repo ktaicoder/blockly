@@ -11,13 +11,12 @@ import type { Row } from '../measurables/row.js';
 import type { ConstantProvider } from './constants.js';
 import type { Renderer } from './renderer.js';
 /**
- * An object containing all sizing information needed to draw this block.
+ * An object containing all sizing information needed to draw this block,
+ * customized for the geras renderer.
  *
  * This measure pass does not propagate changes to the block (although fields
  * may choose to rerender when getSize() is called).  However, calling it
  * repeatedly may be expensive.
- *
- * @alias Blockly.geras.RenderInfo
  */
 export declare class RenderInfo extends BaseRenderInfo {
     constants_: ConstantProvider;
@@ -25,14 +24,12 @@ export declare class RenderInfo extends BaseRenderInfo {
     /**
      * @param renderer The renderer in use.
      * @param block The block to measure.
-     * @internal
      */
     constructor(renderer: Renderer, block: BlockSvg);
     /**
      * Get the block renderer in use.
      *
      * @returns The block renderer in use.
-     * @internal
      */
     getRenderer(): Renderer;
     populateBottomRow_(): void;

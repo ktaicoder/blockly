@@ -7,11 +7,13 @@ import { AbstractEventJson } from './events_abstract.js';
 import { UiBase } from './events_ui_base.js';
 import type { Workspace } from '../workspace.js';
 /**
- * Class for a trashcan open event.
- *
- * @alias Blockly.Events.TrashcanOpen
+ * Notifies listeners when the trashcan is opening or closing.
  */
 export declare class TrashcanOpen extends UiBase {
+    /**
+     * True if the trashcan is currently opening (previously closed).
+     * False if it is currently closing (previously open).
+     */
     isOpen?: boolean;
     type: string;
     /**

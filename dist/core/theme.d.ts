@@ -18,8 +18,6 @@ export interface ITheme {
 }
 /**
  * Class for a theme.
- *
- * @alias Blockly.Theme
  */
 export declare class Theme implements ITheme {
     name: string;
@@ -146,8 +144,8 @@ export declare namespace Theme {
         size?: number;
     }
 }
-export declare type BlockStyle = Theme.BlockStyle;
-export declare type CategoryStyle = Theme.CategoryStyle;
-export declare type ComponentStyle = Theme.ComponentStyle;
-export declare type FontStyle = Theme.FontStyle;
+export type BlockStyle = Theme.BlockStyle;
+export type CategoryStyle = Theme.CategoryStyle;
+export type ComponentStyle = Theme.ComponentStyle;
+export type FontStyle = Theme.FontStyle;
 //# sourceMappingURL=theme.d.ts.map

@@ -6,8 +6,6 @@
 import type { Rect } from '../utils/rect.js';
 /**
  * A bounded element interface.
- *
- * @alias Blockly.IBoundedElement
  */
 export interface IBoundedElement {
     /**

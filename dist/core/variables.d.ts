@@ -12,8 +12,6 @@ import type { WorkspaceSvg } from './workspace_svg.js';
  * variable blocks.
  * See also Blockly.Procedures.CATEGORY_NAME and
  * Blockly.VariablesDynamic.CATEGORY_NAME.
- *
- * @alias Blockly.Variables.CATEGORY_NAME
  */
 export declare const CATEGORY_NAME = "VARIABLE";
 /**
@@ -24,7 +22,6 @@ export declare const CATEGORY_NAME = "VARIABLE";
  *
  * @param ws The workspace to search for variables.
  * @returns Array of variable models.
- * @alias Blockly.Variables.allUsedVarModels
  */
 export declare function allUsedVarModels(ws: Workspace): VariableModel[];
 /**
@@ -37,7 +34,6 @@ export declare function allUsedVarModels(ws: Workspace): VariableModel[];
  *
  * @param workspace The workspace to search.
  * @returns A list of non-duplicated variable names.
- * @alias Blockly.Variables.allDeveloperVariables
  */
 export declare function allDeveloperVariables(workspace: Workspace): string[];
 /**
@@ -46,7 +42,6 @@ export declare function allDeveloperVariables(workspace: Workspace): string[];
  *
  * @param workspace The workspace containing variables.
  * @returns Array of XML elements.
- * @alias Blockly.Variables.flyoutCategory
  */
 export declare function flyoutCategory(workspace: WorkspaceSvg): Element[];
 /**
@@ -54,10 +49,8 @@ export declare function flyoutCategory(workspace: WorkspaceSvg): Element[];
  *
  * @param workspace The workspace containing variables.
  * @returns Array of XML block elements.
- * @alias Blockly.Variables.flyoutCategoryBlocks
  */
 export declare function flyoutCategoryBlocks(workspace: Workspace): Element[];
-/** @alias Blockly.Variables.VAR_LETTER_OPTIONS */
 export declare const VAR_LETTER_OPTIONS = "ijkmnopqrstuvwxyzabcdefgh";
 /**
  * Return a new variable name that is not yet being used. This will try to
@@ -67,7 +60,6 @@ export declare const VAR_LETTER_OPTIONS = "ijkmnopqrstuvwxyzabcdefgh";
  *
  * @param workspace The workspace to be unique in.
  * @returns New variable name.
- * @alias Blockly.Variables.generateUniqueName
  */
 export declare function generateUniqueName(workspace: Workspace): string;
 /**
@@ -82,7 +74,6 @@ declare function generateUniqueNameInternal(workspace: Workspace): string;
  * @param startChar The character to start the search at.
  * @param usedNames A list of all of the used names.
  * @returns A unique name that is not present in the usedNames array.
- * @alias Blockly.Variables.generateUniqueNameFromOptions
  */
 export declare function generateUniqueNameFromOptions(startChar: string, usedNames: string[]): string;
 /**
@@ -100,7 +91,6 @@ export declare function generateUniqueNameFromOptions(startChar: string, usedNam
  *     an existing variable was chosen.
  * @param opt_type The type of the variable like 'int', 'string', or ''. This
  *     will default to '', which is a specific type.
- * @alias Blockly.Variables.createVariableButtonHandler
  */
 export declare function createVariableButtonHandler(workspace: Workspace, opt_callback?: (p1?: string | null) => void, opt_type?: string): void;
 /**
@@ -113,7 +103,6 @@ export declare function createVariableButtonHandler(workspace: Workspace, opt_ca
  * @param opt_callback A callback. It will be passed an acceptable new variable
  *     name, or null if change is to be aborted (cancel button), or undefined if
  *     an existing variable was chosen.
- * @alias Blockly.Variables.renameVariable
  */
 export declare function renameVariable(workspace: Workspace, variable: VariableModel, opt_callback?: (p1?: string | null) => void): void;
 /**
@@ -123,7 +112,6 @@ export declare function renameVariable(workspace: Workspace, variable: VariableM
  * @param defaultText The default value to show in the prompt's field.
  * @param callback A callback. It will be passed the new variable name, or null
  *     if the user picked something illegal.
- * @alias Blockly.Variables.promptName
  */
 export declare function promptName(promptText: string, defaultText: string, callback: (p1: string | null) => void): void;
 /**
@@ -132,15 +120,26 @@ export declare function promptName(promptText: string, defaultText: string, call
  * @param name The name to search for.
  * @param workspace The workspace to search for the variable.
  * @returns The variable with the given name, or null if none was found.
- * @alias Blockly.Variables.nameUsedWithAnyType
  */
 export declare function nameUsedWithAnyType(name: string, workspace: Workspace): VariableModel | null;
+/**
+ * Returns the name of the procedure with a conflicting parameter name, or null
+ * if one does not exist.
+ *
+ * This checks the procedure map if it contains models, and the legacy procedure
+ * blocks otherwise.
+ *
+ * @param oldName The old name of the variable.
+ * @param newName The proposed name of the variable.
+ * @param workspace The workspace to search for conflicting parameters.
+ * @internal
+ */
+export declare function nameUsedWithConflictingParam(oldName: string, newName: string, workspace: Workspace): string | null;
 /**
  * Generate DOM objects representing a variable field.
  *
  * @param variableModel The variable model to represent.
  * @returns The generated DOM.
- * @alias Blockly.Variables.generateVariableFieldDom
  */
 export declare function generateVariableFieldDom(variableModel: VariableModel): Element;
 /**
@@ -154,7 +153,6 @@ export declare function generateVariableFieldDom(variableModel: VariableModel): 
  * @param opt_type The type to use to look up or create the variable.
  * @returns The variable corresponding to the given ID or name + type
  *     combination.
- * @alias Blockly.Variables.getOrCreateVariablePackage
  */
 export declare function getOrCreateVariablePackage(workspace: Workspace, id: string | null, opt_name?: string, opt_type?: string): VariableModel;
 /**
@@ -171,7 +169,6 @@ export declare function getOrCreateVariablePackage(workspace: Workspace, id: str
  *     Only used if lookup by ID fails.
  * @returns The variable corresponding to the given ID or name + type
  *     combination, or null if not found.
- * @alias Blockly.Variables.getVariable
  */
 export declare function getVariable(workspace: Workspace, id: string | null, opt_name?: string, opt_type?: string): VariableModel | null;
 /**
@@ -185,7 +182,6 @@ export declare function getVariable(workspace: Workspace, id: string | null, opt
  * @returns The new array of variables that were freshly added to the workspace
  *     after creating the new block, or [] if no new variables were added to the
  *     workspace.
- * @alias Blockly.Variables.getAddedVariables
  * @internal
  */
 export declare function getAddedVariables(workspace: Workspace, originalVariables: VariableModel[]): VariableModel[];

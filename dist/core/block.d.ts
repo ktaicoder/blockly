@@ -22,8 +22,6 @@ import type { Workspace } from './workspace.js';
 /**
  * Class for one block.
  * Not normally called directly, workspace.newBlock() is preferred.
- *
- * @alias Blockly.Block
  */
 export declare class Block implements IASTNodeLocation, IDeletable {
     /**
@@ -31,7 +29,7 @@ export declare class Block implements IASTNodeLocation, IDeletable {
      * changes. This is usually only called from the constructor, the block type
      * initializer function, or an extension initializer function.
      */
-    onchange?: ((p1: Abstract) => any) | null;
+    onchange?: ((p1: Abstract) => void) | null;
     /** The language-neutral ID given to the collapsed input. */
     static readonly COLLAPSED_INPUT_NAME: string;
     /** The language-neutral ID given to the collapsed field. */
@@ -57,7 +55,7 @@ export declare class Block implements IASTNodeLocation, IDeletable {
     /** Name of the block style. */
     protected styleName_: string;
     /** An optional method called during initialization. */
-    init?: (() => any) | null;
+    init?: (() => void);
     /** An optional method called during disposal. */
     destroy?: (() => void);
     /**
@@ -65,25 +63,25 @@ export declare class Block implements IASTNodeLocation, IDeletable {
      * mutation state to XML. This must be coupled with defining
      * `domToMutation`.
      */
-    mutationToDom?: ((...p1: any[]) => Element) | null;
+    mutationToDom?: (...p1: any[]) => Element;
     /**
      * An optional deserialization method for defining how to deserialize the
      * mutation state from XML. This must be coupled with defining
      * `mutationToDom`.
      */
-    domToMutation?: ((p1: Element) => any) | null;
+    domToMutation?: (p1: Element) => void;
     /**
      * An optional serialization method for defining how to serialize the
      * block's extra state (eg mutation state) to something JSON compatible.
      * This must be coupled with defining `loadExtraState`.
      */
-    saveExtraState?: (() => any) | null;
+    saveExtraState?: () => any;
     /**
      * An optional serialization method for defining how to deserialize the
      * block's extra state (eg mutation state) from something JSON compatible.
      * This must be coupled with defining `saveExtraState`.
      */
-    loadExtraState?: ((p1: any) => any) | null;
+    loadExtraState?: (p1: any) => void;
     /**
      * An optional property for suppressing adding STATEMENT_PREFIX and
      * STATEMENT_SUFFIX to generated code.
@@ -95,21 +93,21 @@ export declare class Block implements IASTNodeLocation, IDeletable {
      * shown to the user, but are declared as global variables in the generated
      * code.
      */
-    getDeveloperVariables?: (() => string[]);
+    getDeveloperVariables?: () => string[];
     /**
      * An optional function that reconfigures the block based on the contents of
      * the mutator dialog.
      */
-    compose?: ((p1: Block) => void);
+    compose?: (p1: Block) => void;
     /**
      * An optional function that populates the mutator's dialog with
      * this block's components.
      */
-    decompose?: ((p1: Workspace) => Block);
+    decompose?: (p1: Workspace) => Block;
     id: string;
-    outputConnection: Connection;
-    nextConnection: Connection;
-    previousConnection: Connection;
+    outputConnection: Connection | null;
+    nextConnection: Connection | null;
+    previousConnection: Connection | null;
     inputList: Input[];
     inputsInline?: boolean;
     private disabled;
@@ -147,7 +145,7 @@ export declare class Block implements IASTNodeLocation, IDeletable {
     /**
      * String for block help, or function that returns a URL. Null for no help.
      */
-    helpUrl: string | Function;
+    helpUrl: string | Function | null;
     /** A bound callback function to use when the parent workspace changes. */
     private onchangeWrapper_;
     /**
@@ -179,6 +177,11 @@ export declare class Block implements IASTNodeLocation, IDeletable {
      * @suppress {checkTypes}
      */
     dispose(healStack: boolean): void;
+    /**
+     * Disposes of this block without doing things required by the top block.
+     * E.g. does not fire events, unplug the block, etc.
+     */
+    protected disposeInternal(): void;
     /**
      * Returns true if the block is either in the process of being disposed, or
      * is disposed.
@@ -349,6 +352,12 @@ export declare class Block implements IASTNodeLocation, IDeletable {
      */
     isDeletable(): boolean;
     /**
+     * Return whether this block's own deletable property is true or false.
+     *
+     * @returns True if the block's deletable property is true, false otherwise.
+     */
+    isOwnDeletable(): boolean;
+    /**
      * Set whether this block is deletable or not.
      *
      * @param deletable True if deletable.
@@ -358,8 +367,16 @@ export declare class Block implements IASTNodeLocation, IDeletable {
      * Get whether this block is movable or not.
      *
      * @returns True if movable.
+     * @internal
      */
     isMovable(): boolean;
+    /**
+     * Return whether this block's own movable property is true or false.
+     *
+     * @returns True if the block's movable property is true, false otherwise.
+     * @internal
+     */
+    isOwnMovable(): boolean;
     /**
      * Set whether this block is movable or not.
      *
@@ -406,8 +423,15 @@ export declare class Block implements IASTNodeLocation, IDeletable {
      * Get whether this block is editable or not.
      *
      * @returns True if editable.
+     * @internal
      */
     isEditable(): boolean;
+    /**
+     * Return whether this block's own editable property is true or false.
+     *
+     * @returns True if the block's editable property is true, false otherwise.
+     */
+    isOwnEditable(): boolean;
     /**
      * Set whether this block is editable or not.
      *
@@ -492,7 +516,7 @@ export declare class Block implements IASTNodeLocation, IDeletable {
      * @param onchangeFn The callback to call when the block's workspace changes.
      * @throws {Error} if onchangeFn is not falsey and not a function.
      */
-    setOnChange(onchangeFn: (p1: Abstract) => any): void;
+    setOnChange(onchangeFn: (p1: Abstract) => void): void;
     /**
      * Returns the named field from a block.
      *
@@ -627,11 +651,19 @@ export declare class Block implements IASTNodeLocation, IDeletable {
      * Create a human-readable text representation of this block and any children.
      *
      * @param opt_maxLength Truncate the string to this length.
-     * @param opt_emptyToken The placeholder string used to denote an empty field.
+     * @param opt_emptyToken The placeholder string used to denote an empty input.
      *     If not specified, '?' is used.
      * @returns Text of block.
      */
     toString(opt_maxLength?: number, opt_emptyToken?: string): string;
+    /**
+     * Converts this block into string tokens.
+     *
+     * @param emptyToken The token to use in place of an empty input.
+     *     Defaults to '?'.
+     * @returns The array of string tokens representing this block.
+     */
+    private toTokens;
     /**
      * Shortcut for appending a value input row.
      *
@@ -880,5 +912,5 @@ export declare namespace Block {
         size: Size;
     }
 }
-export declare type CommentModel = Block.CommentModel;
+export type CommentModel = Block.CommentModel;
 //# sourceMappingURL=block.d.ts.map

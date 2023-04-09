@@ -5,16 +5,20 @@
  */
 import './events/events_block_change.js';
 import { Field, FieldConfig, FieldValidator } from './field.js';
-import type { Sentinel } from './utils/sentinel.js';
 import type { WorkspaceSvg } from './workspace_svg.js';
-export declare type InputTypes = string | number;
-export declare type FieldInputValidator<T extends InputTypes> = FieldValidator<T>;
 /**
- * Class for an editable text field.
+ * Supported types for FieldInput subclasses.
  *
- * @alias Blockly.FieldInput
+ * @internal
  */
-export declare abstract class FieldInput<T extends InputTypes> extends Field<T> {
+type InputTypes = string | number;
+/**
+ * Abstract class for an editable input field.
+ *
+ * @typeParam T - The value stored on the field.
+ * @internal
+ */
+export declare abstract class FieldInput<T extends InputTypes> extends Field<string | T> {
     /**
      * Pixel size of input border radius.
      * Should match blocklyText's border-radius in CSS.
@@ -48,34 +52,24 @@ export declare abstract class FieldInput<T extends InputTypes> extends Field<T> 
     SERIALIZABLE: boolean;
     /** Mouse cursor style when over the hotspot that initiates the editor. */
     CURSOR: string;
-    clickTarget_: any;
-    value_: any;
-    isDirty_: any;
     /**
-     * @param opt_value The initial value of the field. Should cast to a string.
+     * @param value The initial value of the field. Should cast to a string.
      *     Defaults to an empty string if null or undefined. Also accepts
      *     Field.SKIP_SETUP if you wish to skip setup (only used by subclasses
      *     that want to handle configuration and setting the field value after
      *     their own constructors have run).
-     * @param opt_validator A function that is called to validate changes to the
+     * @param validator A function that is called to validate changes to the
      *     field's value. Takes in a string & returns a validated string, or null
      *     to abort the change.
-     * @param opt_config A map of options used to configure the field.
+     * @param config A map of options used to configure the field.
      *     See the [field creation documentation]{@link
      * https://developers.google.com/blockly/guides/create-custom-blocks/fields/built-in-fields/text-input#creation}
      * for a list of properties this parameter supports.
      */
-    constructor(opt_value?: string | Sentinel, opt_validator?: FieldInputValidator<T> | null, opt_config?: FieldInputConfig);
+    constructor(value?: string | typeof Field.SKIP_SETUP, validator?: FieldInputValidator<T> | null, config?: FieldInputConfig);
     protected configure_(config: FieldInputConfig): void;
     /** @internal */
     initView(): void;
-    /**
-     * Ensure that the input value casts to a valid string.
-     *
-     * @param opt_newValue The input value.
-     * @returns A valid string, or null if invalid.
-     */
-    protected doClassValidation_(opt_newValue?: any): any;
     /**
      * Called by setValue if the text input is not valid. If the field is
      * currently being edited it reverts value of the field to the previous
@@ -94,7 +88,7 @@ export declare abstract class FieldInput<T extends InputTypes> extends Field<T> 
      * @param newValue The value to be saved. The default validator guarantees
      *     that this is a string.
      */
-    protected doValueUpdate_(newValue: any): void;
+    protected doValueUpdate_(newValue: string | T): void;
     /**
      * Updates text field to match the colour/style of the block.
      *
@@ -118,12 +112,12 @@ export declare abstract class FieldInput<T extends InputTypes> extends Field<T> 
      * Shows a prompt editor for mobile browsers if the modalInputs option is
      * enabled.
      *
-     * @param _opt_e Optional mouse event that triggered the field to open, or
+     * @param _e Optional mouse event that triggered the field to open, or
      *     undefined if triggered programmatically.
-     * @param opt_quietInput True if editor should be created without focus.
+     * @param quietInput True if editor should be created without focus.
      *     Defaults to false.
      */
-    protected showEditor_(_opt_e?: Event, opt_quietInput?: boolean): void;
+    protected showEditor_(_e?: Event, quietInput?: boolean): void;
     /**
      * Create and show a text input editor that is a prompt (usually a popup).
      * Mobile browsers may have issues with in-line textareas (focus and
@@ -166,7 +160,7 @@ export declare abstract class FieldInput<T extends InputTypes> extends Field<T> 
      *
      * @param e Keyboard event.
      */
-    protected onHtmlInputKeyDown_(e: Event): void;
+    protected onHtmlInputKeyDown_(e: KeyboardEvent): void;
     /**
      * Handle a change to the editor.
      *
@@ -222,8 +216,28 @@ export declare abstract class FieldInput<T extends InputTypes> extends Field<T> 
 }
 /**
  * Config options for the input field.
+ *
+ * @internal
  */
 export interface FieldInputConfig extends FieldConfig {
     spellcheck?: boolean;
 }
+/**
+ * A function that is called to validate changes to the field's value before
+ * they are set.
+ *
+ * @see {@link https://developers.google.com/blockly/guides/create-custom-blocks/fields/validators#return_values}
+ * @param newValue The value to be validated.
+ * @returns One of three instructions for setting the new value: `T`, `null`,
+ * or `undefined`.
+ *
+ * - `T` to set this function's returned value instead of `newValue`.
+ *
+ * - `null` to invoke `doValueInvalid_` and not set a value.
+ *
+ * - `undefined` to set `newValue` as is.
+ * @internal
+ */
+export type FieldInputValidator<T extends InputTypes> = FieldValidator<string | T>;
+export {};
 //# sourceMappingURL=field_input.d.ts.map

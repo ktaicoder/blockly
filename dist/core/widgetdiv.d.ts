@@ -9,21 +9,17 @@ import type { Size } from './utils/size.js';
  * Returns the HTML container for editor widgets.
  *
  * @returns The editor widget container.
- * @alias Blockly.WidgetDiv.getDiv
  */
 export declare function getDiv(): HTMLDivElement | null;
 /**
  * Allows unit tests to reset the div. Do not use outside of tests.
  *
  * @param newDiv The new value for the DIV field.
- * @alias Blockly.WidgetDiv.testOnly_setDiv
  * @internal
  */
 export declare function testOnly_setDiv(newDiv: HTMLDivElement | null): void;
 /**
  * Create the widget div and inject it onto the page.
- *
- * @alias Blockly.WidgetDiv.createDom
  */
 export declare function createDom(): void;
 /**
@@ -33,20 +29,16 @@ export declare function createDom(): void;
  * @param rtl Right-to-left (true) or left-to-right (false).
  * @param newDispose Optional cleanup function to be run when the widget is
  *     closed.
- * @alias Blockly.WidgetDiv.show
  */
 export declare function show(newOwner: unknown, rtl: boolean, newDispose: () => void): void;
 /**
  * Destroy the widget and hide the div.
- *
- * @alias Blockly.WidgetDiv.hide
  */
 export declare function hide(): void;
 /**
  * Is the container visible?
  *
  * @returns True if visible.
- * @alias Blockly.WidgetDiv.isVisible
  */
 export declare function isVisible(): boolean;
 /**
@@ -54,7 +46,6 @@ export declare function isVisible(): boolean;
  * object.
  *
  * @param oldOwner The object that was using this container.
- * @alias Blockly.WidgetDiv.hideIfOwner
  */
 export declare function hideIfOwner(oldOwner: unknown): void;
 /**
@@ -71,7 +62,6 @@ export declare function hideIfOwner(oldOwner: unknown): void;
  *     window coordinates.
  * @param rtl Whether the workspace is in RTL mode.  This determines horizontal
  *     alignment.
- * @alias Blockly.WidgetDiv.positionWithAnchor
  * @internal
  */
 export declare function positionWithAnchor(viewportBBox: Rect, anchorBBox: Rect, widgetSize: Size, rtl: boolean): void;

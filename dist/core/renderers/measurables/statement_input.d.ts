@@ -9,14 +9,11 @@ import { InputConnection } from './input_connection.js';
 /**
  * An object containing information about the space a statement input takes up
  * during rendering
- *
- * @alias Blockly.blockRendering.StatementInput
  */
 export declare class StatementInput extends InputConnection {
     /**
      * @param constants The rendering constants provider.
      * @param input The statement input to measure and store information for.
-     * @internal
      */
     constructor(constants: ConstantProvider, input: Input);
 }

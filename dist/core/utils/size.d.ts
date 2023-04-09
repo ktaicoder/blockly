@@ -5,8 +5,6 @@
  */
 /**
  * Class for representing sizes consisting of a width and height.
- *
- * @alias Blockly.utils.Size
  */
 export declare class Size {
     width: number;

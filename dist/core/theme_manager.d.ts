@@ -8,8 +8,6 @@ import type { Workspace } from './workspace.js';
 import type { WorkspaceSvg } from './workspace_svg.js';
 /**
  * Class for storing and updating a workspace's theme and UI components.
- *
- * @alias Blockly.ThemeManager
  */
 export declare class ThemeManager {
     private readonly workspace;
@@ -17,7 +15,6 @@ export declare class ThemeManager {
     /** A list of workspaces that are subscribed to this theme. */
     private subscribedWorkspaces_;
     private componentDB;
-    owner_: any;
     /**
      * @param workspace The main workspace.
      * @param theme The workspace theme.
@@ -63,14 +60,14 @@ export declare class ThemeManager {
      * @param propertyName The inline style property name to update.
      * @internal
      */
-    subscribe(element: Element, componentName: string, propertyName: string): void;
+    subscribe(element: HTMLElement | SVGElement, componentName: string, propertyName: string): void;
     /**
      * Unsubscribe an element to changes to the selected theme.
      *
      * @param element The element to unsubscribe.
      * @internal
      */
-    unsubscribe(element: Element): void;
+    unsubscribe(element: HTMLElement | SVGElement): void;
     /**
      * Dispose of this theme manager.
      *
@@ -82,9 +79,9 @@ export declare class ThemeManager {
 export declare namespace ThemeManager {
     /** The type for a Blockly UI Component. */
     interface Component {
-        element: Element;
+        element: HTMLElement | SVGElement;
         propertyName: string;
     }
 }
-export declare type Component = ThemeManager.Component;
+export type Component = ThemeManager.Component;
 //# sourceMappingURL=theme_manager.d.ts.map

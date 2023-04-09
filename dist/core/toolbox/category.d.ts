@@ -10,8 +10,6 @@ import type { CategoryInfo, FlyoutDefinition, FlyoutItemInfoArray } from '../uti
 import { ToolboxItem } from './toolbox_item.js';
 /**
  * Class for a category in a toolbox.
- *
- * @alias Blockly.ToolboxCategory
  */
 export declare class ToolboxCategory extends ToolboxItem implements ISelectableToolboxItem {
     /** Name used for registering a toolbox category. */
@@ -30,15 +28,15 @@ export declare class ToolboxCategory extends ToolboxItem implements ISelectableT
     protected name_: string;
     /** The colour of the category. */
     protected colour_: string;
-    /** The html container for the category. */
+    /** The HTML container for the category. */
     protected htmlDiv_: HTMLDivElement | null;
-    /** The html element for the category row. */
+    /** The HTML element for the category row. */
     protected rowDiv_: HTMLDivElement | null;
-    /** The html element that holds children elements of the category row. */
+    /** The HTML element that holds children elements of the category row. */
     protected rowContents_: HTMLDivElement | null;
-    /** The html element for the toolbox icon. */
+    /** The HTML element for the toolbox icon. */
     protected iconDom_: Element | null;
-    /** The html element for the toolbox label. */
+    /** The HTML element for the toolbox label. */
     protected labelDom_: Element | null;
     protected cssConfig_: CssConfig;
     /** True if the category is meant to be hidden, false otherwise. */
@@ -263,5 +261,5 @@ export declare namespace ToolboxCategory {
         closedicon?: string;
     }
 }
-export declare type CssConfig = ToolboxCategory.CssConfig;
+export type CssConfig = ToolboxCategory.CssConfig;
 //# sourceMappingURL=category.d.ts.map

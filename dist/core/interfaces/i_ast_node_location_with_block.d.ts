@@ -7,8 +7,6 @@ import type { IASTNodeLocation } from './i_ast_node_location.js';
 import type { Block } from '../block.js';
 /**
  * An AST node location that has an associated block.
- *
- * @alias Blockly.IASTNodeLocationWithBlock
  */
 export interface IASTNodeLocationWithBlock extends IASTNodeLocation {
     /**

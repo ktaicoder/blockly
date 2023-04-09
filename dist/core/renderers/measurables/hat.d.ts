@@ -8,14 +8,11 @@ import { Measurable } from './base.js';
 /**
  * An object containing information about the space a hat takes up during
  * rendering.
- *
- * @alias Blockly.blockRendering.Hat
  */
 export declare class Hat extends Measurable {
     ascenderHeight: number;
     /**
      * @param constants The rendering constants provider.
-     * @internal
      */
     constructor(constants: ConstantProvider);
 }

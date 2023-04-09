@@ -8,15 +8,18 @@ import * as blocks from '../serialization/blocks.js';
 import { BlockBase, BlockBaseJson } from './events_block_base.js';
 import { Workspace } from '../workspace.js';
 /**
- * Class for a block deletion event.
- *
- * @alias Blockly.Events.BlockDelete
+ * Notifies listeners when a block (or connected stack of blocks) is
+ * deleted.
  */
 export declare class BlockDelete extends BlockBase {
+    /** The XML representation of the deleted block(s). */
     oldXml?: Element | DocumentFragment;
-    ids?: string[];
-    wasShadow?: boolean;
+    /** The JSON respresentation of the deleted block(s). */
     oldJson?: blocks.State;
+    /** All of the IDs of deleted blocks. */
+    ids?: string[];
+    /** True if the deleted block was a shadow block, false otherwise. */
+    wasShadow?: boolean;
     type: string;
     /** @param opt_block The deleted block.  Undefined for a blank event. */
     constructor(opt_block?: Block);

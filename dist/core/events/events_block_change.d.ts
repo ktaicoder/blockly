@@ -8,15 +8,21 @@ import type { BlockSvg } from '../block_svg.js';
 import { Workspace } from '../workspace.js';
 import { BlockBase, BlockBaseJson } from './events_block_base.js';
 /**
- * Class for a block change event.
- *
- * @alias Blockly.Events.BlockChange
+ * Notifies listeners when some element of a block has changed (e.g.
+ * field values, comments, etc).
  */
 export declare class BlockChange extends BlockBase {
     type: string;
+    /**
+     * The element that changed; one of 'field', 'comment', 'collapsed',
+     * 'disabled', 'inline', or 'mutation'
+     */
     element?: string;
+    /** The name of the field that changed, if this is a change to a field. */
     name?: string;
+    /** The original value of the element. */
     oldValue: unknown;
+    /** The new value of the element. */
     newValue: unknown;
     /**
      * @param opt_block The changed block.  Undefined for a blank event.

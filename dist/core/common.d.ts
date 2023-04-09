@@ -40,20 +40,16 @@ export declare function unregisterWorkpace(workspace: Workspace): void;
  * page.
  *
  * @returns The main workspace.
- * @alias Blockly.common.getMainWorkspace
  */
 export declare function getMainWorkspace(): Workspace;
 /**
  * Sets last used main workspace.
  *
  * @param workspace The most recently used top level workspace.
- * @alias Blockly.common.setMainWorkspace
  */
 export declare function setMainWorkspace(workspace: Workspace): void;
 /**
  * Returns the currently selected copyable object.
- *
- * @alias Blockly.common.getSelected
  */
 export declare function getSelected(): ICopyable | null;
 /**
@@ -62,7 +58,6 @@ export declare function getSelected(): ICopyable | null;
  * programmatically select a block, use `BlockSvg#select`.
  *
  * @param newSelection The newly selected block.
- * @alias Blockly.common.setSelected
  * @internal
  */
 export declare function setSelected(newSelection: ICopyable | null): void;
@@ -71,7 +66,6 @@ export declare function setSelected(newSelection: ICopyable | null): void;
  * Tooltip.
  *
  * @returns The parent container.
- * @alias Blockly.common.getParentContainer
  */
 export declare function getParentContainer(): Element | null;
 /**
@@ -81,7 +75,6 @@ export declare function getParentContainer(): Element | null;
  * This method is a NOP if called after the first `Blockly.inject`.
  *
  * @param newParent The container element.
- * @alias Blockly.common.setParentContainer
  */
 export declare function setParentContainer(newParent: Element): void;
 /**
@@ -92,7 +85,6 @@ export declare function setParentContainer(newParent: Element): void;
  * Record the height/width of the SVG image.
  *
  * @param workspace Any workspace in the SVG.
- * @alias Blockly.common.svgResize
  */
 export declare function svgResize(workspace: WorkspaceSvg): void;
 /**
@@ -108,7 +100,6 @@ export declare const draggingConnections: Connection[];
  *    statements (blocks that are not inside a value or statement input
  *    of the block).
  * @returns Map of types to type counts for descendants of the bock.
- * @alias Blockly.common.getBlockTypeCounts
  */
 export declare function getBlockTypeCounts(block: Block, opt_stripFollowing?: boolean): {
     [key: string]: number;
@@ -118,7 +109,6 @@ export declare function getBlockTypeCounts(block: Block, opt_stripFollowing?: bo
  * by the Blockly Developer Tools.
  *
  * @param jsonArray An array of JSON block definitions.
- * @alias Blockly.common.defineBlocksWithJsonArray
  */
 export declare function defineBlocksWithJsonArray(jsonArray: any[]): void;
 /**
@@ -132,7 +122,6 @@ declare function defineBlocksWithJsonArrayInternal(jsonArray: any[]): void;
  * @param jsonArray An array of JSON block definitions.
  * @returns A map of the block
  *     definitions created.
- * @alias Blockly.common.defineBlocksWithJsonArray
  */
 export declare function createBlockDefinitionsFromJsonArray(jsonArray: any[]): {
     [key: string]: BlockDefinition;
@@ -143,7 +132,6 @@ export declare function createBlockDefinitionsFromJsonArray(jsonArray: any[]): {
  *
  * @param blocks A map of block
  *     type names to block definitions.
- * @alias Blockly.common.defineBlocks
  */
 export declare function defineBlocks(blocks: {
     [key: string]: BlockDefinition;

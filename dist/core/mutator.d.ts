@@ -13,8 +13,6 @@ import { Options } from './options.js';
 import type { WorkspaceSvg } from './workspace_svg.js';
 /**
  * Class for a mutator dialog.
- *
- * @alias Blockly.Mutator
  */
 export declare class Mutator extends Icon {
     private quarkNames;

@@ -7,9 +7,12 @@ import './events/events_block_change.js';
 import type { Block } from './block.js';
 import type { Abstract } from './events/events_abstract.js';
 import { Field } from './field.js';
-import { ObservableProcedureMap } from './procedures/observable_procedure_map.js';
-import { ObservableProcedureModel } from './procedures/observable_procedure_model.js';
-import { ObservableParameterModel } from './procedures/observable_parameter_model.js';
+import { IParameterModel } from './interfaces/i_parameter_model.js';
+import { IProcedureMap } from './interfaces/i_procedure_map.js';
+import { IProcedureModel } from './interfaces/i_procedure_model.js';
+import { IProcedureBlock, isProcedureBlock } from './interfaces/i_procedure_block.js';
+import { ProcedureTuple } from './interfaces/i_legacy_procedure_blocks.js';
+import { ObservableProcedureMap } from './observable_procedure_map.js';
 import type { Workspace } from './workspace.js';
 import type { WorkspaceSvg } from './workspace_svg.js';
 /**
@@ -18,27 +21,12 @@ import type { WorkspaceSvg } from './workspace_svg.js';
  * procedure blocks.
  * See also Blockly.Variables.CATEGORY_NAME and
  * Blockly.VariablesDynamic.CATEGORY_NAME.
- *
- * @alias Blockly.Procedures.CATEGORY_NAME
  */
 export declare const CATEGORY_NAME = "PROCEDURE";
 /**
  * The default argument for a procedures_mutatorarg block.
- *
- * @alias Blockly.Procedures.DEFAULT_ARG
  */
 export declare const DEFAULT_ARG = "x";
-export declare type ProcedureTuple = [string, string[], boolean];
-/**
- * Procedure block type.
- *
- * @alias Blockly.Procedures.ProcedureBlock
- */
-export interface ProcedureBlock {
-    getProcedureCall: () => string;
-    renameProcedure: (p1: string, p2: string) => void;
-    getProcedureDef: () => ProcedureTuple;
-}
 /**
  * Find all user-created procedure definitions in a workspace.
  *
@@ -46,7 +34,6 @@ export interface ProcedureBlock {
  * @returns Pair of arrays, the first contains procedures without return
  *     variables, the second with. Each procedure is defined by a three-element
  *     list of name, parameter list, and return value boolean.
- * @alias Blockly.Procedures.allProcedures
  */
 export declare function allProcedures(root: Workspace): [
     ProcedureTuple[],
@@ -60,7 +47,6 @@ export declare function allProcedures(root: Workspace): [
  * @param name Proposed procedure name.
  * @param block Block to disambiguate.
  * @returns Non-colliding name.
- * @alias Blockly.Procedures.findLegalName
  */
 export declare function findLegalName(name: string, block: Block): string;
 /**
@@ -71,7 +57,6 @@ export declare function findLegalName(name: string, block: Block): string;
  * @param opt_exclude Optional block to exclude from comparisons (one doesn't
  *     want to collide with oneself).
  * @returns True if the name is used, otherwise return false.
- * @alias Blockly.Procedures.isNameUsed
  */
 export declare function isNameUsed(name: string, workspace: Workspace, opt_exclude?: Block): boolean;
 /**
@@ -79,7 +64,6 @@ export declare function isNameUsed(name: string, workspace: Workspace, opt_exclu
  *
  * @param name The proposed new name.
  * @returns The accepted name.
- * @alias Blockly.Procedures.rename
  */
 export declare function rename(this: Field, name: string): string;
 /**
@@ -87,7 +71,6 @@ export declare function rename(this: Field, name: string): string;
  *
  * @param workspace The workspace containing procedures.
  * @returns Array of XML block elements.
- * @alias Blockly.Procedures.flyoutCategory
  */
 export declare function flyoutCategory(workspace: WorkspaceSvg): Element[];
 /**
@@ -95,7 +78,6 @@ export declare function flyoutCategory(workspace: WorkspaceSvg): Element[];
  * update and adds a mutator change listener to the mutator workspace.
  *
  * @param e The event that triggered this listener.
- * @alias Blockly.Procedures.mutatorOpenListener
  * @internal
  */
 export declare function mutatorOpenListener(e: Abstract): void;
@@ -105,7 +87,6 @@ export declare function mutatorOpenListener(e: Abstract): void;
  * @param name Name of procedure.
  * @param workspace The workspace to find callers in.
  * @returns Array of caller blocks.
- * @alias Blockly.Procedures.getCallers
  */
 export declare function getCallers(name: string, workspace: Workspace): Block[];
 /**
@@ -113,7 +94,6 @@ export declare function getCallers(name: string, workspace: Workspace): Block[];
  * callers.
  *
  * @param defBlock Procedure definition block.
- * @alias Blockly.Procedures.mutateCallers
  */
 export declare function mutateCallers(defBlock: Block): void;
 /**
@@ -122,8 +102,7 @@ export declare function mutateCallers(defBlock: Block): void;
  * @param name Name of procedure.
  * @param workspace The workspace to search.
  * @returns The procedure definition block, or null not found.
- * @alias Blockly.Procedures.getDefinition
  */
 export declare function getDefinition(name: string, workspace: Workspace): Block | null;
-export { ObservableProcedureMap, ObservableProcedureModel, ObservableParameterModel, };
+export { ObservableProcedureMap, IParameterModel, IProcedureBlock, isProcedureBlock, IProcedureMap, IProcedureModel, ProcedureTuple, };
 //# sourceMappingURL=procedures.d.ts.map

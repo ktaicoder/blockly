@@ -5,8 +5,6 @@
  */
 /**
  * A name with the type of the SVG element stored in the generic.
- *
- * @alias Blockly.utils.Svg
  */
 export declare class Svg<_T> {
     private readonly tagName;

@@ -18,15 +18,15 @@ import { RenderInfo } from './info.js';
 import { MarkerSvg } from './marker_svg.js';
 import { PathObject } from './path_object.js';
 /**
- * The zelos renderer.
+ * The zelos renderer. This renderer emulates Scratch-style and MakeCode-style
+ * rendering.
  *
- * @alias Blockly.zelos.Renderer
+ * Zelos is the ancient Greek spirit of rivalry and emulation.
  */
 export declare class Renderer extends BaseRenderer {
     protected constants_: ConstantProvider;
     /**
      * @param name The renderer name.
-     * @internal
      */
     constructor(name: string);
     /**
@@ -57,7 +57,6 @@ export declare class Renderer extends BaseRenderer {
      * @param workspace The workspace the cursor belongs to.
      * @param marker The marker.
      * @returns The object in charge of drawing the marker.
-     * @internal
      */
     makeMarkerDrawer(workspace: WorkspaceSvg, marker: Marker): MarkerSvg;
     /**
@@ -66,7 +65,6 @@ export declare class Renderer extends BaseRenderer {
      * @param root The root SVG element.
      * @param style The style object to use for colouring.
      * @returns The renderer path object.
-     * @internal
      */
     makePathObject(root: SVGElement, style: BlockStyle): PathObject;
     /**

@@ -13,7 +13,6 @@ import type { WorkspaceSvg } from './workspace_svg.js';
  * @param workspace The workspace containing blocks.
  * @param opt_noId True if the encoder should skip the block IDs.
  * @returns XML DOM element.
- * @alias Blockly.Xml.workspaceToDom
  */
 export declare function workspaceToDom(workspace: Workspace, opt_noId?: boolean): Element;
 /**
@@ -21,7 +20,6 @@ export declare function workspaceToDom(workspace: Workspace, opt_noId?: boolean)
  *
  * @param variableList List of all variable models.
  * @returns Tree of XML elements.
- * @alias Blockly.Xml.variablesToDom
  */
 export declare function variablesToDom(variableList: VariableModel[]): Element;
 /**
@@ -31,7 +29,6 @@ export declare function variablesToDom(variableList: VariableModel[]): Element;
  * @param opt_noId True if the encoder should skip the block ID.
  * @returns Tree of XML elements or an empty document fragment if the block was
  *     an insertion marker.
- * @alias Blockly.Xml.blockToDomWithXY
  */
 export declare function blockToDomWithXY(block: Block, opt_noId?: boolean): Element | DocumentFragment;
 /**
@@ -41,7 +38,6 @@ export declare function blockToDomWithXY(block: Block, opt_noId?: boolean): Elem
  * @param opt_noId True if the encoder should skip the block ID.
  * @returns Tree of XML elements or an empty document fragment if the block was
  *     an insertion marker.
- * @alias Blockly.Xml.blockToDom
  */
 export declare function blockToDom(block: Block, opt_noId?: boolean): Element | DocumentFragment;
 /**
@@ -51,7 +47,6 @@ export declare function blockToDom(block: Block, opt_noId?: boolean): Element | 
  *
  * @param dom A tree of XML nodes.
  * @returns Text representation.
- * @alias Blockly.Xml.domToText
  */
 export declare function domToText(dom: Node): string;
 /**
@@ -59,7 +54,6 @@ export declare function domToText(dom: Node): string;
  *
  * @param dom A tree of XML elements.
  * @returns Text representation.
- * @alias Blockly.Xml.domToPrettyText
  */
 export declare function domToPrettyText(dom: Node): string;
 /**
@@ -69,7 +63,7 @@ export declare function domToPrettyText(dom: Node): string;
  * @returns A DOM object representing the singular child of the document
  *     element.
  * @throws if the text doesn't parse.
- * @alias Blockly.Xml.textToDom
+ * @deprecated Moved to core/utils/xml.js.
  */
 export declare function textToDom(text: string): Element;
 /**
@@ -79,7 +73,6 @@ export declare function textToDom(text: string): Element;
  * @param xml XML DOM.
  * @param workspace The workspace.
  * @returns An array containing new block IDs.
- * @alias Blockly.Xml.clearWorkspaceAndLoadFromXml
  */
 export declare function clearWorkspaceAndLoadFromXml(xml: Element, workspace: WorkspaceSvg): string[];
 /**
@@ -90,7 +83,6 @@ export declare function clearWorkspaceAndLoadFromXml(xml: Element, workspace: Wo
  * @returns An array containing new block IDs.
  * @suppress {strictModuleDepCheck} Suppress module check while workspace
  * comments are not bundled in.
- * @alias Blockly.Xml.domToWorkspace
  */
 export declare function domToWorkspace(xml: Element, workspace: Workspace): string[];
 /**
@@ -100,7 +92,6 @@ export declare function domToWorkspace(xml: Element, workspace: Workspace): stri
  * @param xml The XML DOM.
  * @param workspace The workspace to add to.
  * @returns An array containing new block IDs.
- * @alias Blockly.Xml.appendDomToWorkspace
  */
 export declare function appendDomToWorkspace(xml: Element, workspace: WorkspaceSvg): string[];
 /**
@@ -110,7 +101,6 @@ export declare function appendDomToWorkspace(xml: Element, workspace: WorkspaceS
  * @param xmlBlock XML block element.
  * @param workspace The workspace.
  * @returns The root block created.
- * @alias Blockly.Xml.domToBlock
  */
 export declare function domToBlock(xmlBlock: Element, workspace: Workspace): Block;
 /**
@@ -118,7 +108,6 @@ export declare function domToBlock(xmlBlock: Element, workspace: Workspace): Blo
  *
  * @param xmlVariables List of XML variable elements.
  * @param workspace The workspace to which the variable should be added.
- * @alias Blockly.Xml.domToVariables
  */
 export declare function domToVariables(xmlVariables: Element, workspace: Workspace): void;
 /**
@@ -126,7 +115,6 @@ export declare function domToVariables(xmlVariables: Element, workspace: Workspa
  *
  * @param xmlBlock XML block element or an empty DocumentFragment if the block
  *     was an insertion marker.
- * @alias Blockly.Xml.deleteNext
  */
 export declare function deleteNext(xmlBlock: Element | DocumentFragment): void;
 //# sourceMappingURL=xml.d.ts.map

@@ -9,8 +9,6 @@ import type { CssConfig as SeparatorCssConfig } from '../toolbox/separator.js';
 /**
  * The information needed to create a block in the toolbox.
  * Note that disabled has a different type for backwards compatibility.
- *
- * @alias Blockly.utils.toolbox.BlockInfo
  */
 export interface BlockInfo {
     kind: string;
@@ -39,8 +37,6 @@ export interface BlockInfo {
 }
 /**
  * The information needed to create a separator in the toolbox.
- *
- * @alias Blockly.utils.toolbox.SeparatorInfo
  */
 export interface SeparatorInfo {
     kind: string;
@@ -50,8 +46,6 @@ export interface SeparatorInfo {
 }
 /**
  * The information needed to create a button in the toolbox.
- *
- * @alias Blockly.utils.toolbox.ButtonInfo
  */
 export interface ButtonInfo {
     kind: string;
@@ -60,8 +54,6 @@ export interface ButtonInfo {
 }
 /**
  * The information needed to create a label in the toolbox.
- *
- * @alias Blockly.utils.toolbox.LabelInfo
  */
 export interface LabelInfo {
     kind: string;
@@ -70,14 +62,10 @@ export interface LabelInfo {
 }
 /**
  * The information needed to create either a button or a label in the flyout.
- *
- * @alias Blockly.utils.toolbox.ButtonOrLabelInfo
  */
-export declare type ButtonOrLabelInfo = ButtonInfo | LabelInfo;
+export type ButtonOrLabelInfo = ButtonInfo | LabelInfo;
 /**
  * The information needed to create a category in the toolbox.
- *
- * @alias Blockly.utils.toolbox.StaticCategoryInfo
  */
 export interface StaticCategoryInfo {
     kind: string;
@@ -88,11 +76,10 @@ export interface StaticCategoryInfo {
     colour: string | undefined;
     cssconfig: CategoryCssConfig | undefined;
     hidden: string | undefined;
+    expanded?: string | boolean;
 }
 /**
  * The information needed to create a custom category.
- *
- * @alias Blockly.utils.toolbox.DynamicCategoryInfo
  */
 export interface DynamicCategoryInfo {
     kind: string;
@@ -102,29 +89,22 @@ export interface DynamicCategoryInfo {
     colour: string | undefined;
     cssconfig: CategoryCssConfig | undefined;
     hidden: string | undefined;
+    expanded?: string | boolean;
 }
 /**
  * The information needed to create either a dynamic or static category.
- *
- * @alias Blockly.utils.toolbox.CategoryInfo
  */
-export declare type CategoryInfo = StaticCategoryInfo | DynamicCategoryInfo;
+export type CategoryInfo = StaticCategoryInfo | DynamicCategoryInfo;
 /**
  * Any information that can be used to create an item in the toolbox.
- *
- * @alias Blockly.utils.toolbox.ToolboxItemInfo
  */
-export declare type ToolboxItemInfo = FlyoutItemInfo | StaticCategoryInfo;
+export type ToolboxItemInfo = FlyoutItemInfo | StaticCategoryInfo;
 /**
  * All the different types that can be displayed in a flyout.
- *
- * @alias Blockly.utils.toolbox.FlyoutItemInfo
  */
-export declare type FlyoutItemInfo = BlockInfo | SeparatorInfo | ButtonInfo | LabelInfo | DynamicCategoryInfo;
+export type FlyoutItemInfo = BlockInfo | SeparatorInfo | ButtonInfo | LabelInfo | DynamicCategoryInfo;
 /**
  * The JSON definition of a toolbox.
- *
- * @alias Blockly.utils.toolbox.ToolboxInfo
  */
 export interface ToolboxInfo {
     kind?: string;
@@ -132,26 +112,18 @@ export interface ToolboxInfo {
 }
 /**
  * An array holding flyout items.
- *
- * @alias Blockly.utils.toolbox.FlyoutItemInfoArray
  */
-export declare type FlyoutItemInfoArray = FlyoutItemInfo[];
+export type FlyoutItemInfoArray = FlyoutItemInfo[];
 /**
  * All of the different types that can create a toolbox.
- *
- * @alias Blockly.utils.toolbox.ToolboxDefinition
  */
-export declare type ToolboxDefinition = Node | ToolboxInfo | string;
+export type ToolboxDefinition = Node | ToolboxInfo | string;
 /**
  * All of the different types that can be used to show items in a flyout.
- *
- * @alias Blockly.utils.toolbox.FlyoutDefinition
  */
-export declare type FlyoutDefinition = FlyoutItemInfoArray | NodeList | ToolboxInfo | Node[];
+export type FlyoutDefinition = FlyoutItemInfoArray | NodeList | ToolboxInfo | Node[];
 /**
  * Position of the toolbox and/or flyout relative to the workspace.
- *
- * @alias Blockly.utils.toolbox.Position
  */
 export declare enum Position {
     TOP = 0,
@@ -164,7 +136,6 @@ export declare enum Position {
  *
  * @param toolboxDef The definition of the toolbox in one of its many forms.
  * @returns Object holding information for creating a toolbox.
- * @alias Blockly.utils.toolbox.convertToolboxDefToJson
  * @internal
  */
 export declare function convertToolboxDefToJson(toolboxDef: ToolboxDefinition | null): ToolboxInfo | null;
@@ -173,7 +144,6 @@ export declare function convertToolboxDefToJson(toolboxDef: ToolboxDefinition | 
  *
  * @param flyoutDef The definition of the flyout in one of its many forms.
  * @returns A list of flyout items.
- * @alias Blockly.utils.toolbox.convertFlyoutDefToJsonArray
  * @internal
  */
 export declare function convertFlyoutDefToJsonArray(flyoutDef: FlyoutDefinition | null): FlyoutItemInfoArray;
@@ -182,7 +152,6 @@ export declare function convertFlyoutDefToJsonArray(flyoutDef: FlyoutDefinition 
  *
  * @param toolboxJson Object holding information for creating a toolbox.
  * @returns True if the toolbox has categories.
- * @alias Blockly.utils.toolbox.hasCategories
  * @internal
  */
 export declare function hasCategories(toolboxJson: ToolboxInfo | null): boolean;
@@ -195,7 +164,6 @@ declare function hasCategoriesInternal(toolboxJson: ToolboxInfo | null): boolean
  *
  * @param categoryInfo Object holing information for creating a category.
  * @returns True if the category has subcategories.
- * @alias Blockly.utils.toolbox.isCategoryCollapsible
  * @internal
  */
 export declare function isCategoryCollapsible(categoryInfo: CategoryInfo): boolean;
@@ -204,7 +172,6 @@ export declare function isCategoryCollapsible(categoryInfo: CategoryInfo): boole
  *
  * @param toolboxDef DOM tree of blocks, or text representation of same.
  * @returns DOM tree of blocks, or null.
- * @alias Blockly.utils.toolbox.parseToolboxTree
  */
 export declare function parseToolboxTree(toolboxDef: Element | null | string): Element | null;
 export declare const TEST_ONLY: {

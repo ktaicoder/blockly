@@ -8,11 +8,10 @@ import { Abstract as AbstractEvent, AbstractEventJson } from './events_abstract.
 import type { Workspace } from '../workspace.js';
 /**
  * Abstract class for a variable event.
- *
- * @alias Blockly.Events.VarBase
  */
 export declare class VarBase extends AbstractEvent {
     isBlank: boolean;
+    /** The ID of the variable this event references. */
     varId?: string;
     /**
      * @param opt_variable The variable this event corresponds to.  Undefined for

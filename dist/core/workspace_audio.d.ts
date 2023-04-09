@@ -6,8 +6,6 @@
 import type { WorkspaceSvg } from './workspace_svg.js';
 /**
  * Class for loading, storing, and playing audio for a workspace.
- *
- * @alias Blockly.WorkspaceAudio
  */
 export declare class WorkspaceAudio {
     private parentWorkspace;

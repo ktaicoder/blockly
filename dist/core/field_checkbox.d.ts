@@ -5,14 +5,12 @@
  */
 import './events/events_block_change.js';
 import { Field, FieldConfig, FieldValidator } from './field.js';
-import type { Sentinel } from './utils/sentinel.js';
-export declare type FieldCheckboxValidator = FieldValidator<boolean>;
+type BoolString = 'TRUE' | 'FALSE';
+type CheckboxBool = BoolString | boolean;
 /**
  * Class for a checkbox field.
- *
- * @alias Blockly.FieldCheckbox
  */
-export declare class FieldCheckbox extends Field<boolean> {
+export declare class FieldCheckbox extends Field<CheckboxBool> {
     /** Default character for the checkmark. */
     static readonly CHECK_CHAR = "\u2713";
     private checkChar_;
@@ -25,22 +23,26 @@ export declare class FieldCheckbox extends Field<boolean> {
      * Mouse cursor style when over the hotspot that initiates editability.
      */
     CURSOR: string;
-    value_: any;
     /**
-     * @param opt_value The initial value of the field. Should either be 'TRUE',
+     * NOTE: The default value is set in `Field`, so maintain that value instead
+     * of overwriting it here or in the constructor.
+     */
+    value_: boolean | null;
+    /**
+     * @param value The initial value of the field. Should either be 'TRUE',
      *     'FALSE' or a boolean. Defaults to 'FALSE'. Also accepts
      *     Field.SKIP_SETUP if you wish to skip setup (only used by subclasses
      *     that want to handle configuration and setting the field value after
      *     their own constructors have run).
-     * @param opt_validator  A function that is called to validate changes to the
+     * @param validator  A function that is called to validate changes to the
      *     field's value. Takes in a value ('TRUE' or 'FALSE') & returns a
      *     validated value ('TRUE' or 'FALSE'), or null to abort the change.
-     * @param opt_config A map of options used to configure the field.
+     * @param config A map of options used to configure the field.
      *     See the [field creation documentation]{@link
      * https://developers.google.com/blockly/guides/create-custom-blocks/fields/built-in-fields/checkbox#creation}
      * for a list of properties this parameter supports.
      */
-    constructor(opt_value?: string | boolean | Sentinel, opt_validator?: FieldCheckboxValidator, opt_config?: FieldCheckboxConfig);
+    constructor(value?: CheckboxBool | typeof Field.SKIP_SETUP, validator?: FieldCheckboxValidator, config?: FieldCheckboxConfig);
     /**
      * Configure the field based on the given map of options.
      *
@@ -74,29 +76,29 @@ export declare class FieldCheckbox extends Field<boolean> {
     /**
      * Ensure that the input value is valid ('TRUE' or 'FALSE').
      *
-     * @param opt_newValue The input value.
+     * @param newValue The input value.
      * @returns A valid value ('TRUE' or 'FALSE), or null if invalid.
      */
-    protected doClassValidation_(opt_newValue?: any): string | null;
+    protected doClassValidation_(newValue?: any): BoolString | null;
     /**
      * Update the value of the field, and update the checkElement.
      *
      * @param newValue The value to be saved. The default validator guarantees
      *     that this is a either 'TRUE' or 'FALSE'.
      */
-    protected doValueUpdate_(newValue: any): void;
+    protected doValueUpdate_(newValue: BoolString): void;
     /**
      * Get the value of this field, either 'TRUE' or 'FALSE'.
      *
      * @returns The value of this field.
      */
-    getValue(): string;
+    getValue(): BoolString;
     /**
      * Get the boolean value of this field.
      *
      * @returns The boolean value of this field.
      */
-    getValueBoolean(): boolean;
+    getValueBoolean(): boolean | null;
     /**
      * Get the text of this field. Used when the block is collapsed.
      *
@@ -135,4 +137,21 @@ export interface FieldCheckboxConfig extends FieldConfig {
 export interface FieldCheckboxFromJsonConfig extends FieldCheckboxConfig {
     checked?: boolean;
 }
+/**
+ * A function that is called to validate changes to the field's value before
+ * they are set.
+ *
+ * @see {@link https://developers.google.com/blockly/guides/create-custom-blocks/fields/validators#return_values}
+ * @param newValue The value to be validated.
+ * @returns One of three instructions for setting the new value: `T`, `null`,
+ * or `undefined`.
+ *
+ * - `T` to set this function's returned value instead of `newValue`.
+ *
+ * - `null` to invoke `doValueInvalid_` and not set a value.
+ *
+ * - `undefined` to set `newValue` as is.
+ */
+export type FieldCheckboxValidator = FieldValidator<CheckboxBool>;
+export {};
 //# sourceMappingURL=field_checkbox.d.ts.map

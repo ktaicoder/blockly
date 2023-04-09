@@ -10,8 +10,6 @@ import * as toolbox from '../utils/toolbox.js';
 import { ToolboxCategory } from './category.js';
 /**
  * Class for a category in a toolbox that can be collapsed.
- *
- * @alias Blockly.CollapsibleToolboxCategory
  */
 export declare class CollapsibleToolboxCategory extends ToolboxCategory implements ICollapsibleToolboxItem {
     /** Name used for registering a collapsible toolbox category. */
@@ -22,8 +20,6 @@ export declare class CollapsibleToolboxCategory extends ToolboxCategory implemen
     protected expanded_: boolean;
     /** The child toolbox items for this category. */
     protected toolboxItems_: IToolboxItem[];
-    flyoutItems_: any;
-    isHidden_: any;
     /**
      * @param categoryDef The information needed to create a category in the
      *     toolbox.
@@ -94,5 +90,5 @@ export declare namespace CollapsibleToolboxCategory {
         contents: string | null;
     }
 }
-export declare type CssConfig = CollapsibleToolboxCategory.CssConfig;
+export type CssConfig = CollapsibleToolboxCategory.CssConfig;
 //# sourceMappingURL=collapsible_category.d.ts.map

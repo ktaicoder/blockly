@@ -15,13 +15,27 @@ import type { KeyboardShortcut } from './shortcut_registry.js';
 import * as Tooltip from './tooltip.js';
 import type { Coordinate } from './utils/coordinate.js';
 import { Rect } from './utils/rect.js';
-import { Sentinel } from './utils/sentinel.js';
 import { Size } from './utils/size.js';
-export declare type FieldValidator<T = any> = (value?: T) => T | null | undefined;
+/**
+ * A function that is called to validate changes to the field's value before
+ * they are set.
+ *
+ * @see {@link https://developers.google.com/blockly/guides/create-custom-blocks/fields/validators#return_values}
+ * @param newValue The value to be validated.
+ * @returns One of three instructions for setting the new value: `T`, `null`,
+ * or `undefined`.
+ *
+ * - `T` to set this function's returned value instead of `newValue`.
+ *
+ * - `null` to invoke `doValueInvalid_` and not set a value.
+ *
+ * - `undefined` to set `newValue` as is.
+ */
+export type FieldValidator<T = any> = (newValue: T) => T | null | undefined;
 /**
  * Abstract class for an editable field.
  *
- * @alias Blockly.Field
+ * @typeParam T - The value stored on the field.
  */
 export declare abstract class Field<T = any> implements IASTNodeLocationSvg, IASTNodeLocationWithBlock, IKeyboardAccessible, IRegistrable {
     /**
@@ -41,7 +55,7 @@ export declare abstract class Field<T = any> implements IASTNodeLocationSvg, IAS
      * field's value or run configure_, and should allow a subclass to do that
      * instead.
      */
-    static readonly SKIP_SETUP: Sentinel;
+    static readonly SKIP_SETUP: unique symbol;
     /**
      * Name of field.  Unique within each block.
      * Static labels are usually unnamed.
@@ -128,14 +142,14 @@ export declare abstract class Field<T = any> implements IASTNodeLocationSvg, IAS
      *     Also accepts Field.SKIP_SETUP if you wish to skip setup (only used by
      * subclasses that want to handle configuration and setting the field value
      * after their own constructors have run).
-     * @param opt_validator  A function that is called to validate changes to the
+     * @param validator  A function that is called to validate changes to the
      *     field's value. Takes in a value & returns a validated value, or null to
      *     abort the change.
-     * @param opt_config A map of options used to configure the field.
+     * @param config A map of options used to configure the field.
      *    Refer to the individual field's documentation for a list of properties
      * this parameter supports.
      */
-    constructor(value: T | Sentinel, opt_validator?: FieldValidator<T> | null, opt_config?: FieldConfig);
+    constructor(value: T | typeof Field.SKIP_SETUP, validator?: FieldValidator<T> | null, config?: FieldConfig);
     /**
      * Process the configuration map passed to the field.
      *
@@ -336,7 +350,7 @@ export declare abstract class Field<T = any> implements IASTNodeLocationSvg, IAS
      *
      * @returns Validation function, or null.
      */
-    getValidator(): Function | null;
+    getValidator(): FieldValidator<T> | null;
     /**
      * Gets the group element for this editable field.
      * Used for measuring the size and for positioning.
@@ -383,12 +397,12 @@ export declare abstract class Field<T = any> implements IASTNodeLocationSvg, IAS
      * Calls showEditor_ when the field is clicked if the field is clickable.
      * Do not override.
      *
-     * @param opt_e Optional mouse event that triggered the field to open, or
+     * @param e Optional mouse event that triggered the field to open, or
      *     undefined if triggered programmatically.
      * @sealed
      * @internal
      */
-    showEditor(opt_e?: Event): void;
+    showEditor(e?: Event): void;
     /**
      * A developer hook to create an editor for the field. This is no-op by
      * default, and must be overriden to create an editor.
@@ -400,9 +414,9 @@ export declare abstract class Field<T = any> implements IASTNodeLocationSvg, IAS
     /**
      * Updates the size of the field based on the text.
      *
-     * @param opt_margin margin to use when positioning the text element.
+     * @param margin margin to use when positioning the text element.
      */
-    protected updateSize_(opt_margin?: number): void;
+    protected updateSize_(margin?: number): void;
     /**
      * Position a field's text element after a size change.  This handles both LTR
      * and RTL positioning.
@@ -495,22 +509,36 @@ export declare abstract class Field<T = any> implements IASTNodeLocationSvg, IAS
      *
      * @returns Current value.
      */
-    getValue(): any;
+    getValue(): T | null;
     /**
-     * Used to validate a value. Returns input by default. Can be overridden by
-     * subclasses, see FieldDropdown.
+     * Validate the changes to a field's value before they are set. See
+     * **FieldDropdown** for an example of subclass implementation.
      *
-     * @param opt_newValue The value to be validated.
-     * @returns The validated value, same as input by default.
+     * **NOTE:** Validation returns one option between `T`, `null`, and
+     * `undefined`. **Field**'s implementation will never return `undefined`, but
+     * it is valid for a subclass to return `undefined` if the new value is
+     * compatible with `T`.
+     *
+     * @see {@link https://developers.google.com/blockly/guides/create-custom-blocks/fields/validators#return_values}
+     * @param newValue - The value to be validated.
+     * @returns One of three instructions for setting the new value: `T`, `null`,
+     * or `undefined`.
+     *
+     * - `T` to set this function's returned value instead of `newValue`.
+     *
+     * - `null` to invoke `doValueInvalid_` and not set a value.
+     *
+     * - `undefined` to set `newValue` as is.
      */
-    protected doClassValidation_(opt_newValue?: any): any;
+    protected doClassValidation_(newValue: T): T | null | undefined;
+    protected doClassValidation_(newValue?: any): T | null;
     /**
      * Used to update the value of a field. Can be overridden by subclasses to do
      * custom storage of values/updating of external things.
      *
      * @param newValue The value to be saved.
      */
-    protected doValueUpdate_(newValue: any): void;
+    protected doValueUpdate_(newValue: T): void;
     /**
      * Used to notify the field an invalid value was input. Can be overridden by
      * subclasses, see FieldTextInput.
@@ -612,8 +640,12 @@ export declare abstract class Field<T = any> implements IASTNodeLocationSvg, IAS
      * @internal
      */
     setMarkerSvg(markerSvg: SVGElement): void;
-    /** Redraw any attached marker or cursor svgs if needed. */
-    protected updateMarkers_(): void;
+    /**
+     * Redraw any attached marker or cursor svgs if needed.
+     *
+     * @internal
+     */
+    updateMarkers_(): void;
 }
 /**
  * Extra configuration options for the base field.
@@ -624,8 +656,10 @@ export interface FieldConfig {
 /**
  * For use by Field and descendants of Field. Constructors can change
  * in descendants, though they should contain all of Field's prototype methods.
+ *
+ * @internal
  */
-export declare type FieldProto = Pick<typeof Field, 'prototype'>;
+export type FieldProto = Pick<typeof Field, 'prototype'>;
 /**
  * Represents an error where the field is trying to access its block or
  * information about its block before it has actually been attached to said

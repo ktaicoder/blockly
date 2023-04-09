@@ -10,7 +10,6 @@ import type { Workspace } from './workspace.js';
  * Class for a code generator that translates the blocks into a language.
  *
  * @unrestricted
- * @alias Blockly.CodeGenerator
  */
 export declare class CodeGenerator {
     name_: string;

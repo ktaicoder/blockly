@@ -4,12 +4,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import { Field, FieldConfig } from './field.js';
-import type { Sentinel } from './utils/sentinel.js';
 import { Size } from './utils/size.js';
 /**
  * Class for an image on a block.
- *
- * @alias Blockly.FieldImage
  */
 export declare class FieldImage extends Field<string> {
     /**
@@ -38,7 +35,6 @@ export declare class FieldImage extends Field<string> {
     private flipRtl_;
     /** Alt text of this image. */
     private altText_;
-    value_: any;
     /**
      * @param src The URL of the image.
      *     Also accepts Field.SKIP_SETUP if you wish to skip setup (only used by
@@ -46,16 +42,16 @@ export declare class FieldImage extends Field<string> {
      * after their own constructors have run).
      * @param width Width of the image.
      * @param height Height of the image.
-     * @param opt_alt Optional alt text for when block is collapsed.
-     * @param opt_onClick Optional function to be called when the image is
-     *     clicked. If opt_onClick is defined, opt_alt must also be defined.
-     * @param opt_flipRtl Whether to flip the icon in RTL.
-     * @param opt_config A map of options used to configure the field.
+     * @param alt Optional alt text for when block is collapsed.
+     * @param onClick Optional function to be called when the image is
+     *     clicked. If onClick is defined, alt must also be defined.
+     * @param flipRtl Whether to flip the icon in RTL.
+     * @param config A map of options used to configure the field.
      *     See the [field creation documentation]{@link
      * https://developers.google.com/blockly/guides/create-custom-blocks/fields/built-in-fields/image#creation}
      * for a list of properties this parameter supports.
      */
-    constructor(src: string | Sentinel, width: string | number, height: string | number, opt_alt?: string, opt_onClick?: (p1: FieldImage) => any, opt_flipRtl?: boolean, opt_config?: FieldImageConfig);
+    constructor(src: string | typeof Field.SKIP_SETUP, width: string | number, height: string | number, alt?: string, onClick?: (p1: FieldImage) => void, flipRtl?: boolean, config?: FieldImageConfig);
     /**
      * Configure the field based on the given map of options.
      *
@@ -72,17 +68,17 @@ export declare class FieldImage extends Field<string> {
     /**
      * Ensure that the input value (the source URL) is a string.
      *
-     * @param opt_newValue The input value.
+     * @param newValue The input value.
      * @returns A string, or null if invalid.
      */
-    protected doClassValidation_(opt_newValue?: any): string | null;
+    protected doClassValidation_(newValue?: any): string | null;
     /**
      * Update the value of this image field, and update the displayed image.
      *
      * @param newValue The value to be saved. The default validator guarantees
      *     that this is a string.
      */
-    protected doValueUpdate_(newValue: any): void;
+    protected doValueUpdate_(newValue: string): void;
     /**
      * Get whether to flip this image in RTL
      *
@@ -106,7 +102,7 @@ export declare class FieldImage extends Field<string> {
      * @param func The function that is called when the image is clicked, or null
      *     to remove.
      */
-    setOnClickHandler(func: ((p1: FieldImage) => any) | null): void;
+    setOnClickHandler(func: ((p1: FieldImage) => void) | null): void;
     /**
      * Use the `getText_` developer hook to override the field's text
      * representation.

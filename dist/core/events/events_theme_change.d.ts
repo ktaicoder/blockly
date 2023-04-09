@@ -7,11 +7,10 @@ import { AbstractEventJson } from './events_abstract.js';
 import { UiBase } from './events_ui_base.js';
 import type { Workspace } from '../workspace.js';
 /**
- * Class for a theme change event.
- *
- * @alias Blockly.Events.ThemeChange
+ * Notifies listeners that the workspace theme has changed.
  */
 export declare class ThemeChange extends UiBase {
+    /** The name of the new theme that has been set. */
     themeName?: string;
     type: string;
     /**

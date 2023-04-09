@@ -8,12 +8,9 @@ import { Marker } from './marker.js';
 /**
  * Class for a cursor.
  * A cursor controls how a user navigates the Blockly AST.
- *
- * @alias Blockly.Cursor
  */
 export declare class Cursor extends Marker {
     type: string;
-    /** @alias Blockly.Cursor */
     constructor();
     /**
      * Find the next connection, field, or block.

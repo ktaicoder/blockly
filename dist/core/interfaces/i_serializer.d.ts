@@ -6,8 +6,6 @@
 import type { Workspace } from '../workspace.js';
 /**
  * Serializes and deserializes a plugin or system.
- *
- * @alias Blockly.serialization.ISerializer.ISerializer
  */
 export interface ISerializer {
     /**

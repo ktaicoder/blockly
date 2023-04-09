@@ -6,8 +6,6 @@
 import type { IDeletable } from './i_deletable.js';
 /**
  * The interface for an object that can be dragged.
- *
- * @alias Blockly.IDraggable
  */
 export interface IDraggable extends IDeletable {
 }

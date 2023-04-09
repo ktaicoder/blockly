@@ -10,15 +10,12 @@ import type { ConstantProvider as GerasConstantProvider } from '../constants.js'
 /**
  * An object containing information about the space an inline input takes up
  * during rendering.
- *
- * @alias Blockly.geras.InlineInput
  */
 export declare class InlineInput extends BaseInlineInput {
     constants_: GerasConstantProvider;
     /**
      * @param constants The rendering constants provider.
      * @param input The inline input to measure and store information for.
-     * @internal
      */
     constructor(constants: BaseConstantProvider, input: Input);
 }

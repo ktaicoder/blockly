@@ -8,15 +8,15 @@ import type { WorkspaceComment } from '../workspace_comment.js';
 import { CommentBase, CommentBaseJson } from './events_comment_base.js';
 import type { Workspace } from '../workspace.js';
 /**
- * Class for a comment move event.  Created before the move.
- *
- * @alias Blockly.Events.CommentMove
+ * Notifies listeners that a workspace comment has moved.
  */
 export declare class CommentMove extends CommentBase {
     type: string;
+    /** The comment that is being moved. */
     comment_?: WorkspaceComment;
+    /** The location of the comment before the move, in workspace coordinates. */
     oldCoordinate_?: Coordinate;
-    /** The location after the move, in workspace coordinates. */
+    /** The location of the comment after the move, in workspace coordinates. */
     newCoordinate_?: Coordinate;
     /**
      * @param opt_comment The comment that is being moved.  Undefined for a blank

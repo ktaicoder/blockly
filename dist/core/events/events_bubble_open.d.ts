@@ -9,12 +9,13 @@ import { UiBase } from './events_ui_base.js';
 import type { Workspace } from '../workspace.js';
 /**
  * Class for a bubble open event.
- *
- * @alias Blockly.Events.BubbleOpen
  */
 export declare class BubbleOpen extends UiBase {
+    /** The ID of the block the bubble is attached to. */
     blockId?: string;
+    /** True if the bubble is opening, false if closing. */
     isOpen?: boolean;
+    /** The type of bubble; one of 'mutator', 'comment', or 'warning'. */
     bubbleType?: BubbleType;
     type: string;
     /**

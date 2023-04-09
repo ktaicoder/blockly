@@ -7,8 +7,6 @@ import type { Coordinate } from '../utils/coordinate.js';
 import type { BlockSvg } from '../block_svg.js';
 /**
  * A block dragger interface.
- *
- * @alias Blockly.IBlockDragger
  */
 export interface IBlockDragger {
     /**

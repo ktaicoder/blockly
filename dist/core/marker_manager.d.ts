@@ -8,8 +8,6 @@ import type { Marker } from './keyboard_nav/marker.js';
 import type { WorkspaceSvg } from './workspace_svg.js';
 /**
  * Class to manage the multiple markers and the cursor on a workspace.
- *
- * @alias Blockly.MarkerManager
  */
 export declare class MarkerManager {
     private readonly workspace;

@@ -5,8 +5,6 @@
  */
 /**
  * The interface for a Blockly component that can be registered.
- *
- * @alias Blockly.IRegistrable
  */
 export interface IRegistrable {
 }

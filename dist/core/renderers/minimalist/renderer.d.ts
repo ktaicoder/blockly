@@ -11,13 +11,10 @@ import { Drawer } from './drawer.js';
 import { RenderInfo } from './info.js';
 /**
  * The minimalist renderer.
- *
- * @alias Blockly.minimalist.Renderer
  */
 export declare class Renderer extends BaseRenderer {
     /**
      * @param name The renderer name.
-     * @internal
      */
     constructor(name: string);
     /**

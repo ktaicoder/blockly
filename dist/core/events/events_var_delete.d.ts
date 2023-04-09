@@ -7,13 +7,15 @@ import type { VariableModel } from '../variable_model.js';
 import { VarBase, VarBaseJson } from './events_var_base.js';
 import type { Workspace } from '../workspace.js';
 /**
- * Class for a variable deletion event.
+ * Notifies listeners that a variable model has been deleted.
  *
- * @alias Blockly.Events.VarDelete
+ * @class
  */
 export declare class VarDelete extends VarBase {
     type: string;
+    /** The type of the variable that was deleted. */
     varType?: string;
+    /** The name of the variable that was deleted. */
     varName?: string;
     /**
      * @param opt_variable The deleted variable. Undefined for a blank event.

@@ -7,14 +7,14 @@ import type { BlockSvg } from '../../block_svg.js';
 import { Renderer as BaseRenderer } from '../common/renderer.js';
 import { RenderInfo } from './info.js';
 /**
- * The thrasos renderer.
+ * The thrasos renderer. This is a more modern take on the legacy geras
+ * renderer.
  *
- * @alias Blockly.thrasos.Renderer
+ * Thrasos is the ancient Greek spirit of boldness.
  */
 export declare class Renderer extends BaseRenderer {
     /**
      * @param name The renderer name.
-     * @internal
      */
     constructor(name: string);
     /**

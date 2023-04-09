@@ -11,8 +11,6 @@ import type { ConstantProvider } from './constants.js';
 /**
  * An object that handles creating and setting each of the SVG elements
  * used by the renderer.
- *
- * @alias Blockly.zelos.PathObject
  */
 export declare class PathObject extends BasePathObject {
     /** The selected path of the block. */
@@ -31,13 +29,11 @@ export declare class PathObject extends BasePathObject {
      * with an output connection is drawn.
      */
     outputShapeType: number | null;
-    /** @internal */
     constants: ConstantProvider;
     /**
      * @param root The root SVG element.
      * @param style The style object to use for colouring.
      * @param constants The renderer's constants.
-     * @internal
      */
     constructor(root: SVGElement, style: BlockStyle, constants: ConstantProvider);
     setPath(pathString: string): void;
@@ -48,14 +44,10 @@ export declare class PathObject extends BasePathObject {
     updateShapeForInputHighlight(conn: Connection, enable: boolean): void;
     /**
      * Method that's called when the drawer is about to draw the block.
-     *
-     * @internal
      */
     beginDrawing(): void;
     /**
      * Method that's called when the drawer is done drawing.
-     *
-     * @internal
      */
     endDrawing(): void;
     /**
@@ -64,7 +56,6 @@ export declare class PathObject extends BasePathObject {
      *
      * @param name The input name.
      * @param pathString The path.
-     * @internal
      */
     setOutlinePath(name: string, pathString: string): void;
     /**

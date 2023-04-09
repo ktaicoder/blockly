@@ -18,14 +18,12 @@ interface RegistryOptions {
  *     construct an instance of the field.
  * @throws {Error} if the type name is empty, the field is already registered,
  *     or the fieldClass is not an object containing a fromJson function.
- * @alias Blockly.fieldRegistry.register
  */
 export declare function register(type: string, fieldClass: FieldProto): void;
 /**
  * Unregisters the field registered with the given type.
  *
  * @param type The field type name as used in the JSON definition.
- * @alias Blockly.fieldRegistry.unregister
  */
 export declare function unregister(type: string): void;
 /**
@@ -37,7 +35,6 @@ export declare function unregister(type: string): void;
  *     type.
  * @returns The new field instance or null if a field wasn't found with the
  *     given type name
- * @alias Blockly.fieldRegistry.fromJson
  * @internal
  */
 export declare function fromJson<T>(options: RegistryOptions): Field<T> | null;

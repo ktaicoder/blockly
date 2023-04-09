@@ -7,12 +7,11 @@ import type { WorkspaceComment } from '../workspace_comment.js';
 import { CommentBase, CommentBaseJson } from './events_comment_base.js';
 import type { Workspace } from '../workspace.js';
 /**
- * Class for a comment creation event.
- *
- * @alias Blockly.Events.CommentCreate
+ * Notifies listeners that a workspace comment was created.
  */
 export declare class CommentCreate extends CommentBase {
     type: string;
+    /** The XML representation of the created workspace comment. */
     xml?: Element | DocumentFragment;
     /**
      * @param opt_comment The created comment.

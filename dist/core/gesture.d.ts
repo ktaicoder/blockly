@@ -5,7 +5,6 @@
  */
 import './events/events_click.js';
 import type { BlockSvg } from './block_svg.js';
-import * as browserEvents from './browser_events.js';
 import { BubbleDragger } from './bubble_dragger.js';
 import type { Field } from './field.js';
 import type { IBlockDragger } from './interfaces/i_block_dragger.js';
@@ -16,8 +15,6 @@ import { WorkspaceDragger } from './workspace_dragger.js';
 import type { WorkspaceSvg } from './workspace_svg.js';
 /**
  * Class for one gesture.
- *
- * @alias Blockly.Gesture
  */
 export declare class Gesture {
     private readonly creatorWorkspace;
@@ -63,15 +60,11 @@ export declare class Gesture {
      */
     private hasExceededDragRadius_;
     /**
-     * A handle to use to unbind a pointermove listener at the end of a drag.
-     * Opaque data returned from Blockly.bindEventWithChecks_.
+     * Array holding info needed to unbind events.
+     * Used for disposing.
+     * Ex: [[node, name, func], [node, name, func]].
      */
-    protected onMoveWrapper_: browserEvents.Data | null;
-    /**
-     * A handle to use to unbind a pointerup listener at the end of a drag.
-     * Opaque data returned from Blockly.bindEventWithChecks_.
-     */
-    protected onUpWrapper_: browserEvents.Data | null;
+    private boundEvents;
     /** The object tracking a bubble drag, or null if none is in progress. */
     private bubbleDragger_;
     /** The object tracking a block drag, or null if none is in progress. */
@@ -105,12 +98,6 @@ export declare class Gesture {
     private previousScale_;
     /** The starting distance between two touch points. */
     private startDistance_;
-    /**
-     * A handle to use to unbind the second pointerdown listener
-     * at the end of a drag.
-     * Opaque data returned from Blockly.bindEventWithChecks_.
-     */
-    private onStartWrapper_;
     /** Boolean for whether or not the workspace supports pinch-zoom. */
     private isPinchZoomEnabled_;
     /**
@@ -360,7 +347,7 @@ export declare class Gesture {
      * @param field The field the gesture started on.
      * @internal
      */
-    setStartField(field: Field): void;
+    setStartField<T>(field: Field<T>): void;
     /**
      * Record the bubble that a gesture started on
      *

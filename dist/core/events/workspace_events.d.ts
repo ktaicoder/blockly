@@ -6,12 +6,8 @@
 import type { Workspace } from '../workspace.js';
 import { Abstract as AbstractEvent, AbstractEventJson } from './events_abstract.js';
 /**
- * Class for a finished loading event.
- * Used to notify the developer when the workspace has finished loading (i.e
- * domToWorkspace).
- * Finished loading events do not record undo or redo.
- *
- * @alias Blockly.Events.FinishedLoading
+ * Notifies listeners when the workspace has finished deserializing from
+ * JSON/XML.
  */
 export declare class FinishedLoading extends AbstractEvent {
     isBlank: boolean;

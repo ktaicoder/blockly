@@ -5,13 +5,11 @@
  *
  * aimk 주석을 참고
  */
-import { Coordinate } from "./utils/coordinate.js";
-import type * as toolbox from "./utils/toolbox.js";
-import type { WorkspaceSvg } from "./workspace_svg.js";
+import { Coordinate } from './utils/coordinate.js';
+import type * as toolbox from './utils/toolbox.js';
+import type { WorkspaceSvg } from './workspace_svg.js';
 /**
  * Class for a button or label in the flyout.
- *
- * @alias Blockly.FlyoutButton
  */
 export declare class FlyoutButton {
     private readonly workspace;
@@ -21,6 +19,8 @@ export declare class FlyoutButton {
     static TEXT_MARGIN_X: number;
     /** The vertical margin around the text in the button. */
     static TEXT_MARGIN_Y: number;
+    /** The radius of the flyout button's borders. */
+    static BORDER_RADIUS: number;
     private readonly text_;
     private readonly position_;
     private readonly callbackKey_;

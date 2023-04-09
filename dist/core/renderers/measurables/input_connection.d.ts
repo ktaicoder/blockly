@@ -9,9 +9,7 @@ import type { ConstantProvider } from '../common/constants.js';
 import { Connection } from './connection.js';
 /**
  * The base class to represent an input that takes up space on a block
- * during rendering
- *
- * @alias Blockly.blockRendering.InputConnection
+ * during rendering.
  */
 export declare class InputConnection extends Connection {
     input: Input;
@@ -24,7 +22,6 @@ export declare class InputConnection extends Connection {
     /**
      * @param constants The rendering constants provider.
      * @param input The input to measure and store information for.
-     * @internal
      */
     constructor(constants: ConstantProvider, input: Input);
 }

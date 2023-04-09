@@ -9,15 +9,12 @@ import { StatementInput as BaseStatementInput } from '../../../renderers/measura
 /**
  * An object containing information about the space a statement input takes up
  * during rendering.
- *
- * @alias Blockly.zelos.StatementInput
  */
 export declare class StatementInput extends BaseStatementInput {
     connectedBottomNextConnection: boolean;
     /**
      * @param constants The rendering constants provider.
      * @param input The statement input to measure and store information for.
-     * @internal
      */
     constructor(constants: ConstantProvider, input: Input);
 }

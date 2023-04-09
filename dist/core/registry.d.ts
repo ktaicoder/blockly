@@ -25,14 +25,10 @@ export declare const TEST_ONLY: {
 };
 /**
  * The string used to register the default class for a type of plugin.
- *
- * @alias Blockly.registry.DEFAULT
  */
 export declare const DEFAULT = "default";
 /**
  * A name with the type of the element stored in the generic.
- *
- * @alias Blockly.registry.Type
  */
 export declare class Type<_T> {
     private readonly name;
@@ -71,7 +67,6 @@ export declare class Type<_T> {
  * @throws {Error} if the type or name is empty, a name with the given type has
  *     already been registered, or if the given class or object is not valid for
  *     its type.
- * @alias Blockly.registry.register
  */
 export declare function register<T>(type: string | Type<T>, name: string, registryItem: (new (...p1: any[]) => T) | null | any, opt_allowOverrides?: boolean): void;
 /**
@@ -80,7 +75,6 @@ export declare function register<T>(type: string | Type<T>, name: string, regist
  * @param type The type of the plugin.
  *     (e.g. Field, Renderer)
  * @param name The plugin's name. (Ex. field_angle, geras)
- * @alias Blockly.registry.unregister
  */
 export declare function unregister<T>(type: string | Type<T>, name: string): void;
 /**
@@ -92,7 +86,6 @@ export declare function unregister<T>(type: string | Type<T>, name: string): voi
  * @param name The plugin's name. (Ex. field_angle, geras)
  * @returns True if the registry has an item with the given type and name, false
  *     otherwise.
- * @alias Blockly.registry.hasItem
  */
 export declare function hasItem<T>(type: string | Type<T>, name: string): boolean;
 /**
@@ -104,7 +97,6 @@ export declare function hasItem<T>(type: string | Type<T>, name: string): boolea
  * @param opt_throwIfMissing Whether or not to throw an error if we are unable
  *     to find the plugin.
  * @returns The class with the given name and type or null if none exists.
- * @alias Blockly.registry.getClass
  */
 export declare function getClass<T>(type: string | Type<T>, name: string, opt_throwIfMissing?: boolean): (new (...p1: any[]) => T) | null;
 /**
@@ -116,7 +108,6 @@ export declare function getClass<T>(type: string | Type<T>, name: string, opt_th
  * @param opt_throwIfMissing Whether or not to throw an error if we are unable
  *     to find the object.
  * @returns The object with the given name and type or null if none exists.
- * @alias Blockly.registry.getObject
  */
 export declare function getObject<T>(type: string | Type<T>, name: string, opt_throwIfMissing?: boolean): T | null;
 /**
@@ -128,7 +119,6 @@ export declare function getObject<T>(type: string | Type<T>, name: string, opt_t
  * @param opt_throwIfMissing Whether or not to throw an error if we are unable
  *     to find the object. False by default.
  * @returns A map of objects with the given type, or null if none exists.
- * @alias Blockly.registry.getAllItems
  */
 export declare function getAllItems<T>(type: string | Type<T>, opt_cased?: boolean, opt_throwIfMissing?: boolean): {
     [key: string]: T | null | (new (...p1: any[]) => T);
@@ -142,7 +132,6 @@ export declare function getAllItems<T>(type: string | Type<T>, opt_cased?: boole
  * @param opt_throwIfMissing Whether or not to throw an error if we are unable
  *     to find the plugin.
  * @returns The class for the plugin.
- * @alias Blockly.registry.getClassFromOptions
  */
 export declare function getClassFromOptions<T>(type: Type<T>, options: Options, opt_throwIfMissing?: boolean): (new (...p1: any[]) => T) | null;
 //# sourceMappingURL=registry.d.ts.map

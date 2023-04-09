@@ -11,13 +11,10 @@ import { BottomRow as BaseBottomRow } from '../../../renderers/measurables/botto
  * a block as well as spacing information for the top row.
  * Elements in a bottom row can consist of corners, spacers and next
  * connections.
- *
- * @alias Blockly.zelos.BottomRow
  */
 export declare class BottomRow extends BaseBottomRow {
     /**
      * @param constants The rendering constants provider.
-     * @internal
      */
     constructor(constants: ConstantProvider);
     endsWithElemSpacer(): boolean;

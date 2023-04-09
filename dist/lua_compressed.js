@@ -20,115 +20,142 @@ module$exports$Blockly$Lua.luaGenerator.init=function(a){Object.getPrototypeOf(t
 module$exports$Blockly$Lua.luaGenerator.finish=function(a){const b=Object.values(this.definitions_);a=Object.getPrototypeOf(this).finish.call(this,a);this.isInitialized=!1;this.nameDB_.reset();return b.join("\n\n")+"\n\n\n"+a};module$exports$Blockly$Lua.luaGenerator.scrubNakedValue=function(a){return"local _ = "+a+"\n"};module$exports$Blockly$Lua.luaGenerator.quote_=function(a){a=a.replace(/\\/g,"\\\\").replace(/\n/g,"\\\n").replace(/'/g,"\\'");return"'"+a+"'"};
 module$exports$Blockly$Lua.luaGenerator.multiline_quote_=function(a){return a.split(/\n/g).map(this.quote_).join(" .. '\\n' ..\n")};
 module$exports$Blockly$Lua.luaGenerator.scrub_=function(a,b,c){let d="";if(!a.outputConnection||!a.outputConnection.targetConnection){var e=a.getCommentText();e&&(e=$.module$build$src$core$utils$string.wrap(e,this.COMMENT_WRAP-3),d+=this.prefixLines(e,"-- ")+"\n");for(let f=0;f<a.inputList.length;f++)a.inputList[f].type===$.module$build$src$core$input_types.inputTypes.VALUE&&(e=a.inputList[f].connection.targetBlock())&&(e=this.allNestedComments(e))&&(d+=this.prefixLines(e,"-- "))}a=a.nextConnection&&
-a.nextConnection.targetBlock();c=c?"":this.blockToCode(a);return d+b+c};var module$exports$Blockly$Lua$variables={},module$contents$Blockly$Lua$variables_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$Lua.luaGenerator.variables_get=function(a){return[module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE),module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC]};
-module$exports$Blockly$Lua.luaGenerator.variables_set=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0";return module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE)+" = "+b+"\n"};var module$exports$Blockly$Lua$variablesDynamic={};module$exports$Blockly$Lua.luaGenerator.variables_get_dynamic=module$exports$Blockly$Lua.luaGenerator.variables_get;module$exports$Blockly$Lua.luaGenerator.variables_set_dynamic=module$exports$Blockly$Lua.luaGenerator.variables_set;var module$exports$Blockly$Lua$texts={},module$contents$Blockly$Lua$texts_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$Lua.luaGenerator.text=function(a){return[module$exports$Blockly$Lua.luaGenerator.quote_(a.getFieldValue("TEXT")),module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC]};
-module$exports$Blockly$Lua.luaGenerator.text_multiline=function(a){a=module$exports$Blockly$Lua.luaGenerator.multiline_quote_(a.getFieldValue("TEXT"));const b=-1!==a.indexOf("..")?module$exports$Blockly$Lua.luaGenerator.ORDER_CONCATENATION:module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC;return[a,b]};
-module$exports$Blockly$Lua.luaGenerator.text_join=function(a){if(0===a.itemCount_)return["''",module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC];if(1===a.itemCount_)return["tostring("+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ADD0",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''")+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH];if(2===a.itemCount_){var b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ADD0",module$exports$Blockly$Lua.luaGenerator.ORDER_CONCATENATION)||
-"''";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ADD1",module$exports$Blockly$Lua.luaGenerator.ORDER_CONCATENATION)||"''";return[b+" .. "+a,module$exports$Blockly$Lua.luaGenerator.ORDER_CONCATENATION]}b=[];for(let c=0;c<a.itemCount_;c++)b[c]=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ADD"+c,module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";return["table.concat({"+b.join(", ")+"})",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.text_append=function(a){const b=module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE);a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_CONCATENATION)||"''";return b+" = "+b+" .. "+a+"\n"};
-module$exports$Blockly$Lua.luaGenerator.text_length=function(a){return["#"+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY)||"''"),module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY]};module$exports$Blockly$Lua.luaGenerator.text_isEmpty=function(a){return["#"+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY)||"''")+" == 0",module$exports$Blockly$Lua.luaGenerator.ORDER_RELATIONAL]};
-module$exports$Blockly$Lua.luaGenerator.text_indexOf=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"FIND",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''",c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";return[("FIRST"===a.getFieldValue("END")?module$exports$Blockly$Lua.luaGenerator.provideFunction_("firstIndexOf",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(str, substr)
-  local i = string.find(str, substr, 1, true)
-  if i == nil then
-    return 0
-  end
-  return i
+a.nextConnection.targetBlock();c=c?"":this.blockToCode(a);return d+b+c};var module$exports$Blockly$Lua$colour={};module$exports$Blockly$Lua.luaGenerator.colour_picker=function(a){return[module$exports$Blockly$Lua.luaGenerator.quote_(a.getFieldValue("COLOUR")),module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC]};module$exports$Blockly$Lua.luaGenerator.colour_random=function(a){return['string.format("#%06x", math.random(0, 2^24 - 1))',module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
+module$exports$Blockly$Lua.luaGenerator.colour_rgb=function(a){const b=module$exports$Blockly$Lua.luaGenerator.provideFunction_("colour_rgb",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(r, g, b)
+  r = math.floor(math.min(100, math.max(0, r)) * 2.55 + .5)
+  g = math.floor(math.min(100, math.max(0, g)) * 2.55 + .5)
+  b = math.floor(math.min(100, math.max(0, b)) * 2.55 + .5)
+  return string.format("#%02x%02x%02x", r, g, b)
 end
-`):module$exports$Blockly$Lua.luaGenerator.provideFunction_("lastIndexOf",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(str, substr)
-  local i = string.find(string.reverse(str), string.reverse(substr), 1, true)
-  if i then
-    return #str + 2 - i - #substr
+`),c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"RED",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||0,d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"GREEN",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||0;a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"BLUE",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||0;return[b+"("+c+", "+d+", "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
+module$exports$Blockly$Lua.luaGenerator.colour_blend=function(a){const b=module$exports$Blockly$Lua.luaGenerator.provideFunction_("colour_blend",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(colour1, colour2, ratio)
+  local r1 = tonumber(string.sub(colour1, 2, 3), 16)
+  local r2 = tonumber(string.sub(colour2, 2, 3), 16)
+  local g1 = tonumber(string.sub(colour1, 4, 5), 16)
+  local g2 = tonumber(string.sub(colour2, 4, 5), 16)
+  local b1 = tonumber(string.sub(colour1, 6, 7), 16)
+  local b2 = tonumber(string.sub(colour2, 6, 7), 16)
+  local ratio = math.min(1, math.max(0, ratio))
+  local r = math.floor(r1 * (1 - ratio) + r2 * ratio + .5)
+  local g = math.floor(g1 * (1 - ratio) + g2 * ratio + .5)
+  local b = math.floor(b1 * (1 - ratio) + b2 * ratio + .5)
+  return string.format("#%02x%02x%02x", r, g, b)
+end
+`),c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"COLOUR1",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"'#000000'",d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"COLOUR2",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"'#000000'";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"RATIO",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||0;return[b+"("+c+", "+d+", "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};var module$exports$Blockly$Lua$lists={},module$contents$Blockly$Lua$lists_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$Lua.luaGenerator.lists_create_empty=function(a){return["{}",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
+module$exports$Blockly$Lua.luaGenerator.lists_create_with=function(a){const b=Array(a.itemCount_);for(let c=0;c<a.itemCount_;c++)b[c]=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ADD"+c,module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"None";return["{"+b.join(", ")+"}",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.lists_repeat=function(a){const b=module$exports$Blockly$Lua.luaGenerator.provideFunction_("create_list_repeated",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(item, count)
+  local t = {}
+  for i = 1, count do
+    table.insert(t, item)
+  end
+  return t
+end
+  `),c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ITEM",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"None";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"NUM",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0";return[b+"("+c+", "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
+module$exports$Blockly$Lua.luaGenerator.lists_length=function(a){return["#"+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY)||"{}"),module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY]};module$exports$Blockly$Lua.luaGenerator.lists_isEmpty=function(a){return["#"+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY)||"{}")+" == 0",module$exports$Blockly$Lua.luaGenerator.ORDER_RELATIONAL]};
+module$exports$Blockly$Lua.luaGenerator.lists_indexOf=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"FIND",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''",c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"{}";return[("FIRST"===a.getFieldValue("END")?module$exports$Blockly$Lua.luaGenerator.provideFunction_("first_index",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(t, elem)
+  for k, v in ipairs(t) do
+    if v == elem then
+      return k
+    end
   end
   return 0
 end
-`))+"("+c+", "+b+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.text_charAt=function(a){var b=a.getFieldValue("WHERE")||"FROM_START";const c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT","FROM_END"===b?module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY:module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";if("RANDOM"===b)b=module$exports$Blockly$Lua.luaGenerator.provideFunction_("text_random_letter",
-`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(str)
-  local index = math.random(string.len(str))
-  return string.sub(str, index, index)
-end
-`)+"("+a+")";else{if("FIRST"===b)b="1";else if("LAST"===b)b="-1";else if("FROM_START"===b)b=c;else if("FROM_END"===b)b="-"+c;else throw Error("Unhandled option (text_charAt).");b=b.match(/^-?\w*$/)?"string.sub("+a+", "+b+", "+b+")":module$exports$Blockly$Lua.luaGenerator.provideFunction_("text_char_at",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(str, index)
-  return string.sub(str, index, index)
-end
-`)+"("+a+", "+b+")"}return[b,module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.text_getSubstring=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"STRING",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";var c=a.getFieldValue("WHERE1"),d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT1","FROM_END"===c?module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY:module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";if("FIRST"===c)c=1;else if("FROM_START"===c)c=d;else if("FROM_END"===c)c="-"+d;else throw Error("Unhandled option (text_getSubstring)");
-d=a.getFieldValue("WHERE2");a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT2","FROM_END"===d?module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY:module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";if("LAST"===d)a=-1;else if("FROM_START"!==d)if("FROM_END"===d)a="-"+a;else throw Error("Unhandled option (text_getSubstring)");return["string.sub("+b+", "+c+", "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.text_changeCase=function(a){const b=a.getFieldValue("CASE");a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";let c;"UPPERCASE"===b?c="string.upper":"LOWERCASE"===b?c="string.lower":"TITLECASE"===b&&(c=module$exports$Blockly$Lua.luaGenerator.provideFunction_("text_titlecase",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(str)
-  local buf = {}
-  local inWord = false
-  for i = 1, #str do
-    local c = string.sub(str, i, i)
-    if inWord then
-      table.insert(buf, string.lower(c))
-      if string.find(c, "%s") then
-        inWord = false
-      end
-    else
-      table.insert(buf, string.upper(c))
-      inWord = true
+`):module$exports$Blockly$Lua.luaGenerator.provideFunction_("last_index",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(t, elem)
+  for i = #t, 1, -1 do
+    if t[i] == elem then
+      return i
     end
   end
-  return table.concat(buf)
+  return 0
 end
-`));return[c+"("+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.text_trim=function(a){const b={LEFT:"^%s*(,-)",RIGHT:"(.-)%s*$",BOTH:"^%s*(.-)%s*$"}[a.getFieldValue("MODE")];return["string.gsub("+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''")+', "'+b+'", "%1")',module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.text_print=function(a){return"print("+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''")+")\n"};
-module$exports$Blockly$Lua.luaGenerator.text_prompt_ext=function(a){var b=a.getField("TEXT")?module$exports$Blockly$Lua.luaGenerator.quote_(a.getFieldValue("TEXT")):module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";b=module$exports$Blockly$Lua.luaGenerator.provideFunction_("text_prompt",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(msg)
-  io.write(msg)
-  io.flush()
-  return io.read()
-end
-`)+"("+b+")";"NUMBER"===a.getFieldValue("TYPE")&&(b="tonumber("+b+", 10)");return[b,module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.text_prompt=module$exports$Blockly$Lua.luaGenerator.text_prompt_ext;
-module$exports$Blockly$Lua.luaGenerator.text_count=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"SUB",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";return[module$exports$Blockly$Lua.luaGenerator.provideFunction_("text_count",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(haystack, needle)
-  if #needle == 0 then
-    return #haystack + 1
+`))+"("+c+", "+b+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};var module$contents$Blockly$Lua$lists_getListIndex=function(a,b,c){return"FIRST"===b?"1":"FROM_END"===b?"#"+a+" + 1 - "+c:"LAST"===b?"#"+a:"RANDOM"===b?"math.random(#"+a+")":c};
+module$exports$Blockly$Lua.luaGenerator.lists_getIndex=function(a){var b=a.getFieldValue("MODE")||"GET",c=a.getFieldValue("WHERE")||"FROM_START";const d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH)||"({})";if("LAST"!==c&&"FROM_END"!==c&&"RANDOM"!==c||d.match(/^\w+$/)){a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT","GET"===b&&"FROM_END"===c?module$exports$Blockly$Lua.luaGenerator.ORDER_ADDITIVE:module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||
+"1";a=module$contents$Blockly$Lua$lists_getListIndex(d,c,a);if("GET"===b)return[d+"["+a+"]",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH];c="table.remove("+d+", "+a+")";return"GET_REMOVE"===b?[c,module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]:c+"\n"}if("REMOVE"===b)return b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT","FROM_END"===c?module$exports$Blockly$Lua.luaGenerator.ORDER_ADDITIVE:module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1",a=module$exports$Blockly$Lua.luaGenerator.nameDB_.getDistinctName("tmp_list",
+$.NameType$$module$build$src$core$names.VARIABLE),b=module$contents$Blockly$Lua$lists_getListIndex(a,c,b),a+" = "+d+"\ntable.remove("+a+", "+b+")\n";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";return[("GET"===b?module$exports$Blockly$Lua.luaGenerator.provideFunction_("list_get_"+c.toLowerCase(),["function "+module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_+"(t"+("FROM_END"===c||"FROM_START"===c?", at)":")"),
+"  return t["+module$contents$Blockly$Lua$lists_getListIndex("t",c,"at")+"]","end"]):module$exports$Blockly$Lua.luaGenerator.provideFunction_("list_remove_"+c.toLowerCase(),["function "+module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_+"(t"+("FROM_END"===c||"FROM_START"===c?", at)":")"),"  return table.remove(t, "+module$contents$Blockly$Lua$lists_getListIndex("t",c,"at")+")","end"]))+"("+d+("FROM_END"===c||"FROM_START"===c?", "+a:"")+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
+module$exports$Blockly$Lua.luaGenerator.lists_setIndex=function(a){let b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"LIST",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH)||"{}";const c=a.getFieldValue("MODE")||"SET",d=a.getFieldValue("WHERE")||"FROM_START",e=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT",module$exports$Blockly$Lua.luaGenerator.ORDER_ADDITIVE)||"1";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TO",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||
+"None";let f="";if(("LAST"===d||"FROM_END"===d||"RANDOM"===d)&&!b.match(/^\w+$/)){const g=module$exports$Blockly$Lua.luaGenerator.nameDB_.getDistinctName("tmp_list",$.NameType$$module$build$src$core$names.VARIABLE);f=g+" = "+b+"\n";b=g}f="SET"===c?f+(b+"["+module$contents$Blockly$Lua$lists_getListIndex(b,d,e)+"] = "+a):f+("table.insert("+b+", "+(module$contents$Blockly$Lua$lists_getListIndex(b,d,e)+("LAST"===d?" + 1":""))+", "+a+")");return f+"\n"};
+module$exports$Blockly$Lua.luaGenerator.lists_getSublist=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"LIST",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"{}",c=a.getFieldValue("WHERE1"),d=a.getFieldValue("WHERE2"),e=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT1",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT2",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";const f="FROM_END"===
+c||"FROM_START"===c?", at1":"",g="FROM_END"===d||"FROM_START"===d?", at2":"";return[module$exports$Blockly$Lua.luaGenerator.provideFunction_("list_sublist_"+c.toLowerCase()+"_"+d.toLowerCase(),`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(source${f}${g})
+  local t = {}
+  local start = ${module$contents$Blockly$Lua$lists_getListIndex("source",c,"at1")}
+  local finish = ${module$contents$Blockly$Lua$lists_getListIndex("source",d,"at2")}
+  for i = start, finish do
+    table.insert(t, source[i])
   end
-  local i = 1
-  local count = 0
+  return t
+end
+`)+"("+b+("FROM_END"===c||"FROM_START"===c?", "+e:"")+("FROM_END"===d||"FROM_START"===d?", "+a:"")+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.lists_sort=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"LIST",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"{}",c="1"===a.getFieldValue("DIRECTION")?1:-1;a=a.getFieldValue("TYPE");return[module$exports$Blockly$Lua.luaGenerator.provideFunction_("list_sort",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(list, typev, direction)
+  local t = {}
+  for n,v in pairs(list) do table.insert(t, v) end
+  local compareFuncs = {
+    NUMERIC = function(a, b)
+      return (tonumber(tostring(a)) or 0)
+          < (tonumber(tostring(b)) or 0) end,
+    TEXT = function(a, b)
+      return tostring(a) < tostring(b) end,
+    IGNORE_CASE = function(a, b)
+      return string.lower(tostring(a)) < string.lower(tostring(b)) end
+  }
+  local compareTemp = compareFuncs[typev]
+  local compare = compareTemp
+  if direction == -1
+  then compare = function(a, b) return compareTemp(b, a) end
+  end
+  table.sort(t, compare)
+  return t
+end
+`)+"("+b+',"'+a+'", '+c+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
+module$exports$Blockly$Lua.luaGenerator.lists_split=function(a){let b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"INPUT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE);const c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"DELIM",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";a=a.getFieldValue("MODE");if("SPLIT"===a)b||(b="''"),a=module$exports$Blockly$Lua.luaGenerator.provideFunction_("list_string_split",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(input, delim)
+  local t = {}
+  local pos = 1
   while true do
-    i = string.find(haystack, needle, i, true)
-    if i == nil then
+    next_delim = string.find(input, delim, pos)
+    if next_delim == nil then
+      table.insert(t, string.sub(input, pos))
       break
-    end
-    count = count + 1
-    i = i + #needle
-  end
-  return count
-end
-`)+"("+b+", "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.text_replace=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''",c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"FROM",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TO",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";return[module$exports$Blockly$Lua.luaGenerator.provideFunction_("text_replace",
-`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(haystack, needle, replacement)
-  local buf = {}
-  local i = 1
-  while i <= #haystack do
-    if string.sub(haystack, i, i + #needle - 1) == needle then
-      for j = 1, #replacement do
-        table.insert(buf, string.sub(replacement, j, j))
-      end
-      i = i + #needle
     else
-      table.insert(buf, string.sub(haystack, i, i))
-      i = i + 1
+      table.insert(t, string.sub(input, pos, next_delim-1))
+      pos = next_delim + #delim
     end
   end
-  return table.concat(buf)
+  return t
 end
-`)+"("+b+", "+c+", "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.text_reverse=function(a){return["string.reverse("+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''")+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};var module$exports$Blockly$Lua$procedures={},module$contents$Blockly$Lua$procedures_NameType=$.NameType$$module$build$src$core$names;
-module$exports$Blockly$Lua.luaGenerator.procedures_defreturn=function(a){const b=module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("NAME"),$.NameType$$module$build$src$core$names.PROCEDURE);var c="";module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX&&(c+=module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX,a));module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX&&(c+=module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX,
-a));c&&(c=module$exports$Blockly$Lua.luaGenerator.prefixLines(c,module$exports$Blockly$Lua.luaGenerator.INDENT));let d="";module$exports$Blockly$Lua.luaGenerator.INFINITE_LOOP_TRAP&&(d=module$exports$Blockly$Lua.luaGenerator.prefixLines(module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.INFINITE_LOOP_TRAP,a),module$exports$Blockly$Lua.luaGenerator.INDENT));let e=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"STACK"),f=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,
-"RETURN",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"",g="";e&&f&&(g=c);f?f=module$exports$Blockly$Lua.luaGenerator.INDENT+"return "+f+"\n":e||(e="");const h=[],k=a.getVars();for(let l=0;l<k.length;l++)h[l]=module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(k[l],$.NameType$$module$build$src$core$names.VARIABLE);c="function "+b+"("+h.join(", ")+")\n"+c+d+e+g+f+"end\n";c=module$exports$Blockly$Lua.luaGenerator.scrub_(a,c);module$exports$Blockly$Lua.luaGenerator.definitions_["%"+b]=c;
-return null};module$exports$Blockly$Lua.luaGenerator.procedures_defnoreturn=module$exports$Blockly$Lua.luaGenerator.procedures_defreturn;
-module$exports$Blockly$Lua.luaGenerator.procedures_callreturn=function(a){const b=module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("NAME"),$.NameType$$module$build$src$core$names.PROCEDURE),c=[],d=a.getVars();for(let e=0;e<d.length;e++)c[e]=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ARG"+e,module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"nil";return[b+"("+c.join(", ")+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.procedures_callnoreturn=function(a){return module$exports$Blockly$Lua.luaGenerator.procedures_callreturn(a)[0]+"\n"};
-module$exports$Blockly$Lua.luaGenerator.procedures_ifreturn=function(a){let b="if "+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"CONDITION",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"false")+" then\n";module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX&&(b+=module$exports$Blockly$Lua.luaGenerator.prefixLines(module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX,a),module$exports$Blockly$Lua.luaGenerator.INDENT));a.hasReturnValue_?
-(a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"nil",b+=module$exports$Blockly$Lua.luaGenerator.INDENT+"return "+a+"\n"):b+=module$exports$Blockly$Lua.luaGenerator.INDENT+"return\n";return b+"end\n"};var module$exports$Blockly$Lua$math={},module$contents$Blockly$Lua$math_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$Lua.luaGenerator.math_number=function(a){a=Number(a.getFieldValue("NUM"));return[a,0>a?module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY:module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC]};
+`);else if("JOIN"===a)b||(b="{}"),a="table.concat";else throw Error("Unknown mode: "+a);return[a+"("+b+", "+c+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.lists_reverse=function(a){a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"LIST",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"{}";return[module$exports$Blockly$Lua.luaGenerator.provideFunction_("list_reverse",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(input)
+  local reversed = {}
+  for i = #input, 1, -1 do
+    table.insert(reversed, input[i])
+  end
+  return reversed
+end
+`)+"("+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};var module$exports$Blockly$Lua$logic={};
+module$exports$Blockly$Lua.luaGenerator.controls_if=function(a){var b=0;let c="";module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX&&(c+=module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX,a));do{const d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"IF"+b,module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"false";let e=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"DO"+b);module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX&&(e=
+module$exports$Blockly$Lua.luaGenerator.prefixLines(module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX,a),module$exports$Blockly$Lua.luaGenerator.INDENT)+e);c+=(0<b?"else":"")+"if "+d+" then\n"+e;b++}while(a.getInput("IF"+b));if(a.getInput("ELSE")||module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX)b=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"ELSE"),module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX&&(b=module$exports$Blockly$Lua.luaGenerator.prefixLines(module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX,
+a),module$exports$Blockly$Lua.luaGenerator.INDENT)+b),c+="else\n"+b;return c+"end\n"};module$exports$Blockly$Lua.luaGenerator.controls_ifelse=module$exports$Blockly$Lua.luaGenerator.controls_if;
+module$exports$Blockly$Lua.luaGenerator.logic_compare=function(a){const b={EQ:"==",NEQ:"~=",LT:"<",LTE:"<=",GT:">",GTE:">="}[a.getFieldValue("OP")],c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"A",module$exports$Blockly$Lua.luaGenerator.ORDER_RELATIONAL)||"0";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"B",module$exports$Blockly$Lua.luaGenerator.ORDER_RELATIONAL)||"0";return[c+" "+b+" "+a,module$exports$Blockly$Lua.luaGenerator.ORDER_RELATIONAL]};
+module$exports$Blockly$Lua.luaGenerator.logic_operation=function(a){const b="AND"===a.getFieldValue("OP")?"and":"or",c="and"===b?module$exports$Blockly$Lua.luaGenerator.ORDER_AND:module$exports$Blockly$Lua.luaGenerator.ORDER_OR;let d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"A",c);a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"B",c);if(d||a){const e="and"===b?"true":"false";d||(d=e);a||(a=e)}else a=d="false";return[d+" "+b+" "+a,c]};
+module$exports$Blockly$Lua.luaGenerator.logic_negate=function(a){return["not "+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"BOOL",module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY)||"true"),module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY]};module$exports$Blockly$Lua.luaGenerator.logic_boolean=function(a){return["TRUE"===a.getFieldValue("BOOL")?"true":"false",module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC]};
+module$exports$Blockly$Lua.luaGenerator.logic_null=function(a){return["nil",module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC]};
+module$exports$Blockly$Lua.luaGenerator.logic_ternary=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"IF",module$exports$Blockly$Lua.luaGenerator.ORDER_AND)||"false",c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"THEN",module$exports$Blockly$Lua.luaGenerator.ORDER_AND)||"nil";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ELSE",module$exports$Blockly$Lua.luaGenerator.ORDER_OR)||"nil";return[b+" and "+c+" or "+a,module$exports$Blockly$Lua.luaGenerator.ORDER_OR]};var module$exports$Blockly$Lua$loops={},module$contents$Blockly$Lua$loops_stringUtils=$.module$build$src$core$utils$string,module$contents$Blockly$Lua$loops_NameType=$.NameType$$module$build$src$core$names,module$contents$Blockly$Lua$loops_CONTINUE_STATEMENT="goto continue\n",module$contents$Blockly$Lua$loops_addContinueLabel=function(a){return-1!==a.indexOf(module$contents$Blockly$Lua$loops_CONTINUE_STATEMENT)?a+module$exports$Blockly$Lua.luaGenerator.INDENT+"::continue::\n":a};
+module$exports$Blockly$Lua.luaGenerator.controls_repeat_ext=function(a){let b;b=a.getField("TIMES")?String(Number(a.getFieldValue("TIMES"))):module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TIMES",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0";b=$.module$build$src$core$utils$string.isNumber(b)?parseInt(b,10):"math.floor("+b+")";let c=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"DO");c=module$exports$Blockly$Lua.luaGenerator.addLoopTrap(c,a);c=module$contents$Blockly$Lua$loops_addContinueLabel(c);
+return"for "+module$exports$Blockly$Lua.luaGenerator.nameDB_.getDistinctName("count",$.NameType$$module$build$src$core$names.VARIABLE)+" = 1, "+b+" do\n"+c+"end\n"};module$exports$Blockly$Lua.luaGenerator.controls_repeat=module$exports$Blockly$Lua.luaGenerator.controls_repeat_ext;
+module$exports$Blockly$Lua.luaGenerator.controls_whileUntil=function(a){const b="UNTIL"===a.getFieldValue("MODE");let c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"BOOL",b?module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY:module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"false",d=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"DO");d=module$exports$Blockly$Lua.luaGenerator.addLoopTrap(d,a);d=module$contents$Blockly$Lua$loops_addContinueLabel(d);b&&(c="not "+c);return"while "+
+c+" do\n"+d+"end\n"};
+module$exports$Blockly$Lua.luaGenerator.controls_for=function(a){const b=module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE),c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"FROM",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0",d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TO",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0",e=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"BY",
+module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";let f=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"DO");f=module$exports$Blockly$Lua.luaGenerator.addLoopTrap(f,a);f=module$contents$Blockly$Lua$loops_addContinueLabel(f);a="";let g;$.module$build$src$core$utils$string.isNumber(c)&&$.module$build$src$core$utils$string.isNumber(d)&&$.module$build$src$core$utils$string.isNumber(e)?g=(Number(c)<=Number(d)?"":"-")+Math.abs(Number(e)):(a="",g=module$exports$Blockly$Lua.luaGenerator.nameDB_.getDistinctName(b+
+"_inc",$.NameType$$module$build$src$core$names.VARIABLE),a+=g+" = ",a=$.module$build$src$core$utils$string.isNumber(e)?a+(Math.abs(e)+"\n"):a+("math.abs("+e+")\n"),a=a+("if ("+c+") > ("+d+") then\n")+(module$exports$Blockly$Lua.luaGenerator.INDENT+g+" = -"+g+"\n"),a+="end\n");return a+("for "+b+" = "+c+", "+d+", "+g)+(" do\n"+f+"end\n")};
+module$exports$Blockly$Lua.luaGenerator.controls_forEach=function(a){const b=module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE),c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"LIST",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"{}";let d=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"DO");d=module$exports$Blockly$Lua.luaGenerator.addLoopTrap(d,a);d=module$contents$Blockly$Lua$loops_addContinueLabel(d);
+return"for _, "+b+" in ipairs("+c+") do \n"+d+"end\n"};
+module$exports$Blockly$Lua.luaGenerator.controls_flow_statements=function(a){let b="";module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX&&(b+=module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX,a));module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX&&(b+=module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX,a));if(module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX){const c=a.getSurroundLoop();
+c&&!c.suppressPrefixSuffix&&(b+=module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX,c))}switch(a.getFieldValue("FLOW")){case "BREAK":return b+"break\n";case "CONTINUE":return b+module$contents$Blockly$Lua$loops_CONTINUE_STATEMENT}throw Error("Unknown flow statement.");};var module$exports$Blockly$Lua$math={},module$contents$Blockly$Lua$math_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$Lua.luaGenerator.math_number=function(a){a=Number(a.getFieldValue("NUM"));return[a,0>a?module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY:module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC]};
 module$exports$Blockly$Lua.luaGenerator.math_arithmetic=function(a){var b={ADD:[" + ",module$exports$Blockly$Lua.luaGenerator.ORDER_ADDITIVE],MINUS:[" - ",module$exports$Blockly$Lua.luaGenerator.ORDER_ADDITIVE],MULTIPLY:[" * ",module$exports$Blockly$Lua.luaGenerator.ORDER_MULTIPLICATIVE],DIVIDE:[" / ",module$exports$Blockly$Lua.luaGenerator.ORDER_MULTIPLICATIVE],POWER:[" ^ ",module$exports$Blockly$Lua.luaGenerator.ORDER_EXPONENTIATION]}[a.getFieldValue("OP")];const c=b[0];b=b[1];const d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,
 "A",b)||"0";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"B",b)||"0";return[d+c+a,b]};
 module$exports$Blockly$Lua.luaGenerator.math_single=function(a){var b=a.getFieldValue("OP");if("NEG"===b)return a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"NUM",module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY)||"0",["-"+a,module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY];if("POW10"===b)return a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"NUM",module$exports$Blockly$Lua.luaGenerator.ORDER_EXPONENTIATION)||"0",["10 ^ "+a,module$exports$Blockly$Lua.luaGenerator.ORDER_EXPONENTIATION];
@@ -271,142 +298,115 @@ end
 `);break;default:throw Error("Unknown operator: "+c);}return[c+"("+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.math_modulo=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"DIVIDEND",module$exports$Blockly$Lua.luaGenerator.ORDER_MULTIPLICATIVE)||"0";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"DIVISOR",module$exports$Blockly$Lua.luaGenerator.ORDER_MULTIPLICATIVE)||"0";return[b+" % "+a,module$exports$Blockly$Lua.luaGenerator.ORDER_MULTIPLICATIVE]};
 module$exports$Blockly$Lua.luaGenerator.math_constrain=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0",c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"LOW",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"-math.huge";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"HIGH",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"math.huge";return["math.min(math.max("+b+", "+c+"), "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
 module$exports$Blockly$Lua.luaGenerator.math_random_int=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"FROM",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TO",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0";return["math.random("+b+", "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.math_random_float=function(a){return["math.random()",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.math_atan2=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"X",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0";return["math.deg(math.atan2("+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"Y",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0")+", "+b+"))",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};var module$exports$Blockly$Lua$loops={},module$contents$Blockly$Lua$loops_stringUtils=$.module$build$src$core$utils$string,module$contents$Blockly$Lua$loops_NameType=$.NameType$$module$build$src$core$names,module$contents$Blockly$Lua$loops_CONTINUE_STATEMENT="goto continue\n",module$contents$Blockly$Lua$loops_addContinueLabel=function(a){return-1!==a.indexOf(module$contents$Blockly$Lua$loops_CONTINUE_STATEMENT)?a+module$exports$Blockly$Lua.luaGenerator.INDENT+"::continue::\n":a};
-module$exports$Blockly$Lua.luaGenerator.controls_repeat_ext=function(a){let b;b=a.getField("TIMES")?String(Number(a.getFieldValue("TIMES"))):module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TIMES",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0";b=$.module$build$src$core$utils$string.isNumber(b)?parseInt(b,10):"math.floor("+b+")";let c=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"DO");c=module$exports$Blockly$Lua.luaGenerator.addLoopTrap(c,a);c=module$contents$Blockly$Lua$loops_addContinueLabel(c);
-return"for "+module$exports$Blockly$Lua.luaGenerator.nameDB_.getDistinctName("count",$.NameType$$module$build$src$core$names.VARIABLE)+" = 1, "+b+" do\n"+c+"end\n"};module$exports$Blockly$Lua.luaGenerator.controls_repeat=module$exports$Blockly$Lua.luaGenerator.controls_repeat_ext;
-module$exports$Blockly$Lua.luaGenerator.controls_whileUntil=function(a){const b="UNTIL"===a.getFieldValue("MODE");let c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"BOOL",b?module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY:module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"false",d=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"DO");d=module$exports$Blockly$Lua.luaGenerator.addLoopTrap(d,a);d=module$contents$Blockly$Lua$loops_addContinueLabel(d);b&&(c="not "+c);return"while "+
-c+" do\n"+d+"end\n"};
-module$exports$Blockly$Lua.luaGenerator.controls_for=function(a){const b=module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE),c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"FROM",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0",d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TO",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0",e=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"BY",
-module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";let f=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"DO");f=module$exports$Blockly$Lua.luaGenerator.addLoopTrap(f,a);f=module$contents$Blockly$Lua$loops_addContinueLabel(f);a="";let g;$.module$build$src$core$utils$string.isNumber(c)&&$.module$build$src$core$utils$string.isNumber(d)&&$.module$build$src$core$utils$string.isNumber(e)?g=(Number(c)<=Number(d)?"":"-")+Math.abs(Number(e)):(a="",g=module$exports$Blockly$Lua.luaGenerator.nameDB_.getDistinctName(b+
-"_inc",$.NameType$$module$build$src$core$names.VARIABLE),a+=g+" = ",a=$.module$build$src$core$utils$string.isNumber(e)?a+(Math.abs(e)+"\n"):a+("math.abs("+e+")\n"),a=a+("if ("+c+") > ("+d+") then\n")+(module$exports$Blockly$Lua.luaGenerator.INDENT+g+" = -"+g+"\n"),a+="end\n");return a+("for "+b+" = "+c+", "+d+", "+g)+(" do\n"+f+"end\n")};
-module$exports$Blockly$Lua.luaGenerator.controls_forEach=function(a){const b=module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE),c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"LIST",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"{}";let d=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"DO");d=module$exports$Blockly$Lua.luaGenerator.addLoopTrap(d,a);d=module$contents$Blockly$Lua$loops_addContinueLabel(d);
-return"for _, "+b+" in ipairs("+c+") do \n"+d+"end\n"};
-module$exports$Blockly$Lua.luaGenerator.controls_flow_statements=function(a){let b="";module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX&&(b+=module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX,a));module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX&&(b+=module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX,a));if(module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX){const c=a.getSurroundLoop();
-c&&!c.suppressPrefixSuffix&&(b+=module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX,c))}switch(a.getFieldValue("FLOW")){case "BREAK":return b+"break\n";case "CONTINUE":return b+module$contents$Blockly$Lua$loops_CONTINUE_STATEMENT}throw Error("Unknown flow statement.");};var module$exports$Blockly$Lua$logic={};
-module$exports$Blockly$Lua.luaGenerator.controls_if=function(a){var b=0;let c="";module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX&&(c+=module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX,a));do{const d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"IF"+b,module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"false";let e=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"DO"+b);module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX&&(e=
-module$exports$Blockly$Lua.luaGenerator.prefixLines(module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX,a),module$exports$Blockly$Lua.luaGenerator.INDENT)+e);c+=(0<b?"else":"")+"if "+d+" then\n"+e;b++}while(a.getInput("IF"+b));if(a.getInput("ELSE")||module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX)b=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"ELSE"),module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX&&(b=module$exports$Blockly$Lua.luaGenerator.prefixLines(module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX,
-a),module$exports$Blockly$Lua.luaGenerator.INDENT)+b),c+="else\n"+b;return c+"end\n"};module$exports$Blockly$Lua.luaGenerator.controls_ifelse=module$exports$Blockly$Lua.luaGenerator.controls_if;
-module$exports$Blockly$Lua.luaGenerator.logic_compare=function(a){const b={EQ:"==",NEQ:"~=",LT:"<",LTE:"<=",GT:">",GTE:">="}[a.getFieldValue("OP")],c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"A",module$exports$Blockly$Lua.luaGenerator.ORDER_RELATIONAL)||"0";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"B",module$exports$Blockly$Lua.luaGenerator.ORDER_RELATIONAL)||"0";return[c+" "+b+" "+a,module$exports$Blockly$Lua.luaGenerator.ORDER_RELATIONAL]};
-module$exports$Blockly$Lua.luaGenerator.logic_operation=function(a){const b="AND"===a.getFieldValue("OP")?"and":"or",c="and"===b?module$exports$Blockly$Lua.luaGenerator.ORDER_AND:module$exports$Blockly$Lua.luaGenerator.ORDER_OR;let d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"A",c);a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"B",c);if(d||a){const e="and"===b?"true":"false";d||(d=e);a||(a=e)}else a=d="false";return[d+" "+b+" "+a,c]};
-module$exports$Blockly$Lua.luaGenerator.logic_negate=function(a){return["not "+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"BOOL",module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY)||"true"),module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY]};module$exports$Blockly$Lua.luaGenerator.logic_boolean=function(a){return["TRUE"===a.getFieldValue("BOOL")?"true":"false",module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC]};
-module$exports$Blockly$Lua.luaGenerator.logic_null=function(a){return["nil",module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC]};
-module$exports$Blockly$Lua.luaGenerator.logic_ternary=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"IF",module$exports$Blockly$Lua.luaGenerator.ORDER_AND)||"false",c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"THEN",module$exports$Blockly$Lua.luaGenerator.ORDER_AND)||"nil";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ELSE",module$exports$Blockly$Lua.luaGenerator.ORDER_OR)||"nil";return[b+" and "+c+" or "+a,module$exports$Blockly$Lua.luaGenerator.ORDER_OR]};var module$exports$Blockly$Lua$lists={},module$contents$Blockly$Lua$lists_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$Lua.luaGenerator.lists_create_empty=function(a){return["{}",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.lists_create_with=function(a){const b=Array(a.itemCount_);for(let c=0;c<a.itemCount_;c++)b[c]=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ADD"+c,module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"None";return["{"+b.join(", ")+"}",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.lists_repeat=function(a){const b=module$exports$Blockly$Lua.luaGenerator.provideFunction_("create_list_repeated",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(item, count)
-  local t = {}
-  for i = 1, count do
-    table.insert(t, item)
+module$exports$Blockly$Lua.luaGenerator.math_atan2=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"X",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0";return["math.deg(math.atan2("+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"Y",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0")+", "+b+"))",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};var module$exports$Blockly$Lua$procedures={},module$contents$Blockly$Lua$procedures_NameType=$.NameType$$module$build$src$core$names;
+module$exports$Blockly$Lua.luaGenerator.procedures_defreturn=function(a){const b=module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("NAME"),$.NameType$$module$build$src$core$names.PROCEDURE);var c="";module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX&&(c+=module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_PREFIX,a));module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX&&(c+=module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX,
+a));c&&(c=module$exports$Blockly$Lua.luaGenerator.prefixLines(c,module$exports$Blockly$Lua.luaGenerator.INDENT));let d="";module$exports$Blockly$Lua.luaGenerator.INFINITE_LOOP_TRAP&&(d=module$exports$Blockly$Lua.luaGenerator.prefixLines(module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.INFINITE_LOOP_TRAP,a),module$exports$Blockly$Lua.luaGenerator.INDENT));let e=module$exports$Blockly$Lua.luaGenerator.statementToCode(a,"STACK"),f=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,
+"RETURN",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"",g="";e&&f&&(g=c);f?f=module$exports$Blockly$Lua.luaGenerator.INDENT+"return "+f+"\n":e||(e="");const h=[],k=a.getVars();for(let l=0;l<k.length;l++)h[l]=module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(k[l],$.NameType$$module$build$src$core$names.VARIABLE);c="function "+b+"("+h.join(", ")+")\n"+c+d+e+g+f+"end\n";c=module$exports$Blockly$Lua.luaGenerator.scrub_(a,c);module$exports$Blockly$Lua.luaGenerator.definitions_["%"+b]=c;
+return null};module$exports$Blockly$Lua.luaGenerator.procedures_defnoreturn=module$exports$Blockly$Lua.luaGenerator.procedures_defreturn;
+module$exports$Blockly$Lua.luaGenerator.procedures_callreturn=function(a){const b=module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("NAME"),$.NameType$$module$build$src$core$names.PROCEDURE),c=[],d=a.getVars();for(let e=0;e<d.length;e++)c[e]=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ARG"+e,module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"nil";return[b+"("+c.join(", ")+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
+module$exports$Blockly$Lua.luaGenerator.procedures_callnoreturn=function(a){return module$exports$Blockly$Lua.luaGenerator.procedures_callreturn(a)[0]+"\n"};
+module$exports$Blockly$Lua.luaGenerator.procedures_ifreturn=function(a){let b="if "+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"CONDITION",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"false")+" then\n";module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX&&(b+=module$exports$Blockly$Lua.luaGenerator.prefixLines(module$exports$Blockly$Lua.luaGenerator.injectId(module$exports$Blockly$Lua.luaGenerator.STATEMENT_SUFFIX,a),module$exports$Blockly$Lua.luaGenerator.INDENT));a.hasReturnValue_?
+(a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"nil",b+=module$exports$Blockly$Lua.luaGenerator.INDENT+"return "+a+"\n"):b+=module$exports$Blockly$Lua.luaGenerator.INDENT+"return\n";return b+"end\n"};var module$exports$Blockly$Lua$texts={},module$contents$Blockly$Lua$texts_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$Lua.luaGenerator.text=function(a){return[module$exports$Blockly$Lua.luaGenerator.quote_(a.getFieldValue("TEXT")),module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC]};
+module$exports$Blockly$Lua.luaGenerator.text_multiline=function(a){a=module$exports$Blockly$Lua.luaGenerator.multiline_quote_(a.getFieldValue("TEXT"));const b=-1!==a.indexOf("..")?module$exports$Blockly$Lua.luaGenerator.ORDER_CONCATENATION:module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC;return[a,b]};
+module$exports$Blockly$Lua.luaGenerator.text_join=function(a){if(0===a.itemCount_)return["''",module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC];if(1===a.itemCount_)return["tostring("+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ADD0",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''")+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH];if(2===a.itemCount_){var b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ADD0",module$exports$Blockly$Lua.luaGenerator.ORDER_CONCATENATION)||
+"''";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ADD1",module$exports$Blockly$Lua.luaGenerator.ORDER_CONCATENATION)||"''";return[b+" .. "+a,module$exports$Blockly$Lua.luaGenerator.ORDER_CONCATENATION]}b=[];for(let c=0;c<a.itemCount_;c++)b[c]=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ADD"+c,module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";return["table.concat({"+b.join(", ")+"})",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
+module$exports$Blockly$Lua.luaGenerator.text_append=function(a){const b=module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE);a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_CONCATENATION)||"''";return b+" = "+b+" .. "+a+"\n"};
+module$exports$Blockly$Lua.luaGenerator.text_length=function(a){return["#"+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY)||"''"),module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY]};module$exports$Blockly$Lua.luaGenerator.text_isEmpty=function(a){return["#"+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY)||"''")+" == 0",module$exports$Blockly$Lua.luaGenerator.ORDER_RELATIONAL]};
+module$exports$Blockly$Lua.luaGenerator.text_indexOf=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"FIND",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''",c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";return[("FIRST"===a.getFieldValue("END")?module$exports$Blockly$Lua.luaGenerator.provideFunction_("firstIndexOf",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(str, substr)
+  local i = string.find(str, substr, 1, true)
+  if i == nil then
+    return 0
   end
-  return t
+  return i
 end
-  `),c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"ITEM",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"None";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"NUM",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0";return[b+"("+c+", "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.lists_length=function(a){return["#"+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY)||"{}"),module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY]};module$exports$Blockly$Lua.luaGenerator.lists_isEmpty=function(a){return["#"+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY)||"{}")+" == 0",module$exports$Blockly$Lua.luaGenerator.ORDER_RELATIONAL]};
-module$exports$Blockly$Lua.luaGenerator.lists_indexOf=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"FIND",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''",c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"{}";return[("FIRST"===a.getFieldValue("END")?module$exports$Blockly$Lua.luaGenerator.provideFunction_("first_index",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(t, elem)
-  for k, v in ipairs(t) do
-    if v == elem then
-      return k
-    end
+`):module$exports$Blockly$Lua.luaGenerator.provideFunction_("lastIndexOf",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(str, substr)
+  local i = string.find(string.reverse(str), string.reverse(substr), 1, true)
+  if i then
+    return #str + 2 - i - #substr
   end
   return 0
 end
-`):module$exports$Blockly$Lua.luaGenerator.provideFunction_("last_index",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(t, elem)
-  for i = #t, 1, -1 do
-    if t[i] == elem then
-      return i
-    end
-  end
-  return 0
+`))+"("+c+", "+b+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
+module$exports$Blockly$Lua.luaGenerator.text_charAt=function(a){var b=a.getFieldValue("WHERE")||"FROM_START";const c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT","FROM_END"===b?module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY:module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";if("RANDOM"===b)b=module$exports$Blockly$Lua.luaGenerator.provideFunction_("text_random_letter",
+`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(str)
+  local index = math.random(string.len(str))
+  return string.sub(str, index, index)
 end
-`))+"("+c+", "+b+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};var module$contents$Blockly$Lua$lists_getListIndex=function(a,b,c){return"FIRST"===b?"1":"FROM_END"===b?"#"+a+" + 1 - "+c:"LAST"===b?"#"+a:"RANDOM"===b?"math.random(#"+a+")":c};
-module$exports$Blockly$Lua.luaGenerator.lists_getIndex=function(a){var b=a.getFieldValue("MODE")||"GET",c=a.getFieldValue("WHERE")||"FROM_START";const d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH)||"({})";if("LAST"!==c&&"FROM_END"!==c&&"RANDOM"!==c||d.match(/^\w+$/)){a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT","GET"===b&&"FROM_END"===c?module$exports$Blockly$Lua.luaGenerator.ORDER_ADDITIVE:module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||
-"1";a=module$contents$Blockly$Lua$lists_getListIndex(d,c,a);if("GET"===b)return[d+"["+a+"]",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH];c="table.remove("+d+", "+a+")";return"GET_REMOVE"===b?[c,module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]:c+"\n"}if("REMOVE"===b)return b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT","FROM_END"===c?module$exports$Blockly$Lua.luaGenerator.ORDER_ADDITIVE:module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1",a=module$exports$Blockly$Lua.luaGenerator.nameDB_.getDistinctName("tmp_list",
-$.NameType$$module$build$src$core$names.VARIABLE),b=module$contents$Blockly$Lua$lists_getListIndex(a,c,b),a+" = "+d+"\ntable.remove("+a+", "+b+")\n";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";return[("GET"===b?module$exports$Blockly$Lua.luaGenerator.provideFunction_("list_get_"+c.toLowerCase(),["function "+module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_+"(t"+("FROM_END"===c||"FROM_START"===c?", at)":")"),
-"  return t["+module$contents$Blockly$Lua$lists_getListIndex("t",c,"at")+"]","end"]):module$exports$Blockly$Lua.luaGenerator.provideFunction_("list_remove_"+c.toLowerCase(),["function "+module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_+"(t"+("FROM_END"===c||"FROM_START"===c?", at)":")"),"  return table.remove(t, "+module$contents$Blockly$Lua$lists_getListIndex("t",c,"at")+")","end"]))+"("+d+("FROM_END"===c||"FROM_START"===c?", "+a:"")+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.lists_setIndex=function(a){let b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"LIST",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH)||"{}";const c=a.getFieldValue("MODE")||"SET",d=a.getFieldValue("WHERE")||"FROM_START",e=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT",module$exports$Blockly$Lua.luaGenerator.ORDER_ADDITIVE)||"1";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TO",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||
-"None";let f="";if(("LAST"===d||"FROM_END"===d||"RANDOM"===d)&&!b.match(/^\w+$/)){const g=module$exports$Blockly$Lua.luaGenerator.nameDB_.getDistinctName("tmp_list",$.NameType$$module$build$src$core$names.VARIABLE);f=g+" = "+b+"\n";b=g}f="SET"===c?f+(b+"["+module$contents$Blockly$Lua$lists_getListIndex(b,d,e)+"] = "+a):f+("table.insert("+b+", "+(module$contents$Blockly$Lua$lists_getListIndex(b,d,e)+("LAST"===d?" + 1":""))+", "+a+")");return f+"\n"};
-module$exports$Blockly$Lua.luaGenerator.lists_getSublist=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"LIST",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"{}",c=a.getFieldValue("WHERE1"),d=a.getFieldValue("WHERE2"),e=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT1",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT2",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";const f="FROM_END"===
-c||"FROM_START"===c?", at1":"",g="FROM_END"===d||"FROM_START"===d?", at2":"";return[module$exports$Blockly$Lua.luaGenerator.provideFunction_("list_sublist_"+c.toLowerCase()+"_"+d.toLowerCase(),`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(source${f}${g})
-  local t = {}
-  local start = ${module$contents$Blockly$Lua$lists_getListIndex("source",c,"at1")}
-  local finish = ${module$contents$Blockly$Lua$lists_getListIndex("source",d,"at2")}
-  for i = start, finish do
-    table.insert(t, source[i])
-  end
-  return t
+`)+"("+a+")";else{if("FIRST"===b)b="1";else if("LAST"===b)b="-1";else if("FROM_START"===b)b=c;else if("FROM_END"===b)b="-"+c;else throw Error("Unhandled option (text_charAt).");b=b.match(/^-?\w*$/)?"string.sub("+a+", "+b+", "+b+")":module$exports$Blockly$Lua.luaGenerator.provideFunction_("text_char_at",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(str, index)
+  return string.sub(str, index, index)
 end
-`)+"("+b+("FROM_END"===c||"FROM_START"===c?", "+e:"")+("FROM_END"===d||"FROM_START"===d?", "+a:"")+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.lists_sort=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"LIST",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"{}",c="1"===a.getFieldValue("DIRECTION")?1:-1;a=a.getFieldValue("TYPE");return[module$exports$Blockly$Lua.luaGenerator.provideFunction_("list_sort",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(list, typev, direction)
-  local t = {}
-  for n,v in pairs(list) do table.insert(t, v) end
-  local compareFuncs = {
-    NUMERIC = function(a, b)
-      return (tonumber(tostring(a)) or 0)
-          < (tonumber(tostring(b)) or 0) end,
-    TEXT = function(a, b)
-      return tostring(a) < tostring(b) end,
-    IGNORE_CASE = function(a, b)
-      return string.lower(tostring(a)) < string.lower(tostring(b)) end
-  }
-  local compareTemp = compareFuncs[typev]
-  local compare = compareTemp
-  if direction == -1
-  then compare = function(a, b) return compareTemp(b, a) end
-  end
-  table.sort(t, compare)
-  return t
-end
-`)+"("+b+',"'+a+'", '+c+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.lists_split=function(a){let b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"INPUT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE);const c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"DELIM",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";a=a.getFieldValue("MODE");if("SPLIT"===a)b||(b="''"),a=module$exports$Blockly$Lua.luaGenerator.provideFunction_("list_string_split",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(input, delim)
-  local t = {}
-  local pos = 1
-  while true do
-    next_delim = string.find(input, delim, pos)
-    if next_delim == nil then
-      table.insert(t, string.sub(input, pos))
-      break
+`)+"("+a+", "+b+")"}return[b,module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
+module$exports$Blockly$Lua.luaGenerator.text_getSubstring=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"STRING",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";var c=a.getFieldValue("WHERE1"),d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT1","FROM_END"===c?module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY:module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";if("FIRST"===c)c=1;else if("FROM_START"===c)c=d;else if("FROM_END"===c)c="-"+d;else throw Error("Unhandled option (text_getSubstring)");
+d=a.getFieldValue("WHERE2");a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"AT2","FROM_END"===d?module$exports$Blockly$Lua.luaGenerator.ORDER_UNARY:module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"1";if("LAST"===d)a=-1;else if("FROM_START"!==d)if("FROM_END"===d)a="-"+a;else throw Error("Unhandled option (text_getSubstring)");return["string.sub("+b+", "+c+", "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
+module$exports$Blockly$Lua.luaGenerator.text_changeCase=function(a){const b=a.getFieldValue("CASE");a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";let c;"UPPERCASE"===b?c="string.upper":"LOWERCASE"===b?c="string.lower":"TITLECASE"===b&&(c=module$exports$Blockly$Lua.luaGenerator.provideFunction_("text_titlecase",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(str)
+  local buf = {}
+  local inWord = false
+  for i = 1, #str do
+    local c = string.sub(str, i, i)
+    if inWord then
+      table.insert(buf, string.lower(c))
+      if string.find(c, "%s") then
+        inWord = false
+      end
     else
-      table.insert(t, string.sub(input, pos, next_delim-1))
-      pos = next_delim + #delim
+      table.insert(buf, string.upper(c))
+      inWord = true
     end
   end
-  return t
+  return table.concat(buf)
 end
-`);else if("JOIN"===a)b||(b="{}"),a="table.concat";else throw Error("Unknown mode: "+a);return[a+"("+b+", "+c+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.lists_reverse=function(a){a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"LIST",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"{}";return[module$exports$Blockly$Lua.luaGenerator.provideFunction_("list_reverse",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(input)
-  local reversed = {}
-  for i = #input, 1, -1 do
-    table.insert(reversed, input[i])
+`));return[c+"("+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.text_trim=function(a){const b={LEFT:"^%s*(,-)",RIGHT:"(.-)%s*$",BOTH:"^%s*(.-)%s*$"}[a.getFieldValue("MODE")];return["string.gsub("+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''")+', "'+b+'", "%1")',module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
+module$exports$Blockly$Lua.luaGenerator.text_print=function(a){return"print("+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''")+")\n"};
+module$exports$Blockly$Lua.luaGenerator.text_prompt_ext=function(a){var b=a.getField("TEXT")?module$exports$Blockly$Lua.luaGenerator.quote_(a.getFieldValue("TEXT")):module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";b=module$exports$Blockly$Lua.luaGenerator.provideFunction_("text_prompt",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(msg)
+  io.write(msg)
+  io.flush()
+  return io.read()
+end
+`)+"("+b+")";"NUMBER"===a.getFieldValue("TYPE")&&(b="tonumber("+b+", 10)");return[b,module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.text_prompt=module$exports$Blockly$Lua.luaGenerator.text_prompt_ext;
+module$exports$Blockly$Lua.luaGenerator.text_count=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"SUB",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";return[module$exports$Blockly$Lua.luaGenerator.provideFunction_("text_count",`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(haystack, needle)
+  if #needle == 0 then
+    return #haystack + 1
   end
-  return reversed
+  local i = 1
+  local count = 0
+  while true do
+    i = string.find(haystack, needle, i, true)
+    if i == nil then
+      break
+    end
+    count = count + 1
+    i = i + #needle
+  end
+  return count
 end
-`)+"("+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};var module$exports$Blockly$Lua$colour={};module$exports$Blockly$Lua.luaGenerator.colour_picker=function(a){return[module$exports$Blockly$Lua.luaGenerator.quote_(a.getFieldValue("COLOUR")),module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC]};module$exports$Blockly$Lua.luaGenerator.colour_random=function(a){return['string.format("#%06x", math.random(0, 2^24 - 1))',module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.colour_rgb=function(a){const b=module$exports$Blockly$Lua.luaGenerator.provideFunction_("colour_rgb",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(r, g, b)
-  r = math.floor(math.min(100, math.max(0, r)) * 2.55 + .5)
-  g = math.floor(math.min(100, math.max(0, g)) * 2.55 + .5)
-  b = math.floor(math.min(100, math.max(0, b)) * 2.55 + .5)
-  return string.format("#%02x%02x%02x", r, g, b)
+`)+"("+b+", "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
+module$exports$Blockly$Lua.luaGenerator.text_replace=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''",c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"FROM",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TO",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''";return[module$exports$Blockly$Lua.luaGenerator.provideFunction_("text_replace",
+`
+function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(haystack, needle, replacement)
+  local buf = {}
+  local i = 1
+  while i <= #haystack do
+    if string.sub(haystack, i, i + #needle - 1) == needle then
+      for j = 1, #replacement do
+        table.insert(buf, string.sub(replacement, j, j))
+      end
+      i = i + #needle
+    else
+      table.insert(buf, string.sub(haystack, i, i))
+      i = i + 1
+    end
+  end
+  return table.concat(buf)
 end
-`),c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"RED",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||0,d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"GREEN",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||0;a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"BLUE",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||0;return[b+"("+c+", "+d+", "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};
-module$exports$Blockly$Lua.luaGenerator.colour_blend=function(a){const b=module$exports$Blockly$Lua.luaGenerator.provideFunction_("colour_blend",`
-function ${module$exports$Blockly$Lua.luaGenerator.FUNCTION_NAME_PLACEHOLDER_}(colour1, colour2, ratio)
-  local r1 = tonumber(string.sub(colour1, 2, 3), 16)
-  local r2 = tonumber(string.sub(colour2, 2, 3), 16)
-  local g1 = tonumber(string.sub(colour1, 4, 5), 16)
-  local g2 = tonumber(string.sub(colour2, 4, 5), 16)
-  local b1 = tonumber(string.sub(colour1, 6, 7), 16)
-  local b2 = tonumber(string.sub(colour2, 6, 7), 16)
-  local ratio = math.min(1, math.max(0, ratio))
-  local r = math.floor(r1 * (1 - ratio) + r2 * ratio + .5)
-  local g = math.floor(g1 * (1 - ratio) + g2 * ratio + .5)
-  local b = math.floor(b1 * (1 - ratio) + b2 * ratio + .5)
-  return string.format("#%02x%02x%02x", r, g, b)
-end
-`),c=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"COLOUR1",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"'#000000'",d=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"COLOUR2",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"'#000000'";a=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"RATIO",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||0;return[b+"("+c+", "+d+", "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};var module$exports$Blockly$Lua$all=module$exports$Blockly$Lua;
+`)+"("+b+", "+c+", "+a+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};module$exports$Blockly$Lua.luaGenerator.text_reverse=function(a){return["string.reverse("+(module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"TEXT",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"''")+")",module$exports$Blockly$Lua.luaGenerator.ORDER_HIGH]};var module$exports$Blockly$Lua$variables={},module$contents$Blockly$Lua$variables_NameType=$.NameType$$module$build$src$core$names;module$exports$Blockly$Lua.luaGenerator.variables_get=function(a){return[module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE),module$exports$Blockly$Lua.luaGenerator.ORDER_ATOMIC]};
+module$exports$Blockly$Lua.luaGenerator.variables_set=function(a){const b=module$exports$Blockly$Lua.luaGenerator.valueToCode(a,"VALUE",module$exports$Blockly$Lua.luaGenerator.ORDER_NONE)||"0";return module$exports$Blockly$Lua.luaGenerator.nameDB_.getName(a.getFieldValue("VAR"),$.NameType$$module$build$src$core$names.VARIABLE)+" = "+b+"\n"};var module$exports$Blockly$Lua$variablesDynamic={};module$exports$Blockly$Lua.luaGenerator.variables_get_dynamic=module$exports$Blockly$Lua.luaGenerator.variables_get;module$exports$Blockly$Lua.luaGenerator.variables_set_dynamic=module$exports$Blockly$Lua.luaGenerator.variables_set;var module$exports$Blockly$Lua$all=module$exports$Blockly$Lua;
 module$exports$Blockly$Lua.__namespace__=$;
 return module$exports$Blockly$Lua;
 }));

@@ -6,12 +6,8 @@
 import { Field, FieldConfig, FieldValidator } from './field.js';
 import { Menu } from './menu.js';
 import { MenuItem } from './menuitem.js';
-import type { Sentinel } from './utils/sentinel.js';
-export declare type FieldDropdownValidator = FieldValidator<string>;
 /**
  * Class for an editable dropdown field.
- *
- * @alias Blockly.FieldDropdown
  */
 export declare class FieldDropdown extends Field<string> {
     /** Horizontal distance that a checkmark overhangs the dropdown. */
@@ -64,18 +60,18 @@ export declare class FieldDropdown extends Field<string> {
      *     if you wish to skip setup (only used by subclasses that want to handle
      *     configuration and setting the field value after their own constructors
      *     have run).
-     * @param opt_validator A function that is called to validate changes to the
+     * @param validator A function that is called to validate changes to the
      *     field's value. Takes in a language-neutral dropdown option & returns a
      *     validated language-neutral dropdown option, or null to abort the
      *     change.
-     * @param opt_config A map of options used to configure the field.
+     * @param config A map of options used to configure the field.
      *     See the [field creation documentation]{@link
      * https://developers.google.com/blockly/guides/create-custom-blocks/fields/built-in-fields/dropdown#creation}
      * for a list of properties this parameter supports.
      * @throws {TypeError} If `menuGenerator` options are incorrectly structured.
      */
-    constructor(menuGenerator: MenuGenerator, opt_validator?: FieldDropdownValidator, opt_config?: FieldConfig);
-    constructor(menuGenerator: Sentinel);
+    constructor(menuGenerator: MenuGenerator, validator?: FieldDropdownValidator, config?: FieldDropdownConfig);
+    constructor(menuGenerator: typeof Field.SKIP_SETUP);
     /**
      * Sets the field's value based on the given XML element. Should only be
      * called by Blockly.Xml.
@@ -110,16 +106,16 @@ export declare class FieldDropdown extends Field<string> {
     /**
      * Create a dropdown menu under the text.
      *
-     * @param opt_e Optional mouse event that triggered the field to open, or
+     * @param e Optional mouse event that triggered the field to open, or
      *     undefined if triggered programmatically.
      */
-    protected showEditor_(opt_e?: MouseEvent): void;
+    protected showEditor_(e?: MouseEvent): void;
     /** Create the dropdown editor. */
     private dropdownCreate_;
     /**
      * Disposes of events and DOM-references belonging to the dropdown editor.
      */
-    private dropdownDispose_;
+    protected dropdownDispose_(): void;
     /**
      * Handle an action in the dropdown menu.
      *
@@ -141,27 +137,27 @@ export declare class FieldDropdown extends Field<string> {
     /**
      * Return a list of the options for this dropdown.
      *
-     * @param opt_useCache For dynamic options, whether or not to use the cached
+     * @param useCache For dynamic options, whether or not to use the cached
      *     options or to re-generate them.
      * @returns A non-empty array of option tuples:
      *     (human-readable text or image, language-neutral name).
      * @throws {TypeError} If generated options are incorrectly structured.
      */
-    getOptions(opt_useCache?: boolean): MenuOption[];
+    getOptions(useCache?: boolean): MenuOption[];
     /**
      * Ensure that the input value is a valid language-neutral option.
      *
-     * @param opt_newValue The input value.
+     * @param newValue The input value.
      * @returns A valid language-neutral option, or null if invalid.
      */
-    protected doClassValidation_(opt_newValue?: MenuOption[1]): string | null;
+    protected doClassValidation_(newValue?: string): string | null;
     /**
      * Update the value of this dropdown field.
      *
      * @param newValue The value to be saved. The default validator guarantees
      *     that this is one of the valid dropdown options.
      */
-    protected doValueUpdate_(newValue: MenuOption[1]): void;
+    protected doValueUpdate_(newValue: string): void;
     /**
      * Updates the dropdown arrow to match the colour/style of the block.
      *
@@ -188,8 +184,8 @@ export declare class FieldDropdown extends Field<string> {
     private positionSVGArrow_;
     /**
      * Use the `getText_` developer hook to override the field's text
-     * representation.  Get the selected option text. If the selected option is an
-     * image we return the image alt text.
+     * representation.  Get the selected option text.  If the selected option is
+     * an image we return the image alt text.
      *
      * @returns Selected option text.
      */
@@ -218,21 +214,41 @@ export interface ImageProperties {
  * readable value (text or image), and the second element is the language-
  * neutral value.
  */
-export declare type MenuOption = [string | ImageProperties, string];
+export type MenuOption = [string | ImageProperties, string];
 /**
  * A function that generates an array of menu options for FieldDropdown
  * or its descendants.
  */
-export declare type MenuGeneratorFunction = (this: FieldDropdown) => MenuOption[];
+export type MenuGeneratorFunction = (this: FieldDropdown) => MenuOption[];
 /**
  * Either an array of menu options or a function that generates an array of
  * menu options for FieldDropdown or its descendants.
  */
-export declare type MenuGenerator = MenuOption[] | MenuGeneratorFunction;
+export type MenuGenerator = MenuOption[] | MenuGeneratorFunction;
+/**
+ * Config options for the dropdown field.
+ */
+export type FieldDropdownConfig = FieldConfig;
 /**
  * fromJson config for the dropdown field.
  */
-export interface FieldDropdownFromJsonConfig extends FieldConfig {
+export interface FieldDropdownFromJsonConfig extends FieldDropdownConfig {
     options?: MenuOption[];
 }
+/**
+ * A function that is called to validate changes to the field's value before
+ * they are set.
+ *
+ * @see {@link https://developers.google.com/blockly/guides/create-custom-blocks/fields/validators#return_values}
+ * @param newValue The value to be validated.
+ * @returns One of three instructions for setting the new value: `T`, `null`,
+ * or `undefined`.
+ *
+ * - `T` to set this function's returned value instead of `newValue`.
+ *
+ * - `null` to invoke `doValueInvalid_` and not set a value.
+ *
+ * - `undefined` to set `newValue` as is.
+ */
+export type FieldDropdownValidator = FieldValidator<string>;
 //# sourceMappingURL=field_dropdown.d.ts.map

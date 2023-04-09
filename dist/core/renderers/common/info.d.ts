@@ -21,8 +21,6 @@ import type { Renderer } from './renderer.js';
  * This measure pass does not propagate changes to the block (although fields
  * may choose to rerender when getSize() is called).  However, calling it
  * repeatedly may be expensive.
- *
- * @alias Blockly.blockRendering.RenderInfo
  */
 export declare class RenderInfo {
     block_: BlockSvg;
@@ -57,14 +55,12 @@ export declare class RenderInfo {
     /**
      * @param renderer The renderer in use.
      * @param block The block to measure.
-     * @internal
      */
     constructor(renderer: Renderer, block: BlockSvg);
     /**
      * Get the block renderer in use.
      *
      * @returns The block renderer in use.
-     * @internal
      */
     getRenderer(): Renderer;
     /**
@@ -74,8 +70,6 @@ export declare class RenderInfo {
      * This measure pass does not propagate changes to the block (although fields
      * may choose to rerender when getSize() is called).  However, calling it
      * repeatedly may be expensive.
-     *
-     * @internal
      */
     measure(): void;
     /**
@@ -85,16 +79,12 @@ export declare class RenderInfo {
     protected createRows_(): void;
     /**
      * Create all non-spacer elements that belong on the top row.
-     *
-     * @internal
      */
-    populateTopRow_(): void;
+    protected populateTopRow_(): void;
     /**
      * Create all non-spacer elements that belong on the bottom row.
-     *
-     * @internal
      */
-    populateBottomRow_(): void;
+    protected populateBottomRow_(): void;
     /**
      * Add an input element to the active row, if needed, and record the type of
      * the input on the row.

@@ -6,8 +6,6 @@
 import type { Workspace } from '../workspace.js';
 /**
  * Abstract class for an event.
- *
- * @alias Blockly.Events.Abstract
  */
 export declare abstract class Abstract {
     /**
@@ -17,13 +15,19 @@ export declare abstract class Abstract {
     abstract isBlank: boolean;
     /** The workspace identifier for this event. */
     workspaceId?: string;
+    /**
+     * An ID for the group of events this block is associated with.
+     *
+     * Groups define events that should be treated as an single action from the
+     * user's perspective, and should be undone together.
+     */
     group: string;
+    /** Whether this event is undoable or not. */
     recordUndo: boolean;
     /** Whether or not the event is a UI event. */
     isUiEvent: boolean;
     /** Type of this event. */
     type: string;
-    /** @alias Blockly.Events.Abstract */
     constructor();
     /**
      * Encode the event as JSON.

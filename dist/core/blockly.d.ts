@@ -38,19 +38,19 @@ import { DragTarget } from './drag_target.js';
 import * as dropDownDiv from './dropdowndiv.js';
 import * as Events from './events/events.js';
 import * as Extensions from './extensions.js';
-import { Field, FieldValidator } from './field.js';
-import { FieldAngle, FieldAngleValidator } from './field_angle.js';
-import { FieldCheckbox, FieldCheckboxValidator } from './field_checkbox.js';
-import { FieldColour, FieldColourValidator } from './field_colour.js';
-import { FieldDropdown, FieldDropdownValidator, MenuGenerator, MenuGeneratorFunction, MenuOption } from './field_dropdown.js';
-import { FieldImage } from './field_image.js';
-import { FieldLabel } from './field_label.js';
+import { Field, FieldConfig, FieldValidator, UnattachedFieldError } from './field.js';
+import { FieldAngle, FieldAngleConfig, FieldAngleFromJsonConfig, FieldAngleValidator } from './field_angle.js';
+import { FieldCheckbox, FieldCheckboxConfig, FieldCheckboxFromJsonConfig, FieldCheckboxValidator } from './field_checkbox.js';
+import { FieldColour, FieldColourConfig, FieldColourFromJsonConfig, FieldColourValidator } from './field_colour.js';
+import { FieldDropdown, FieldDropdownConfig, FieldDropdownFromJsonConfig, FieldDropdownValidator, MenuGenerator, MenuGeneratorFunction, MenuOption } from './field_dropdown.js';
+import { FieldImage, FieldImageConfig, FieldImageFromJsonConfig } from './field_image.js';
+import { FieldLabel, FieldLabelConfig, FieldLabelFromJsonConfig } from './field_label.js';
 import { FieldLabelSerializable } from './field_label_serializable.js';
-import { FieldMultilineInput, FieldMultilineInputValidator } from './field_multilineinput.js';
-import { FieldNumber, FieldNumberValidator } from './field_number.js';
+import { FieldMultilineInput, FieldMultilineInputConfig, FieldMultilineInputFromJsonConfig, FieldMultilineInputValidator } from './field_multilineinput.js';
+import { FieldNumber, FieldNumberConfig, FieldNumberFromJsonConfig, FieldNumberValidator } from './field_number.js';
 import * as fieldRegistry from './field_registry.js';
-import { FieldTextInput, FieldTextInputValidator } from './field_textinput.js';
-import { FieldVariable, FieldVariableValidator } from './field_variable.js';
+import { FieldTextInput, FieldTextInputConfig, FieldTextInputFromJsonConfig, FieldTextInputValidator } from './field_textinput.js';
+import { FieldVariable, FieldVariableConfig, FieldVariableFromJsonConfig, FieldVariableValidator } from './field_variable.js';
 import { Flyout } from './flyout_base.js';
 import { FlyoutButton } from './flyout_button.js';
 import { HorizontalFlyout } from './flyout_horizontal.js';
@@ -84,6 +84,7 @@ import { IFlyout } from './interfaces/i_flyout.js';
 import { IKeyboardAccessible } from './interfaces/i_keyboard_accessible.js';
 import { IMetricsManager } from './interfaces/i_metrics_manager.js';
 import { IMovable } from './interfaces/i_movable.js';
+import { IObservable, isObservable } from './interfaces/i_observable.js';
 import { IPositionable } from './interfaces/i_positionable.js';
 import { IRegistrable } from './interfaces/i_registrable.js';
 import { ISelectable } from './interfaces/i_selectable.js';
@@ -91,6 +92,7 @@ import { ISelectableToolboxItem } from './interfaces/i_selectable_toolbox_item.j
 import { IStyleable } from './interfaces/i_styleable.js';
 import { IToolbox } from './interfaces/i_toolbox.js';
 import { IToolboxItem } from './interfaces/i_toolbox_item.js';
+import { IVariableBackedParameterModel, isVariableBackedParameterModel } from './interfaces/i_variable_backed_parameter_model.js';
 import { ASTNode } from './keyboard_nav/ast_node.js';
 import { BasicCursor } from './keyboard_nav/basic_cursor.js';
 import { Cursor } from './keyboard_nav/cursor.js';
@@ -155,68 +157,55 @@ import { ZoomControls } from './zoom_controls.js';
  * compiler to override this constant.
  *
  * @define {string}
- * @alias Blockly.VERSION
  */
 export declare const VERSION = "uncompiled";
 /**
  * @see Blockly.Input.Align.LEFT
- * @alias Blockly.ALIGN_LEFT
  */
 export declare const ALIGN_LEFT = Input.Align.LEFT;
 /**
  * @see Blockly.Input.Align.CENTRE
- * @alias Blockly.ALIGN_CENTRE
  */
 export declare const ALIGN_CENTRE = Input.Align.CENTRE;
 /**
  * @see Blockly.Input.Align.RIGHT
- * @alias Blockly.ALIGN_RIGHT
  */
 export declare const ALIGN_RIGHT = Input.Align.RIGHT;
 /**
  * @see ConnectionType.INPUT_VALUE
- * @alias Blockly.INPUT_VALUE
  */
 export declare const INPUT_VALUE = ConnectionType.INPUT_VALUE;
 /**
  * @see ConnectionType.OUTPUT_VALUE
- * @alias Blockly.OUTPUT_VALUE
  */
 export declare const OUTPUT_VALUE = ConnectionType.OUTPUT_VALUE;
 /**
  * @see ConnectionType.NEXT_STATEMENT
- * @alias Blockly.NEXT_STATEMENT
  */
 export declare const NEXT_STATEMENT = ConnectionType.NEXT_STATEMENT;
 /**
  * @see ConnectionType.PREVIOUS_STATEMENT
- * @alias Blockly.PREVIOUS_STATEMENT
  */
 export declare const PREVIOUS_STATEMENT = ConnectionType.PREVIOUS_STATEMENT;
 /**
  * @see inputTypes.DUMMY_INPUT
- * @alias Blockly.DUMMY_INPUT
  */
-export declare const DUMMY_INPUT: inputTypes;
+export declare const DUMMY_INPUT = inputTypes.DUMMY;
 /** Aliases for toolbox positions. */
 /**
  * @see toolbox.Position.TOP
- * @alias Blockly.TOOLBOX_AT_TOP
  */
 export declare const TOOLBOX_AT_TOP = utils.toolbox.Position.TOP;
 /**
  * @see toolbox.Position.BOTTOM
- * @alias Blockly.TOOLBOX_AT_BOTTOM
  */
 export declare const TOOLBOX_AT_BOTTOM = utils.toolbox.Position.BOTTOM;
 /**
  * @see toolbox.Position.LEFT
- * @alias Blockly.TOOLBOX_AT_LEFT
  */
 export declare const TOOLBOX_AT_LEFT = utils.toolbox.Position.LEFT;
 /**
  * @see toolbox.Position.RIGHT
- * @alias Blockly.TOOLBOX_AT_RIGHT
  */
 export declare const TOOLBOX_AT_RIGHT = utils.toolbox.Position.RIGHT;
 /**
@@ -228,7 +217,6 @@ export declare const TOOLBOX_AT_RIGHT = utils.toolbox.Position.RIGHT;
  *
  * @param workspace Any workspace in the SVG.
  * @see Blockly.common.svgResize
- * @alias Blockly.svgResize
  */
 export declare const svgResize: typeof common.svgResize;
 /**
@@ -236,7 +224,6 @@ export declare const svgResize: typeof common.svgResize;
  *
  * @param opt_onlyClosePopups Whether only popups should be closed.
  * @see Blockly.WorkspaceSvg.hideChaff
- * @alias Blockly.hideChaff
  */
 export declare function hideChaff(opt_onlyClosePopups?: boolean): void;
 /**
@@ -245,13 +232,10 @@ export declare function hideChaff(opt_onlyClosePopups?: boolean): void;
  * Blockly instances on a page.
  *
  * @see Blockly.common.getMainWorkspace
- * @alias Blockly.getMainWorkspace
  */
 export declare const getMainWorkspace: typeof common.getMainWorkspace;
 /**
  * Returns the currently selected copyable object.
- *
- * @alias Blockly.common.getSelected
  */
 export declare const getSelected: typeof common.getSelected;
 /**
@@ -260,7 +244,6 @@ export declare const getSelected: typeof common.getSelected;
  *
  * @param jsonArray An array of JSON block definitions.
  * @see Blockly.common.defineBlocksWithJsonArray
- * @alias Blockly.defineBlocksWithJsonArray
  */
 export declare const defineBlocksWithJsonArray: typeof common.defineBlocksWithJsonArray;
 /**
@@ -271,7 +254,6 @@ export declare const defineBlocksWithJsonArray: typeof common.defineBlocksWithJs
  *
  * @param container The container element.
  * @see Blockly.common.setParentContainer
- * @alias Blockly.setParentContainer
  */
 export declare const setParentContainer: typeof common.setParentContainer;
 /**
@@ -281,7 +263,6 @@ export declare const setParentContainer: typeof common.setParentContainer;
  * @param workspace The workspace to resize.
  * @deprecated Use **workspace.resizeContents** instead.
  * @see Blockly.WorkspaceSvg.resizeContents
- * @alias Blockly.resizeSvgContents
  */
 declare function resizeSvgContentsLocal(workspace: WorkspaceSvg): void;
 export declare const resizeSvgContents: typeof resizeSvgContentsLocal;
@@ -291,7 +272,6 @@ export declare const resizeSvgContents: typeof resizeSvgContentsLocal;
  * @param toCopy Block or Workspace Comment to be copied.
  * @deprecated Use **Blockly.clipboard.copy** instead.
  * @see Blockly.clipboard.copy
- * @alias Blockly.copy
  */
 export declare function copy(toCopy: ICopyable): void;
 /**
@@ -300,7 +280,6 @@ export declare function copy(toCopy: ICopyable): void;
  * @returns True if the paste was successful, false otherwise.
  * @deprecated Use **Blockly.clipboard.paste** instead.
  * @see Blockly.clipboard.paste
- * @alias Blockly.paste
  */
 export declare function paste(): boolean;
 /**
@@ -309,7 +288,6 @@ export declare function paste(): boolean;
  * @param toDuplicate Block or Workspace Comment to be copied.
  * @deprecated Use **Blockly.clipboard.duplicate** instead.
  * @see Blockly.clipboard.duplicate
- * @alias Blockly.duplicate
  */
 export declare function duplicate(toDuplicate: ICopyable): void;
 /**
@@ -319,7 +297,6 @@ export declare function duplicate(toDuplicate: ICopyable): void;
  * @returns True if number, false otherwise.
  * @deprecated Use **Blockly.utils.string.isNumber** instead.
  * @see Blockly.utils.string.isNumber
- * @alias Blockly.isNumber
  */
 export declare function isNumber(str: string): boolean;
 /**
@@ -329,7 +306,6 @@ export declare function isNumber(str: string): boolean;
  * @returns RGB code, e.g. '#5ba65b'.
  * @deprecated Use **Blockly.utils.colour.hueToHex** instead.
  * @see Blockly.utils.colour.hueToHex
- * @alias Blockly.hueToHex
  */
 export declare function hueToHex(hue: number): string;
 /**
@@ -345,7 +321,6 @@ export declare function hueToHex(hue: number): string;
  * @returns Opaque data that can be passed to unbindEvent_.
  * @deprecated Use **Blockly.browserEvents.bind** instead.
  * @see Blockly.browserEvents.bind
- * @alias Blockly.bindEvent_
  */
 export declare function bindEvent_(node: EventTarget, name: string, thisObject: Object | null, func: Function): browserEvents.Data;
 /**
@@ -356,7 +331,6 @@ export declare function bindEvent_(node: EventTarget, name: string, thisObject: 
  * @returns The function call.
  * @deprecated Use **Blockly.browserEvents.unbind** instead.
  * @see browserEvents.unbind
- * @alias Blockly.unbindEvent_
  */
 export declare function unbindEvent_(bindData: browserEvents.Data): Function;
 /**
@@ -376,7 +350,6 @@ export declare function unbindEvent_(bindData: browserEvents.Data): Function;
  * @returns Opaque data that can be passed to unbindEvent_.
  * @deprecated Use **Blockly.browserEvents.conditionalBind** instead.
  * @see browserEvents.conditionalBind
- * @alias Blockly.bindEventWithChecks_
  */
 export declare function bindEventWithChecks_(node: EventTarget, name: string, thisObject: Object | null, func: Function, opt_noCaptureIdentifier?: boolean, _opt_noPreventDefault?: boolean): browserEvents.Data;
 export declare const COLLAPSE_CHARS = 30;
@@ -390,24 +363,18 @@ export declare const COLLAPSED_FIELD_NAME = "_TEMP_COLLAPSED_FIELD";
  * String for use in the "custom" attribute of a category in toolbox XML.
  * This string indicates that the category should be dynamically populated with
  * variable blocks.
- *
- * @alias Blockly.VARIABLE_CATEGORY_NAME
  */
 export declare const VARIABLE_CATEGORY_NAME: string;
 /**
  * String for use in the "custom" attribute of a category in toolbox XML.
  * This string indicates that the category should be dynamically populated with
  * variable blocks.
- *
- * @alias Blockly.VARIABLE_DYNAMIC_CATEGORY_NAME
  */
 export declare const VARIABLE_DYNAMIC_CATEGORY_NAME: string;
 /**
  * String for use in the "custom" attribute of a category in toolbox XML.
  * This string indicates that the category should be dynamically populated with
  * procedure blocks.
- *
- * @alias Blockly.PROCEDURE_CATEGORY_NAME
  */
 export declare const PROCEDURE_CATEGORY_NAME: string;
 export { browserEvents };
@@ -463,18 +430,18 @@ export { Cursor };
 export { DeleteArea };
 export { DragTarget };
 export declare const DropDownDiv: typeof dropDownDiv;
-export { Field, FieldValidator };
-export { FieldAngle, FieldAngleValidator };
-export { FieldCheckbox, FieldCheckboxValidator };
-export { FieldColour, FieldColourValidator };
-export { FieldDropdown, FieldDropdownValidator, MenuGenerator, MenuGeneratorFunction, MenuOption, };
-export { FieldImage };
-export { FieldLabel };
+export { Field, FieldConfig, FieldValidator, UnattachedFieldError };
+export { FieldAngle, FieldAngleConfig, FieldAngleFromJsonConfig, FieldAngleValidator, };
+export { FieldCheckbox, FieldCheckboxConfig, FieldCheckboxFromJsonConfig, FieldCheckboxValidator, };
+export { FieldColour, FieldColourConfig, FieldColourFromJsonConfig, FieldColourValidator, };
+export { FieldDropdown, FieldDropdownConfig, FieldDropdownFromJsonConfig, FieldDropdownValidator, MenuGenerator, MenuGeneratorFunction, MenuOption, };
+export { FieldImage, FieldImageConfig, FieldImageFromJsonConfig };
+export { FieldLabel, FieldLabelConfig, FieldLabelFromJsonConfig };
 export { FieldLabelSerializable };
-export { FieldMultilineInput, FieldMultilineInputValidator };
-export { FieldNumber, FieldNumberValidator };
-export { FieldTextInput, FieldTextInputValidator };
-export { FieldVariable, FieldVariableValidator };
+export { FieldMultilineInput, FieldMultilineInputConfig, FieldMultilineInputFromJsonConfig, FieldMultilineInputValidator, };
+export { FieldNumber, FieldNumberConfig, FieldNumberFromJsonConfig, FieldNumberValidator, };
+export { FieldTextInput, FieldTextInputConfig, FieldTextInputFromJsonConfig, FieldTextInputValidator, };
+export { FieldVariable, FieldVariableConfig, FieldVariableFromJsonConfig, FieldVariableValidator, };
 export { Flyout };
 export { FlyoutButton };
 export { FlyoutMetricsManager };
@@ -507,6 +474,7 @@ export { IMetricsManager };
 export { IMovable };
 export { Input };
 export { InsertionMarkerManager };
+export { IObservable, isObservable };
 export { IPositionable };
 export { IRegistrable };
 export { ISelectable };
@@ -514,6 +482,7 @@ export { ISelectableToolboxItem };
 export { IStyleable };
 export { IToolbox };
 export { IToolboxItem };
+export { IVariableBackedParameterModel, isVariableBackedParameterModel };
 export { Marker };
 export { MarkerManager };
 export { Menu };

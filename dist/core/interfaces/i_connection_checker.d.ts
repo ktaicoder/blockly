@@ -7,8 +7,6 @@ import type { Connection } from '../connection.js';
 import type { RenderedConnection } from '../rendered_connection.js';
 /**
  * Class for connection type checking logic.
- *
- * @alias Blockly.IConnectionChecker
  */
 export interface IConnectionChecker {
     /**

@@ -7,12 +7,12 @@ import { AbstractEventJson } from './events_abstract.js';
 import { UiBase } from './events_ui_base.js';
 import type { Workspace } from '../workspace.js';
 /**
- * Class for a toolbox item select event.
- *
- * @alias Blockly.Events.ToolboxItemSelect
+ * Notifies listeners that a toolbox item has been selected.
  */
 export declare class ToolboxItemSelect extends UiBase {
+    /** The previously selected toolbox item. */
     oldItem?: string;
+    /** The newly selected toolbox item. */
     newItem?: string;
     type: string;
     /**

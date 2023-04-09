@@ -10,7 +10,6 @@ import type { WorkspaceSvg } from './workspace_svg.js';
 /**
  * Enum for vertical positioning.
  *
- * @alias Blockly.uiPosition.verticalPosition
  * @internal
  */
 export declare enum verticalPosition {
@@ -20,7 +19,6 @@ export declare enum verticalPosition {
 /**
  * Enum for horizontal positioning.
  *
- * @alias Blockly.uiPosition.horizontalPosition
  * @internal
  */
 export declare enum horizontalPosition {
@@ -30,7 +28,6 @@ export declare enum horizontalPosition {
 /**
  * An object defining a horizontal and vertical positioning.
  *
- * @alias Blockly.uiPosition.Position
  * @internal
  */
 export interface Position {
@@ -40,7 +37,6 @@ export interface Position {
 /**
  * Enum for bump rules to use for dealing with collisions.
  *
- * @alias Blockly.uiPosition.bumpDirection
  * @internal
  */
 export declare enum bumpDirection {
@@ -60,7 +56,6 @@ export declare enum bumpDirection {
  * @param metrics The workspace UI metrics.
  * @param workspace The workspace.
  * @returns The suggested start position.
- * @alias Blockly.uiPosition.getStartPositionRect
  * @internal
  */
 export declare function getStartPositionRect(position: Position, size: Size, horizontalPadding: number, verticalPadding: number, metrics: UiMetrics, workspace: WorkspaceSvg): Rect;
@@ -73,7 +68,6 @@ export declare function getStartPositionRect(position: Position, size: Size, hor
  * @param workspace The workspace.
  * @param metrics The workspace metrics.
  * @returns The suggested corner position.
- * @alias Blockly.uiPosition.getCornerOppositeToolbox
  * @internal
  */
 export declare function getCornerOppositeToolbox(workspace: WorkspaceSvg, metrics: UiMetrics): Position;
@@ -89,7 +83,6 @@ export declare function getCornerOppositeToolbox(workspace: WorkspaceSvg, metric
  * @param savedPositions List of rectangles that represent the positions of UI
  *     elements already placed.
  * @returns The suggested position rectangle.
- * @alias Blockly.uiPosition.bumpPositionRect
  * @internal
  */
 export declare function bumpPositionRect(startRect: Rect, margin: number, bumpDir: bumpDirection, savedPositions: Rect[]): Rect;

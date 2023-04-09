@@ -14,8 +14,6 @@ import type { Workspace } from '../workspace.js';
  * Class for an AST node.
  * It is recommended that you use one of the createNode methods instead of
  * creating a node directly.
- *
- * @alias Blockly.ASTNode
  */
 export declare class ASTNode {
     /**
@@ -37,7 +35,6 @@ export declare class ASTNode {
      *     Must be in ASTNode.types.
      * @param location The position in the AST.
      * @param opt_params Optional dictionary of options.
-     * @alias Blockly.ASTNode
      */
     constructor(type: string, location: IASTNodeLocation, opt_params?: Params);
     /**
@@ -262,5 +259,5 @@ export declare namespace ASTNode {
         WORKSPACE = "workspace"
     }
 }
-export declare type Params = ASTNode.Params;
+export type Params = ASTNode.Params;
 //# sourceMappingURL=ast_node.d.ts.map

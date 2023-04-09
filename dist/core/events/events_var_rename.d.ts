@@ -7,13 +7,15 @@ import type { VariableModel } from '../variable_model.js';
 import { VarBase, VarBaseJson } from './events_var_base.js';
 import type { Workspace } from '../workspace.js';
 /**
- * Class for a variable rename event.
+ * Notifies listeners that a variable model was renamed.
  *
- * @alias Blockly.Events.VarRename
+ * @class
  */
 export declare class VarRename extends VarBase {
     type: string;
+    /** The previous name of the variable. */
     oldName?: string;
+    /** The new name of the variable. */
     newName?: string;
     /**
      * @param opt_variable The renamed variable. Undefined for a blank event.

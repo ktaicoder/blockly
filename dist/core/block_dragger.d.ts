@@ -13,8 +13,6 @@ import type { WorkspaceSvg } from './workspace_svg.js';
 /**
  * Class for a block dragger.  It moves blocks around the workspace when they
  * are being dragged by a mouse or touch.
- *
- * @alias Blockly.BlockDragger
  */
 export declare class BlockDragger implements IBlockDragger {
     /** The top block in the stack that is being dragged. */
@@ -103,11 +101,8 @@ export declare class BlockDragger implements IBlockDragger {
     protected maybeDeleteBlock_(): boolean;
     /**
      * Updates the necessary information to place a block at a certain location.
-     *
-     * @param delta The change in location from where the block started the drag
-     *     to where it ended the drag.
      */
-    protected updateBlockAfterMove_(delta: Coordinate): void;
+    protected updateBlockAfterMove_(): void;
     /** Fire a UI event at the end of a block drag. */
     protected fireDragEndEvent_(): void;
     /**

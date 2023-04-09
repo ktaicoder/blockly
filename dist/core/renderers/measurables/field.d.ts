@@ -10,8 +10,6 @@ import { Measurable } from './base.js';
 /**
  * An object containing information about the space a field takes up during
  * rendering
- *
- * @alias Blockly.blockRendering.Field
  */
 export declare class Field extends Measurable {
     field: BlocklyField;
@@ -24,7 +22,6 @@ export declare class Field extends Measurable {
      * @param constants The rendering constants provider.
      * @param field The field to measure and store information for.
      * @param parentInput The parent input for the field.
-     * @internal
      */
     constructor(constants: ConstantProvider, field: BlocklyField, parentInput: Input);
 }

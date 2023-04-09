@@ -18,8 +18,6 @@ declare enum FlyoutItemType {
 }
 /**
  * Class for a flyout.
- *
- * @alias Blockly.Flyout
  */
 export declare abstract class Flyout extends DeleteArea implements IFlyout {
     /**
@@ -50,8 +48,7 @@ export declare abstract class Flyout extends DeleteArea implements IFlyout {
     /**
      * Lay out the blocks in the flyout.
      *
-     * @param contents The blocks and buttons to lay
-     *     out.
+     * @param contents The blocks and buttons to lay out.
      * @param gaps The visible gaps between blocks.
      */
     protected abstract layout_(contents: FlyoutItem[], gaps: number[]): void;
@@ -96,9 +93,11 @@ export declare abstract class Flyout extends DeleteArea implements IFlyout {
     horizontalLayout: boolean;
     protected toolboxPosition_: number;
     /**
-     * Opaque data that can be passed to Blockly.unbindEvent_.
+     * Array holding info needed to unbind events.
+     * Used for disposing.
+     * Ex: [[node, name, func], [node, name, func]].
      */
-    private eventWrappers_;
+    private boundEvents;
     /**
      * Function that will be registered as a change listener on the workspace
      * to reflow when blocks in the flyout workspace change.

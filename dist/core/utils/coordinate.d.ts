@@ -5,8 +5,6 @@
  */
 /**
  * Class for representing coordinates and positions.
- *
- * @alias Blockly.utils.Coordinate
  */
 export declare class Coordinate {
     x: number;

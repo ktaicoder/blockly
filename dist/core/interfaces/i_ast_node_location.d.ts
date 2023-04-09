@@ -5,8 +5,6 @@
  */
 /**
  * An AST node location interface.
- *
- * @alias Blockly.IASTNodeLocation
  */
 export interface IASTNodeLocation {
 }

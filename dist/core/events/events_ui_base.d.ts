@@ -10,8 +10,6 @@ import { Abstract as AbstractEvent } from './events_abstract.js';
  * editing to work (e.g. scrolling the workspace, zooming, opening toolbox
  * categories).
  * UI events do not undo or redo.
- *
- * @alias Blockly.Events.UiBase
  */
 export declare class UiBase extends AbstractEvent {
     isBlank: boolean;

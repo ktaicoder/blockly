@@ -1,11 +1,4 @@
 /**
- * blocks/loops.js를 복사해서 변경
- * 변경부분:
- * aimk add custom loop blocks
- * aimk 주석을 참고
- */
-
-/**
  * @license
  * Copyright 2012 Google LLC
  * SPDX-License-Identifier: Apache-2.0

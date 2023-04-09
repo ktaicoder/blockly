@@ -1,3 +1,5 @@
+dist/
+
 blockly-src/yarn.lock
 # Logs
 logs

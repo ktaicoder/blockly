@@ -10,9 +10,9 @@ node ./scripts/copy-patch-files.js
 
 # step - build
 cd blockly-src
-yarn install
-yarn build
-yarn package
+npm install
+npm run build
+npm run package
 cd ..
 
 # step - dist

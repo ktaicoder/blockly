@@ -6,11 +6,6 @@
  * aimk 주석을 참고
  */
 
-/**
- * @license
- * Copyright 2016 Google LLC
- * SPDX-License-Identifier: Apache-2.0
- */
 
 /**
  * Class for a button in the flyout.
@@ -69,10 +64,10 @@ export class FlyoutButton {
   /** The SVG element with the text of the label or button. */
   private svgText: SVGTextElement | null = null;
 
-  // aimk
+    // aimk
   private line1_: SVGLineElement | null = null;
 
-  // aimk
+    // aimk
   private line2_: SVGLineElement | null = null;
 
   /**
@@ -198,15 +193,14 @@ export class FlyoutButton {
     svgText.textContent = text;
     if (this.isLabel_) {
       this.svgText = svgText;
-      this.workspace
-        .getThemeManager()
-        .subscribe(this.svgText, 'flyoutForegroundColour', 'fill');
 
       // aimk
       this.line1_ = line1;
       this.line2_ = line2;
-      this.workspace.getThemeManager().subscribe(this.line1_!, "flyoutForegroundColour", "stroke");
-      this.workspace.getThemeManager().subscribe(this.line2_!, "flyoutForegroundColour", "stroke");
+
+      this.workspace
+        .getThemeManager()
+        .subscribe(this.svgText, 'flyoutForegroundColour', 'fill');
     }
 
     const fontSize = style.getComputedStyle(svgText, 'fontSize');
@@ -241,7 +235,6 @@ export class FlyoutButton {
       // aimk add else
       this.height += LABEL_MARGIN_TOP + LABEL_MARGIN_BOTTOM;
     }
-
     rect.setAttribute('width', String(this.width));
     rect.setAttribute('height', String(this.height));
 
@@ -263,6 +256,7 @@ export class FlyoutButton {
         line2.setAttribute("x2", this.width.toString());
         line2.setAttribute("y2", lineTop.toString());
       }
+
       svgText.setAttribute('x', String(this.width / 2));
       svgText.setAttribute(
         'y',

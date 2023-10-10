@@ -61,6 +61,7 @@ export function procedures_defreturn(block, generator) {
     args[i] =
         generator.getVariableName(variables[i]);
   }
+
   // aimk
   let code = 'async function ' + funcName + '(' + args.join(', ') + ') {\n' + xfix1 +
       loopTrap + branch + xfix2 + returnValue + '}';
@@ -83,12 +84,13 @@ export function procedures_callreturn(block, generator) {
     args[i] = generator.valueToCode(block, 'ARG' + i, Order.NONE) ||
         'null';
   }
+
   // aimk
   const code = 'await ' + funcName + '(' + args.join(', ') + ')';
   // return [code, Order.FUNCTION_CALL];
 
   // aimk
-  return [code, JavaScript.ORDER_FUNCTION_CALL];
+  return [code, Order.AWAIT];
 };
 
 export function procedures_callnoreturn(block, generator) {

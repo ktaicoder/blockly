@@ -1,9 +1,10 @@
 /**
  * blocks/loop.ts를 복사해서 변경
  * 변경부분:
- * custom loop blocks 추가
+ * custom loop blocks 추가(aimk comment)
  * 다른 수정 없음
  */
+
 /**
  * @license
  * Copyright 2012 Google LLC

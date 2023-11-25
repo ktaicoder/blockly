@@ -6,6 +6,11 @@
  * aimk 주석을 참고
  */
 
+/**
+ * @license
+ * Copyright 2016 Google LLC
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
 /**
  * Class for a button in the flyout.
@@ -23,7 +28,6 @@ import * as style from './utils/style.js';
 import {Svg} from './utils/svg.js';
 import type * as toolbox from './utils/toolbox.js';
 import type {WorkspaceSvg} from './workspace_svg.js';
-
 
 // aimk
 const LABEL_MIN_WIDTH = 260;
@@ -64,10 +68,10 @@ export class FlyoutButton {
   /** The SVG element with the text of the label or button. */
   private svgText: SVGTextElement | null = null;
 
-    // aimk
+  // aimk
   private line1_: SVGLineElement | null = null;
 
-    // aimk
+  // aimk
   private line2_: SVGLineElement | null = null;
 
   /**
@@ -235,32 +239,33 @@ export class FlyoutButton {
       // aimk add else
       this.height += LABEL_MARGIN_TOP + LABEL_MARGIN_BOTTOM;
     }
+
     rect.setAttribute('width', String(this.width));
     rect.setAttribute('height', String(this.height));
 
-    if(this.isLabel_){
+    if(this.isLabel_) {
       // aimk add if condition
       const lineLength = (this.width - textWidth) / 2;
       const lineTop = (this.height + LABEL_MARGIN_TOP) / 2;
 
       if (line1) {
         line1.setAttribute("x1", "0");
-        line1.setAttribute("y1", lineTop.toString());
-        line1.setAttribute("x2", (lineLength - 12).toString());
-        line1.setAttribute("y2", lineTop.toString());
+        line1.setAttribute("y1", String(lineTop));
+        line1.setAttribute("x2", String(lineLength - 12));
+        line1.setAttribute("y2", String(lineTop));
       }
 
       if (line2) {
-        line2.setAttribute("x1", (this.width - lineLength + 12).toString());
-        line2.setAttribute("y1", lineTop.toString());
-        line2.setAttribute("x2", this.width.toString());
-        line2.setAttribute("y2", lineTop.toString());
+        line2.setAttribute("x1", String(this.width - lineLength + 12));
+        line2.setAttribute("y1", String(lineTop));
+        line2.setAttribute("x2", String(this.width));
+        line2.setAttribute("y2", String(lineTop));
       }
 
       svgText.setAttribute('x', String(this.width / 2));
       svgText.setAttribute(
         'y',
-        String(this.height / 2 - fontMetrics.height / 2 + fontMetrics.baseline),
+        String(this.height / 2 - fontMetrics.height / 2 + fontMetrics.baseline + LABEL_MARGIN_TOP / 2),
       );
     } else {
       svgText.setAttribute('x', String(this.width / 2));

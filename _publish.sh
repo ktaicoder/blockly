@@ -9,5 +9,3 @@ cd ${SCRIPT_DIR}
 
 cd dist
 npm publish . --access=public
-
-

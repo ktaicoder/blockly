@@ -1,11 +1,4 @@
 /**
- * blocks/loop.ts를 복사해서 변경
- * 변경부분:
- * custom loop blocks 추가(aimk comment)
- * 다른 수정 없음
- */
-
-/**
  * @license
  * Copyright 2012 Google LLC
  * SPDX-License-Identifier: Apache-2.0
@@ -339,8 +332,12 @@ export const loopTypes: Set<string> = new Set([
   'kws_loop',
 ]);
 
-/** Type of a block that has CONTROL_FLOW_IN_LOOP_CHECK_MIXIN */
-type ControlFlowInLoopBlock = Block & ControlFlowInLoopMixin;
+/**
+ * Type of a block that has CONTROL_FLOW_IN_LOOP_CHECK_MIXIN
+ *
+ * @internal
+ */
+export type ControlFlowInLoopBlock = Block & ControlFlowInLoopMixin;
 interface ControlFlowInLoopMixin extends ControlFlowInLoopMixinType {}
 type ControlFlowInLoopMixinType = typeof CONTROL_FLOW_IN_LOOP_CHECK_MIXIN;
 

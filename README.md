@@ -32,6 +32,6 @@ vi package.json
 # python3 required for blockly build
 yarn dist
 
-git tag v10.4.2-p1
-git push origin v10.4.2-p1
+git tag v10.4.3-p1
+git push origin v10.4.3-p1
 ```

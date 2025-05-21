@@ -2,7 +2,9 @@
  * blocks/math.ts를 복사해서 변경
  * 변경부분:
  * style: custom_calc_blocks 적용
- * 다른 수정 없음
+ * SQUARE, CUBE를 추가
+ *
+ * aimk 주석을 참고
  */
 
 /**
@@ -93,6 +95,8 @@ export const blocks = createBlockDefinitionsFromJsonArray([
         'options': [
           ['%{BKY_MATH_SINGLE_OP_ROOT}', 'ROOT'],
           ['%{BKY_MATH_SINGLE_OP_ABSOLUTE}', 'ABS'],
+          ['거듭제곱', 'SQUARE'], // aimk 추가
+          ['세제곱', 'CUBE'], // aimk 추가
           ['-', 'NEG'],
           ['ln', 'LN'],
           ['log10', 'LOG10'],

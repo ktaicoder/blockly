@@ -8,4 +8,4 @@ cd ${SCRIPT_DIR}
 ./_dist.sh
 
 cd dist
-npm publish . --access=public
+npm publish . --access=public --tag=next

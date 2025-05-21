@@ -47,7 +47,7 @@ npm publish . --access=public --tag=next
 이렇게 배포한 경우, npmjs에는 최신 버전이 조회되지 않는 문제가 있습니다만, 현재는 어쩔 수 없을 것 같습니다. 아래와 같이 설치할 수 있습니다.
 
 ```sh
-$  yarn add @ktaicoder/blockly@10.4.3-p4
+$  yarn add @ktaicoder/blockly@10.4.3-p5
 
 # 또는
 $  yarn add @ktaicoder/blockly@next
@@ -62,6 +62,6 @@ vi package.json
 # python3 required for blockly build
 yarn dist
 
-git tag v10.4.3-p4
-git push origin v10.4.3-p4
+git tag v10.4.3-p5
+git push origin v10.4.3-p5
 ```

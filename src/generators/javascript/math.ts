@@ -93,7 +93,7 @@ export function math_single(
     case 'ROOT':
       code = 'Math.sqrt(' + arg + ')';
       break;
-    case 'SQUARE': // aimk 거듭제곱
+    case 'SQUARE': // aimk 제곱
       code = 'Math.pow(' + arg + ', 2)';
       break;
     case 'CUBE': // aimk 세제곱

@@ -95,7 +95,7 @@ export const blocks = createBlockDefinitionsFromJsonArray([
         'options': [
           ['%{BKY_MATH_SINGLE_OP_ROOT}', 'ROOT'],
           ['%{BKY_MATH_SINGLE_OP_ABSOLUTE}', 'ABS'],
-          ['거듭제곱', 'SQUARE'], // aimk 추가
+          ['제곱', 'SQUARE'], // aimk 추가
           ['세제곱', 'CUBE'], // aimk 추가
           ['-', 'NEG'],
           ['ln', 'LN'],
